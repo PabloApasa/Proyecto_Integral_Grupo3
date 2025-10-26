@@ -33,13 +33,13 @@ function Header() {
                             <NavDropdown title="Proyectos del grupo" id="basic-nav-dropdown" align="end">
                                 {/* 'align="end"' asegura que el desplegable aparezca a la derecha */}
 
-                                <NavDropdown.Item href="/" >Proyecto_Grupal_2</NavDropdown.Item>
+                                <NavDropdown.Item href="/Proyecto2/index.html" target="_blank" rel="noopener noreferrer">Proycto_Grupal_2</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="/">Proyecto_Grupal_3</NavDropdown.Item>
+                                <NavDropdown.Item href="/Proyecto3/index.html" target="_blank" rel="noopener noreferrer">Proyecto_Grupal_3</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="/">Proyecto_Grupal_4</NavDropdown.Item>
+                                <NavDropdown.Item as={NavLink} to="/proyecto4">Proyecto_Grupal_4</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="/">Proyecto_Grupal_5</NavDropdown.Item>
+                                <NavDropdown.Item as={NavLink} to="/proyecto5">Proyecto_Grupal_5</NavDropdown.Item>
                             </NavDropdown>
 
                             <Nav.Link href="/aboutus">Acerca de nuestro grupo</Nav.Link>

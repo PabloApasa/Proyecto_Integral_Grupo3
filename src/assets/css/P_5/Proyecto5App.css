@@ -1,0 +1,122 @@
+body {
+  margin: 0;
+  background: linear-gradient(180deg,#010a20 0%, #1b2440 100%);
+  color: #f4f7fb;
+  font-family: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 16px;
+  box-sizing: border-box;
+}
+
+
+.contenedor-juego {
+  max-width: 760px;
+  width: 100%;
+  margin: 24px auto;
+  background: rgba(255,255,255,0.04);
+  border-radius: 12px;
+  padding: 20px 24px;
+  box-shadow: 0 8px 24px rgba(3,10,34,0.6);
+  border: 1px solid rgba(255,255,255,0.06);
+  text-align: center;
+  position: relative;
+  box-sizing: border-box;
+}
+
+
+.contenedor-juego h1 {
+  margin: 6px 0 10px;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.contenedor-juego h2 {
+  margin: 8px 0;
+  color: #ffd95a;
+  font-size: 1.25rem;
+}
+
+.juego-area {
+  position: relative;
+  height: 350px;
+  min-height: 180px;
+  margin-top: 8px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.02);
+  border-radius: 8px;
+  overflow: hidden; 
+}
+
+
+.contenedor-juego p {
+  margin: 8px 0;
+  color: #dce7ff;
+}
+
+
+.estrella {
+  position: absolute;
+  font-size: 2.25rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+  user-select: none;
+  color: #ffd700;
+  text-shadow: 0 2px 6px rgba(250, 239, 239, 0.6);
+  will-change: transform, opacity;
+}
+
+
+.estrella.aparecer {
+  transform: scale(1);
+  opacity: 1;
+}
+.estrella.desaparecer {
+  transform: scale(0.6);
+  opacity: 0;
+}
+
+.estrella:hover {
+  transform: scale(1.6);
+}
+
+
+.boton-reiniciar {
+  background: linear-gradient(180deg,#ffde5a,#ffcb00);
+  color: #0a0a0a;
+  border: none;
+  padding: 10px 18px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 12px;
+  box-shadow: 0 6px 14px rgba(255,200,0,0.15);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.boton-reiniciar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(255,200,0,0.22);
+}
+
+
+@media (max-width: 520px) {
+  .contenedor-juego {
+    padding: 14px;
+    margin: 12px;
+  }
+  .juego-area {
+    height: 160px;
+  }
+  .estrella {
+    font-size: 1.8rem;
+  }
+}

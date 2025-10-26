@@ -8,6 +8,13 @@ import Layout from './assets/pages/Layout';
 import InfoPersonal from './assets/pages/InfoPersonal';
 import "bootstrap/dist/css/bootstrap.min.css";
 
+//Importacion de proyectos anteriores
+//import Proyecto1 from '../src/PoryectosAnteriores/Proyecto1/Proyecto1App'
+import Proyecto2 from '../src/assets/components/Proyecto2'
+import Proyecto3 from '../src/assets/components/Proyecto3'
+import Proyecto4 from '../src/PoryectosAnteriores/Proyecto4/Proyecto4App'
+import Proyecto5 from '../src/PoryectosAnteriores/Proyecto5/Proyecto5App'
+
 function App() {
 
   return (
@@ -19,6 +26,12 @@ function App() {
           <Route path="aboutus" element={<AboutUs />} />
           <Route path="infoPersonal" element={<InfoPersonal />} />
           <Route path="*" element={<Error />} />
+
+          {/*rutas de los proyectos anteriores */}
+          <Route path="/proyecto2" element={<Proyecto2 projecPath="proyecto2" title="Proyecto 2" />} />
+          <Route path="/proyecto3" element={<Proyecto3 projecPath="proyecto3" title="Proyecto 3" />} />
+          <Route path="proyecto4" element={<Proyecto4 />} />
+          <Route path="proyecto5" element={<Proyecto5 />} />
         </Route >
       </Routes>
     </Container>
