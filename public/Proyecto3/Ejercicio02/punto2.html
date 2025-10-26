@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Mascotas</title>
+    <link rel="stylesheet" href="../Ejercicio02/index.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Registro de Mascotas en Clínica Veterinaria</h1>
+
+        <form id="mascotaForm">
+            <div class="form-group">
+                <label for="nombre">Nombre de la Mascota:</label>
+                <input type="text" id="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="tipo">Tipo:</label>
+                <select id="tipo" required>
+                    <option value="Perro">Perro</option>
+                    <option value="Gato">Gato</option>
+                    <option value="Conejo">Conejo</option>
+                    <option value="Pajaro">Pájaro</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="edad">Edad (años):</label>
+                <input type="number" id="edad" min="0" required>
+            </div>
+            <div class="form-group">
+                <label for="dueno">Nombre del dueño:</label>
+                <input type="text" id="dueno" required>
+            </div>
+            <div class="form-group">
+                <label>¿Está vacunada?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="vacunada" value="true" required> Sí</label>
+                    <label><input type="radio" name="vacunada" value="false"> No</label>
+                </div>
+            </div>
+
+            <button type="submit">Registrar Mascota</button>
+        </form>
+
+        <hr>
+
+        <h2>Listado de Mascotas</h2>
+        <ul id="listaMascotas">
+        </ul>
+
+        <div id="estadisticas">
+            <h3>Estadísticas</h3>
+            <p><strong>Total de mascotas:</strong> <span id="totalMascotas">0</span></p>
+            <p><strong>Mascotas vacunadas:</strong> <span id="vacunadas">0</span></p>
+            <p><strong>Mascotas no vacunadas:</strong> <span id="noVacunadas">0</span></p>
+        </div>
+    </div>
+
+    <script type="module" src="../Ejercicio02/js/main.js"></script>
+</body>
+
+</html>
