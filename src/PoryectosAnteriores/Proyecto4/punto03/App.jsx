@@ -1,4 +1,3 @@
-import '../../../assets/css/P_4/styles/estiloAdivinarNumero.css';
 import React from "react";
 import Juego from "./juego";
 
