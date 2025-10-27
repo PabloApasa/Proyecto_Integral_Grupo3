@@ -1,4 +1,4 @@
-import "../../../assets/css/P_5/Proyecto5App.css";
+import styles from "../../../assets/css/P_5/Proyecto5App.module.css";
 import Estrella from "../AtraparEstrellas/Estrella";
 import { useJuegoEstrellas } from "../AtraparEstrellas/useJuegoEstrellas";
 
@@ -14,24 +14,26 @@ export default function AtraparEstrellas() {
   } = useJuegoEstrellas();
 
   return (
-    <div className="contenedor-juego">
-      <h1>Atrapa las Estrellas</h1>
-      <p>Puntaje: {puntaje}</p>
-      {mensaje && <h2>{mensaje}</h2>}
+    <div className={styles["proyecto5-app"]}>
+      <div className={styles["contenedor-juego"]}>
+        <h1>Atrapa las Estrellas</h1>
+        <p>Puntaje: {puntaje}</p>
+        {mensaje && <h2>{mensaje}</h2>}
 
-      <div className="juego-area">
-        {visible && juegoActivo && (
-          <Estrella
-            top={posicionEstrella.y}
-            left={posicionEstrella.x}
-            onClick={agarrarEstrella}
-          />
-        )}
+        <div className={styles["juego-area"]}>
+          {visible && juegoActivo && (
+            <Estrella
+              top={posicionEstrella.y}
+              left={posicionEstrella.x}
+              onClick={agarrarEstrella}
+            />
+          )}
+        </div>
+
+        <button className={styles["boton-reiniciar"]} onClick={reiniciarJuego}>
+          Reiniciar juego
+        </button>
       </div>
-
-      <button className="boton-reiniciar" onClick={reiniciarJuego}>
-        Reiniciar juego
-      </button>
     </div>
   );
 }
