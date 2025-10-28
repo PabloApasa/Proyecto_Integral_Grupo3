@@ -7,6 +7,10 @@ import Error from './assets/pages/Error';
 import Layout from './assets/pages/Layout';
 import InfoPersonal from './assets/pages/InfoPersonal';
 import "bootstrap/dist/css/bootstrap.min.css";
+import Login from './assets/pages/Login';
+import ProtectorRutas from "";
+import SinAutorizacionPAge from "";
+
 
 //Importacion de proyectos anteriores
 //import Proyecto1 from '../src/PoryectosAnteriores/Proyecto1/Proyecto1App'
@@ -21,11 +25,14 @@ function App() {
     <Container>
       <Routes>
         <Route path="/" element={<Layout />}>
+          <Route index element = {<Login/>}/>
+          <Route path="/proyectos" element={<ProtectorRutas allowedRoles={["admin"]}><Proyectos/></ProtectorRutas>}/>
           <Route index element={<Home />} />
           <Route path="home" element={<Home />} />
           <Route path="aboutus" element={<AboutUs />} />
           <Route path="infoPersonal" element={<InfoPersonal />} />
           <Route path="*" element={<Error />} />
+          <Route path="/unauthorized" element={<SinAutorizacionPAge/>}/>
 
           {/*rutas de los proyectos anteriores */}
           <Route path="/proyecto2" element={<Proyecto2 projecPath="proyecto2" title="Proyecto 2" />} />
