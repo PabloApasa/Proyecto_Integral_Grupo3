@@ -11,8 +11,11 @@ app.get('/', (req, res) => {
 // routing
 
 const archivoDB = require('./conection.js')
+const usuarios = require('../src/assets/model/usuarios.js')
 
 // midleware
+
+app.use('/api',usuarios);
 
 // listening
 

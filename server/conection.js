@@ -15,3 +15,6 @@ objeto.on('error', () => {
 });
 
 module.exports = mongoose;
+
+//usuario: fpw-proyecto-final
+//password: fpw-proyecto-final 
