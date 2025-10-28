@@ -1,4 +1,4 @@
-body {
+.proyecto5-app {
   margin: 0;
   background: linear-gradient(180deg,#010a20 0%, #1b2440 100%);
   color: #f4f7fb;
@@ -13,8 +13,7 @@ body {
   box-sizing: border-box;
 }
 
-
-.contenedor-juego {
+.proyecto5-app .contenedor-juego {
   max-width: 760px;
   width: 100%;
   margin: 24px auto;
@@ -28,21 +27,20 @@ body {
   box-sizing: border-box;
 }
 
-
-.contenedor-juego h1 {
+.proyecto5-app .contenedor-juego h1 {
   margin: 6px 0 10px;
   font-size: 1.6rem;
   font-weight: 700;
   color: #fff;
 }
 
-.contenedor-juego h2 {
+.proyecto5-app .contenedor-juego h2 {
   margin: 8px 0;
   color: #ffd95a;
   font-size: 1.25rem;
 }
 
-.juego-area {
+.proyecto5-app .juego-area {
   position: relative;
   height: 350px;
   min-height: 180px;
@@ -56,14 +54,12 @@ body {
   overflow: hidden; 
 }
 
-
-.contenedor-juego p {
+.proyecto5-app .contenedor-juego p {
   margin: 8px 0;
   color: #dce7ff;
 }
 
-
-.estrella {
+.proyecto5-app .estrella {
   position: absolute;
   font-size: 2.25rem;
   cursor: pointer;
@@ -74,22 +70,20 @@ body {
   will-change: transform, opacity;
 }
 
-
-.estrella.aparecer {
+.proyecto5-app .estrella.aparecer {
   transform: scale(1);
   opacity: 1;
 }
-.estrella.desaparecer {
+.proyecto5-app .estrella.desaparecer {
   transform: scale(0.6);
   opacity: 0;
 }
 
-.estrella:hover {
+.proyecto5-app .estrella:hover {
   transform: scale(1.6);
 }
 
-
-.boton-reiniciar {
+.proyecto5-app .boton-reiniciar {
   background: linear-gradient(180deg,#ffde5a,#ffcb00);
   color: #0a0a0a;
   border: none;
@@ -102,21 +96,20 @@ body {
   transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 
-.boton-reiniciar:hover {
+.proyecto5-app .boton-reiniciar:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 20px rgba(255,200,0,0.22);
 }
 
-
 @media (max-width: 520px) {
-  .contenedor-juego {
+  .proyecto5-app .contenedor-juego {
     padding: 14px;
     margin: 12px;
   }
-  .juego-area {
+  .proyecto5-app .juego-area {
     height: 160px;
   }
-  .estrella {
+  .proyecto5-app .estrella {
     font-size: 1.8rem;
   }
 }
