@@ -1,16 +1,27 @@
 import { Navigate } from "react-router-dom";
-import { useAutenticacion } from "../../hooks/useAutenticacion";
-import { Spinner, Container, Alert } from "react-bootstrap"
+import { useAutorizacion } from "../hooks/AutorizacionSegura";
+import { Spinner, Container } from "react-bootstrap";
 
 const ProtectorRutas = ({ allowedRoles, children }) => {
-    const { isAuthenticated, user, isLoading } = useAutenticacion();
+    const { isAuthenticated, user, isLoading } = useAutorizacion();
 
-    if (isAuthenticated) {
-        return <Navigate to="/" replace />;
+    if (isLoading) {
+        return (
+            <Container className="text-center mt-5">
+                <Spinner animation="border" role="status">
+                    <span className="visually-hidden">...Cargando Autenticación...</span>
+                </Spinner>
+                <p className="mt-2">...Verificando Sesión...</p>
+            </Container>
+        );
     }
 
-    if (allowedRoles && allowedRoles.includes(user?.rol)) {
-        return <Navigate to="/unauthorized" replace />;
+    if (!isAuthenticated){
+        return <Navigate to="/login" replace />
+    }
+
+    if (allowedRoles && !allowedRoles.includes(user?.rol)){
+        return <Navigate to="/unauthorized" replace />
     }
 
     return children;

@@ -1,27 +1,18 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import './index.css'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
-import { AutorizacionesProvider } from './context/AutorizacionesContext.jsx'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { AutorizacionesProvider } from './assets/context/AutorizacionContext.jsx'
 
-// import './index.css'
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <AutorizacionesProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </AutorizacionesProvider>
+  </StrictMode>,
+)
 
-export default function Main() {
-  return (
-    <div>
-      <h1>hola</h1>
-    </div>
-  )
-
-
-  createRoot(document.getElementById('root')).render(
-    <StrictMode>
-      <AutorizacionesProvide>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </AutorizacionesProvide>
-    </StrictMode>
-
-  );
-}
