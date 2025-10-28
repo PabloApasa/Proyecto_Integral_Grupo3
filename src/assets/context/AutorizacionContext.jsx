@@ -9,7 +9,7 @@ import { useCallback } from "react";
 export const AutorizacionesContext = createContext(null);
 
 // 2 . componente proveedor del ontexto de autorizacion
-export function AutorizacionesProvider = ({ children }) => {
+export function AutorizacionesProvider ({ children }) {
 
     const [usuariosBD, setUsuariosBD] = useState([]);
 
