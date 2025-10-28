@@ -14,13 +14,14 @@ export default function Main() {
   )
 
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <AutorizacionesProvide>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </AutorizacionesProvide>
-  </StrictMode>
+  createRoot(document.getElementById('root')).render(
+    <StrictMode>
+      <AutorizacionesProvide>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </AutorizacionesProvide>
+    </StrictMode>
 
-);}
+  );
+}
