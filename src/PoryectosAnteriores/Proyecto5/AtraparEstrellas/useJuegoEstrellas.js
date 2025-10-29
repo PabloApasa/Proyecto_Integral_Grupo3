@@ -24,8 +24,8 @@ export function useJuegoEstrellas() {
       setPosicionEstrella(posicionAlAzar());
       setVisible(true);
 
-      timeoutId = setTimeout(() => setVisible(false), 700);
-    }, 1200);
+      timeoutId = setTimeout(() => setVisible(false), 1000);
+    }, 2000);
 
     return () => {
       clearInterval(intervalo);
