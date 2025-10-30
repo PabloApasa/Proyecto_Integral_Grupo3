@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+/***import { useState, useEffect } from "react";
 
 const map = {
     1: "uno",
@@ -82,7 +82,7 @@ function shuffle(arr) {
       </div>
 
       /*de aqui asia abajo saque de chatgpt por que era algo ams que agregar y le daba un poco mas de estilo*/
-
+/***
       <p className="font-semibold mb-2">{feedback}</p>
 
       <p className="text-sm text-gray-500">
@@ -104,3 +104,4 @@ function shuffle(arr) {
     </div>
   );
 }
+  */
