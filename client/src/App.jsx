@@ -102,6 +102,7 @@ function App() {
                 </ProtectorRutas>
               }
             />*/}
+            {/* */}
 
             {/* 🔸 Ruta exclusiva para ALUMNO */}
             <Route
