@@ -1,4 +1,4 @@
-/*
+
 const express = require('express');
 const routes = express.Router();
 
@@ -13,7 +13,7 @@ const esquemaUsuario = new esquema({
     name: String,
 });
 
-const listaUsuarios = moongose.model{'user', esquemaUsuario};
+const listaUsuarios = mongoose.model('Usuarios',esquemaUsuario);
 
 //rutas, endopoints
 //promesa
@@ -36,4 +36,4 @@ routes.get('/obtenerUsuarios', async (req, res) => {
     }
 });
 
-module.exports = routes;*/
+module.exports = routes;

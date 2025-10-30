@@ -1,9 +1,8 @@
 
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://fpw-proyecto-final:<db_password>@cluster0.dgphu0u.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+mongoose.connect("mongodb+srv://apasapablo_db_user:apasapablo@tudivj.91nh0vf.mongodb.net/TUDIVJ?appName=TUDIVJ")
 
-//mongodb + srv://fpw-proyecto-final:<db_password>@cluster0.dgphu0u.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 
 const objeto = mongoose.connection;
 
@@ -16,5 +15,3 @@ objeto.on('error', () => {
 
 module.exports = mongoose;
 
-//usuario: fpw-proyecto-final
-//password: fpw-proyecto-final 

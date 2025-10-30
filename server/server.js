@@ -1,11 +1,11 @@
 
 const express = require('express');
-const app = express();
+const app = express("mongodb + srv://apasapablo_db_user:apasapablo@tudivj.91nh0vf.mongodb.net/?appName=TUDIVJ");
 
 // endopoint metodos get o post
 
 app.get('/', (req, res) => {
-    res.send('Bienvenidos a mi sevidor Backend FPW 2025')
+    res.end('Bienvenidos a mi sevidor Backend FPW 2025')
 });
 
 // routing
