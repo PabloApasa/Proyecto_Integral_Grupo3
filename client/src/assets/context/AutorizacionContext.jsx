@@ -1,5 +1,5 @@
 import { createContext, useState, useMemo, useCallback, useEffect } from "react";
-import usuarioGuardados from "../data/usuarios.json";
+import axios from "axios";
 
 // 1. crea el contexto
 export const AutorizacionesContext = createContext(null);
@@ -49,7 +49,7 @@ export function AutorizacionesProvider({ children }) {
       }
     } catch (err) {
       //errores inesperados en el find, aunque es de importancia en carga de datos
-      console.error('Error al iniciar sesión:', error.message);
+      console.error('Error al iniciar sesión:', err.message);
       setUser(null);
       setIsLoading(false);
       return { success: false, message: 'Error al iniciar sesión' };
