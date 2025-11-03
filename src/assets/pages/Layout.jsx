@@ -22,37 +22,29 @@ function Layout() {
               <Nav.Link as={Link} to="/">Home</Nav.Link>
               <Nav.Link as={Link} to="/aboutus">About Us</Nav.Link>
               <Nav.Link as={Link} to="/infopersonal">InfoPersonal</Nav.Link>
-              
 
-              {/* 🔽 Menú desplegable para los proyectos */}
-              <NavDropdown title="Proyectos" id="proyectos-dropdown">
-                {/* Solo ADMINISTRATIVO puede ver Proyectos */}
-                {isAuthenticated && user?.rol === "ADMINISTRATIVO" && (
-                  <>
-                    <NavDropdown.Item as={Link} to="/proyectos">
-                      Panel de Proyectos
-                    </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item as={Link} to="/proyecto2">
-                      Proyecto 2
-                    </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/proyecto3">
-                      Proyecto 3
-                    </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/proyecto4">
-                      Proyecto 4
-                    </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/proyecto5">
-                      Proyecto 5
-                    </NavDropdown.Item>
-                  </>
-                )}
 
-                {/* Solo ALUMNO puede ver Games */}
-                {isAuthenticated && user?.rol === "ALUMNO" && (
-                  <NavDropdown.Item as={Link} to="/games">Games</NavDropdown.Item>
-                )}
-              </NavDropdown>
+              {/* 🔽 Menú desplegable visible SOLO si el usuario está autenticado */}
+              {isAuthenticated && (
+                <NavDropdown title="Proyectos / Juegos" id="proyectos-dropdown">
+                  {/* ADMINISTRATIVO */}
+                  {user?.rol === "ADMINISTRATIVO" && (
+                    <>
+                      <NavDropdown.Item as={Link} to="/proyectos">Panel de Proyectos</NavDropdown.Item>
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item as={Link} to="/proyecto2">Proyecto 2</NavDropdown.Item>
+                      <NavDropdown.Item as={Link} to="/proyecto3">Proyecto 3</NavDropdown.Item>
+                      <NavDropdown.Item as={Link} to="/proyecto4">Proyecto 4</NavDropdown.Item>
+                      <NavDropdown.Item as={Link} to="/proyecto5">Proyecto 5</NavDropdown.Item>
+                    </>
+                  )}
+
+                  {/* ALUMNO */}
+                  {user?.rol === "ALUMNO" && (
+                    <NavDropdown.Item as={Link} to="/games">Games</NavDropdown.Item>
+                  )}
+                </NavDropdown>
+              )}
             </Nav>
 
             {/* 🔒 Login / Logout */}

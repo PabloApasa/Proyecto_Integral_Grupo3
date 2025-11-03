@@ -39,17 +39,10 @@ function App() {
           {/* 🔸 Layout principal con rutas protegidas */}
           <Route path="/" element={<Layout />}>
             {/* Redirección al login si entra sin loguearse */}
-            <Route index element={<Navigate to="/login" />} />
+            <Route index element={<Navigate to="/home" />} />
 
             {/* Rutas accesibles a todos los roles autenticados */}
-            <Route
-              path="home"
-              element={
-                <ProtectorRutas allowedRoles={['ADMINISTRATIVO', 'ALUMNO']}>
-                  <Home />
-                </ProtectorRutas>
-              }
-            />
+            <Route path="home" element={<Home />} />
 
             <Route
               path="aboutus"
