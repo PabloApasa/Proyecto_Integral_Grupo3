@@ -8,7 +8,7 @@ function Layout() {
 
   const manejarLogout = () => {
     logout();
-    navigate("/login");
+    navigate("/home");
   };
 
   return (
@@ -26,7 +26,7 @@ function Layout() {
 
               {/* 🔽 Menú desplegable visible SOLO si el usuario está autenticado */}
               {isAuthenticated && (
-                <NavDropdown title="Proyectos / Juegos" id="proyectos-dropdown">
+                <NavDropdown title=" /Proyectos" id="proyectos-dropdown">
                   {/* ADMINISTRATIVO */}
                   {user?.rol === "ADMINISTRATIVO" && (
                     <>
@@ -41,7 +41,7 @@ function Layout() {
 
                   {/* ALUMNO */}
                   {user?.rol === "ALUMNO" && (
-                    <NavDropdown.Item as={Link} to="/games">Games</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/Games">Games</NavDropdown.Item>
                   )}
                 </NavDropdown>
               )}
