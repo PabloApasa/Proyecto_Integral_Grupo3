@@ -1,6 +1,8 @@
 
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap"
 import { NavLink } from "react-router-dom"
+//estilo
+import "../css/Header.css"
 
 // Header ahora acepta props para pasar elementos extra (como botones de Login/Logout)
 function Header({ authButtons }) {
