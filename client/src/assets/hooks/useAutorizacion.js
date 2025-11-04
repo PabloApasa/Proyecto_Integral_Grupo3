@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AutorizacionesContext } from "../context/AutorizacionContext";
+import { AutorizacionesContext } from "../../../../client/src/assets/context/AutorizacionContext";
 
 export function useAutenticacion() {
     const context = useContext(AutorizacionesContext);

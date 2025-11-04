@@ -13,26 +13,26 @@ const esquemaUsuario = new esquema({
     name: String,
 });
 
-const listaUsuarios = mongoose.model('Usuarios',esquemaUsuario);
+const listaUsuarios = mongoose.model('Usuarios', esquemaUsuario);
 
 //rutas, endopoints
 //promesa
 //routes.get('/obtenerUsuarios', (req, res) => {
-    //obtener sitios
-    //listaUsuarios.find({}.then(docs) => {
-        //res.send(docs)
-    //}).catch(err => {
-        //res.send(err)
-    //})
+//obtener sitios
+//listaUsuarios.find({}.then(docs) => {
+//res.send(docs)
+//}).catch(err => {
+//res.send(err)
+//})
 //})
 
 routes.get('/obtenerUsuarios', async (req, res) => {
     try {
         const docs = await listaUsuarios.find();
         res.send(docs);
-    } catch (err) {
+    } catch (error) {
         console.error('Error al obtener usuarios', error);
-        res.status(500).send({message: 'Error al obtener usuarios', error: error});
+        res.status(500).send({ message: 'Error al obtener usuarios', error: error });
     }
 });
 

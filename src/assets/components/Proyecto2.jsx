@@ -1,30 +1,35 @@
-
 import React from 'react';
+// IMPORTANTE: Necesitas importar Link (y potencialmente useNavigate)
+import { Link, useNavigate } from 'react-router-dom';
 
-// Componente genérico para mostrar un proyecto HTML
-const Proyecto2 = ({ projectPath, title }) => {
-    // La URL se construye a partir de la ruta base pública (ej: /proyecto-html-1/index.html)
-    const fullUrl = `/${projectPath}index.html`;
+function Proyecto02() {
+    // Usamos useNavigate para el botón de volver
+    const navigate = useNavigate();
+
+    // Función para manejar el "Volver"
+    const handleVolver = () => {
+        // Redirige al inicio de la aplicación
+        navigate('/');
+    };
 
     return (
-        <div style={{ padding: '20px' }}>
-            <h1>{title}</h1>
-            <p>Este proyecto se está mostrando dentro de un iframe.</p>
+        <div className="menu-container">
 
-            {/* Botón para volver al Home (usando Link de react-router-dom) */}
-            {/* Asumo que ya tienes la importación de Link en este archivo o lo agregarás */}
-            {/* <Link to="/" className="btn btn-secondary">Volver al Home</Link> */}
+            {/* 1. Botón "Volver" usando useNavigate */}
+            <button onClick={handleVolver}>Volver a la Aplicación Principal</button>
 
-            <div style={{ height: '80vh', width: '100%', border: '1px solid #ccc', marginTop: '15px' }}>
-                <iframe
-                    src={fullUrl}
-                    title={title}
-                    style={{ width: '100%', height: '100%', border: 'none' }}
-                // El 'frameBorder="0"' es una propiedad antigua, 'style={{ border: 'none' }}' es más moderno.
-                />
-            </div>
+            {/* 2. Lista de Enlaces usando <Link> de React Router */}
+            {/* Debes definir la ruta 'to' que corresponde a tu componente React. 
+               Asumiremos que tus componentes Proyecto X se llaman a través de rutas: */}
+
+            <a href="/Proyecto2/punto1/punto1.html">punto_1</a>
+            <a href="/Proyecto2/punto_2/punto02.html">punto_2</a>
+            <a href="/Proyecto2/punto 3/punto3.html">punto_3</a>
+            <a href="/Proyecto2/punto4/punto4.html">punto_4</a>
+            <a href="/Proyecto2/punto5/punto5.html">punto_5</a>
+
         </div>
     );
-};
+}
 
-export default Proyecto2;
+export default Proyecto02;

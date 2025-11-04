@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { AutorizacionesProvider } from './assets/context/AutorizacionContext.jsx'
+import { AutorizacionesProvider } from '../../client/src/assets/context/AutorizacionContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
