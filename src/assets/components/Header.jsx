@@ -24,7 +24,7 @@ function Header({ authButtons }) {
 
                             {/* Menú desplegable principal - Usando NavLink para navegación interna */}
                             <NavDropdown title="Proyectos del grupo" id="basic-nav-dropdown" align="start">
-                                <NavDropdown.Item as={NavLink} to="/proyecto2">Proycto_Grupal_2</NavDropdown.Item>
+                                <NavDropdown.Item as={NavLink} to="/proyecto2" >Proycto_Grupal_2</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item as={NavLink} to="/proyecto3">Proyecto_Grupal_3</NavDropdown.Item>
                                 <NavDropdown.Divider />

@@ -1,10 +1,18 @@
+import "../css/Error.css";
+// importamos Link de react-router-dom si quieres un botón de regreso
+import { Link } from 'react-router-dom';
 
-import "./Error.css";
 function Error() {
     return (
         <div className="error-page">
-            <h1 className="error ">Error</h1>
-            <h2>la pagina no sea h encontraod</h2>
+            {/* Asegúrate que la clase sea 'error' sin el espacio extra */}
+            <h1 className="error">Error</h1>
+            <h2>La página no se ha encontrado</h2>
+
+            {/* OPCIONAL: Añadir un botón o enlace de regreso (muy recomendado) */}
+            <Link to="/" className="btn btn-primary btn-lg">
+                Volver al inicio
+            </Link>
 
         </div>
     )

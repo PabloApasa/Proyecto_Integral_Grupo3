@@ -1,0 +1,56 @@
+/* src/css/Error.css */
+
+.error-page {
+  /* 1. Centrado en la pantalla (usando Flexbox) */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  /* 2. Ocupar toda la altura disponible */
+  /* El valor 100vh asegura que ocupe toda la altura visible del viewport.
+       Asegúrate de que body y html no tengan márgenes por defecto para que funcione. */
+  min-height: 100vh;
+
+  /* 3. Fondo sutil y tipografía */
+  background-color: #f8f9fa;
+  /* Fondo gris claro (como Bootstrap 'light') */
+  text-align: center;
+  padding: 20px;
+}
+
+/* Estilo para el título principal "Error" */
+.error-page h1.error {
+  /* 4. Estilo de Título Destacado (el "404" o "Error") */
+  font-size: 8rem;
+  /* Tamaño muy grande para impacto visual */
+  font-weight: 900;
+  color: #dc3545;
+  /* Rojo de Bootstrap ('danger') para indicar problema */
+
+  /* Efecto sutil de sombra o contorno */
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+/* Estilo para el subtítulo */
+.error-page h2 {
+  /* 5. Subtítulo legible */
+  font-size: 2rem;
+  color: #6c757d;
+  /* Gris de Bootstrap ('secondary') para ser menos agresivo */
+  font-weight: 300;
+  /* Fuente ligera (moderno) */
+  margin-top: 0;
+}
+
+/* Opcional: Estilo para enlaces o botones de regreso (si los añades) */
+.error-page a,
+.error-page button {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  padding: 10px 25px;
+  border-radius: 0.5rem;
+  text-decoration: none;
+}

@@ -22,7 +22,7 @@ function Proyecto02() {
             {/* Debes definir la ruta 'to' que corresponde a tu componente React. 
                Asumiremos que tus componentes Proyecto X se llaman a través de rutas: */}
 
-            <a href="/Proyecto2/punto1/punto1.html">punto_1</a>
+            <a href="/Proyecto2/punto 1/punto1.html">punto_1</a>
             <a href="/Proyecto2/punto_2/punto02.html">punto_2</a>
             <a href="/Proyecto2/punto 3/punto3.html">punto_3</a>
             <a href="/Proyecto2/punto4/punto4.html">punto_4</a>
