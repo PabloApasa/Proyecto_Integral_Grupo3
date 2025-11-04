@@ -1,4 +1,5 @@
 import { createContext, useState, useMemo, useCallback } from "react";
+// IMportacion de JSON, datos de prueba para usuarios.
 import usuarioGuardados from "../data/usuarios.json";
 
 // 1. crea el contexto

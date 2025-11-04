@@ -15,7 +15,7 @@ const usuarios = require('../src/assets/model/usuarios.js')
 
 // midleware
 
-app.use('/api',usuarios);
+app.use('/api', usuarios);
 
 // listening
 

@@ -1,7 +1,9 @@
-import './App.css'
-import "bootstrap/dist/css/bootstrap.min.css";
+// 🔹Importaciones raeact dom y booststrap
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
+
+// 🔹 Estilos
+import './assets/css/App.css'
 
 // 🔹 Páginas del grupo
 import Home from './assets/pages/Home';
@@ -23,80 +25,40 @@ import FormularioRegistro from './assets/components/FormularioRegistro';
 import ProtectorRutas from './assets/components/ProtectorRutas';
 import { AutorizacionesProvider } from './assets/context/AutorizacionContext';
 
-// 🔹 (opcional) Página o componente para alumnos
+// 🔹 Página o componente para alumnos
 import Games from './assets/pages/Games';
+
+// 🔹 Pagina para Administrativos
+import GamesResultados from './assets/pages/GamesResultados';
 
 function App() {
   return (
     <AutorizacionesProvider>
       <Container fluid>
         <Routes>
-          {/* 🔸 Rutas públicas */}
+          {/* 🔸 Rutas públicas y de autenticacion */}
           <Route path="/login" element={<Login />} />
           <Route path="/formularioregistro" element={<FormularioRegistro />} />
           <Route path="/unauthorized" element={<NoAutorizado />} />
 
           {/* 🔸 Layout principal con rutas protegidas */}
           <Route path="/" element={<Layout />}>
+
             {/* Redirección al login si entra sin loguearse */}
             <Route index element={<Navigate to="/home" />} />
 
-            {/* Rutas accesibles a todos los roles autenticados */}
+            {/* Rutas ABIERTAS a cualquier usuario con acceso al Layout */}
             <Route path="home" element={<Home />} />
+            <Route path="aboutus" element={<AboutUs />} />
+            <Route path="infoPersonal" element={<InfoPersonal />} />
 
-            <Route
-              path="aboutus"
-              element={
-                <ProtectorRutas allowedRoles={['ADMINISTRATIVO', 'ALUMNO']}>
-                  <AboutUs />
-                </ProtectorRutas>
-              }
-            />
+            {/* Rutas de Proyectos (Ahora ABIERTAS) */}
+            <Route path="proyecto2" element={<Proyecto2 />} />
+            <Route path="proyecto3" element={<Proyecto3 />} />
+            <Route path="proyecto4" element={<Proyecto4 />} />
+            <Route path="proyecto5" element={<Proyecto5 />} />
 
-            <Route
-              path="infoPersonal"
-              element={
-                <ProtectorRutas allowedRoles={['ADMINISTRATIVO', 'ALUMNO']}>
-                  <InfoPersonal />
-                </ProtectorRutas>
-              }
-            />
-
-            {/* 🔸 Rutas exclusivas para ADMINISTRATIVO */}
-            <Route
-              path="proyecto2"
-              element={
-                <ProtectorRutas allowedRoles={['ADMINISTRATIVO']}>
-                  <Proyecto2 projecPath="proyecto2" title="Proyecto 2" />
-                </ProtectorRutas>
-              }
-            />
-            <Route
-              path="proyecto3"
-              element={
-                <ProtectorRutas allowedRoles={['ADMINISTRATIVO']}>
-                  <Proyecto3 projecPath="proyecto3" title="Proyecto 3" />
-                </ProtectorRutas>
-              }
-            />
-            <Route
-              path="proyecto4"
-              element={
-                <ProtectorRutas allowedRoles={['ADMINISTRATIVO']}>
-                  <Proyecto4 />
-                </ProtectorRutas>
-              }
-            />
-            <Route
-              path="proyecto5"
-              element={
-                <ProtectorRutas allowedRoles={['ADMINISTRATIVO']}>
-                  <Proyecto5 />
-                </ProtectorRutas>
-              }
-            />
-
-            {/* 🔸 Ruta exclusiva para ALUMNO */}
+            {/* 🔸 Ruta PROTEGIDA 1: Solo para el rol ALUMNO */}
             <Route
               path="games"
               element={
@@ -106,7 +68,18 @@ function App() {
               }
             />
 
-            {/* 🔸 Error por defecto */}
+            {/* 🔸 Ruta PROTEGIDA 2: Solo para el rol ADMINISTRATIVO */}
+            <Route
+              path="games-resultados"
+              element={
+                <ProtectorRutas allowedRoles={['ADMINISTRATIVO']}>
+                  {/* NOTA: Asegúrate de que el archivo GamesResultados.jsx exista en su ruta. */}
+                  <GamesResultados />
+                </ProtectorRutas>
+              }
+            />
+
+            {/* 🔸 Ruta de Error: Captura cualquier ruta que no coincida con las anteriores */}
             <Route path="*" element={<Error />} />
           </Route>
         </Routes>

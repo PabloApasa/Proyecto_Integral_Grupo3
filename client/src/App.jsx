@@ -21,7 +21,7 @@ import Login from './assets/pages/Login';
 import NoAutorizado from './assets/pages/NoAutorizado';
 import FormularioRegistro from './assets/components/FormularioRegistro';
 import ProtectorRutas from './assets/components/ProtectorRutas';
-import { AutorizacionesProvider } from './assets/context/AutorizacionContext';
+import { AutorizacionesProvider } from '../../client/src/assets/context/AutorizacionContext';
 
 // 🔹 (opcional) Página o componente para alumnos
 import Games from './assets/pages/Games';
@@ -70,11 +70,11 @@ function App() {
             />
 
             {/* 🔸 Rutas exclusivas para ADMINISTRATIVO */}
-            {/*<Route
+            <Route
               path="proyecto2"
               element={
                 <ProtectorRutas allowedRoles={['ADMINISTRATIVO']}>
-                  <Proyecto2 projecPath="proyecto2" title="Proyecto 2" />
+                  {/*<Proyecto2 projecPath="proyecto2" title="Proyecto 2" />*/}
                 </ProtectorRutas>
               }
             />
@@ -82,7 +82,7 @@ function App() {
               path="proyecto3"
               element={
                 <ProtectorRutas allowedRoles={['ADMINISTRATIVO']}>
-                  <Proyecto3 projecPath="proyecto3" title="Proyecto 3" />
+                  {/*<Proyecto3 projecPath="proyecto3" title="Proyecto 3" />*/}
                 </ProtectorRutas>
               }
             />
@@ -90,7 +90,7 @@ function App() {
               path="proyecto4"
               element={
                 <ProtectorRutas allowedRoles={['ADMINISTRATIVO']}>
-                  <Proyecto4 />
+                  {/*<Proyecto4 />*/}
                 </ProtectorRutas>
               }
             />
@@ -98,10 +98,10 @@ function App() {
               path="proyecto5"
               element={
                 <ProtectorRutas allowedRoles={['ADMINISTRATIVO']}>
-                  <Proyecto5 />
+                  {/*<Proyecto5 />*/}
                 </ProtectorRutas>
               }
-            />*/}
+            />
             {/* */}
 
             {/* 🔸 Ruta exclusiva para ALUMNO */}

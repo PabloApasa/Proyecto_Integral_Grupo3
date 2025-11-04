@@ -5,24 +5,24 @@ import IntegranteCard from "../components/IntegranteCard";
 const integrantesData = [
     {
         id: 1,
-        nombre: "Juan Pérez",
-        rol: "Desarrollador Frontend",
-        datosExtra: "Le gusta el React.",
-        image: "ruta/a/imagen/juan.jpg"
+        nombre: "---",
+        rol: "---",
+        datosExtra: "----",
+        image: "----"
     },
     {
         id: 2,
-        nombre: "María López",
-        rol: "Diseñadora UX/UI",
-        datosExtra: "Experta en CSS y Bootstrap.",
-        image: "ruta/a/imagen/maria.jpg"
+        nombre: "---",
+        rol: "----",
+        datosExtra: "-----",
+        image: "----"
     },
     {
         id: 3,
-        nombre: "Carlos Gómez",
-        rol: "Backend/Database",
-        datosExtra: "Maneja Node.js y MongoDB.",
-        image: "ruta/a/imagen/carlos.jpg"
+        nombre: "-----",
+        rol: "-----",
+        datosExtra: "-----",
+        image: "----"
     },
 ];
 
