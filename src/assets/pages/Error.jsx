@@ -13,9 +13,7 @@ function Error() {
             <Link to="/" className="btn btn-primary btn-lg">
                 Volver al inicio
             </Link>
-
         </div>
     )
 };
-
 export default Error;

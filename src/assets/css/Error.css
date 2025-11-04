@@ -6,12 +6,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   /* 2. Ocupar toda la altura disponible */
   /* El valor 100vh asegura que ocupe toda la altura visible del viewport.
        Asegúrate de que body y html no tengan márgenes por defecto para que funcione. */
   min-height: 100vh;
-
   /* 3. Fondo sutil y tipografía */
   background-color: #f8f9fa;
   /* Fondo gris claro (como Bootstrap 'light') */
