@@ -18,8 +18,9 @@ import Proyecto5 from './PoryectosAnteriores/Proyecto5/Proyecto5App';
 
 // 🔹 Sistema de autenticación
 import Login from './assets/pages/Login';
+import Registrar from './assets/components/Registrar';
 import NoAutorizado from './assets/pages/NoAutorizado';
-import FormularioRegistro from './assets/components/FormularioRegistro';
+import FormularioRegistro from './assets/components/FormularioRegistro/FormularioRegistro';
 import ProtectorRutas from './assets/components/ProtectorRutas';
 import { AutorizacionesProvider } from './assets/context/AutorizacionContext';
 
@@ -33,13 +34,14 @@ function App() {
         <Routes>
           {/* 🔸 Rutas públicas */}
           <Route path="/login" element={<Login />} />
+          <Route path="/registrar" element={<Registrar />} />
           <Route path="/formularioregistro" element={<FormularioRegistro />} />
           <Route path="/unauthorized" element={<NoAutorizado />} />
 
           {/* 🔸 Layout principal con rutas protegidas */}
           <Route path="/" element={<Layout />}>
-            {/* Redirección al login si entra sin loguearse */}
-            <Route index element={<Navigate to="/home" />} />
+            {/* Mostrar Home directamente al entrar */}
+            <Route index element={<Home />} />
 
             {/* Rutas accesibles a todos los roles autenticados */}
             <Route path="home" element={<Home />} />

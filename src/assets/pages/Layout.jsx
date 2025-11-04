@@ -7,9 +7,9 @@ function Layout() {
   const navigate = useNavigate();
 
   const manejarLogout = () => {
-    logout();
-    navigate("/home");
-  };
+  logout();
+  navigate("/home");
+};
 
   return (
     <>
