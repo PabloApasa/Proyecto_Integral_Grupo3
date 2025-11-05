@@ -29,6 +29,8 @@ import { AutorizacionesProvider } from './assets/context/AutorizacionContext';
 // 🔹 Juegos de Diagnostico
 import BotonColor from "./assets/components/Diagnostico/Juego01/BotonColor";
 import Imagenes from "./assets/components/Diagnostico/Juego02/Imagenes";
+import JuegoNumero from "./assets/components/Diagnostico/Juego03/JuegoNumero";
+import Juego04 from "./assets/components/Diagnostico/Juego04/Juego04";
 
 // 🔹 Página o componente para alumnos
 import Games from './assets/pages/Games';
@@ -47,9 +49,11 @@ function App() {
           <Route path="/formularioregistro" element={<FormularioRegistro />} />
           <Route path="/unauthorized" element={<NoAutorizado />} />
 
-          {/* Tutas para los Juegos Diagnosticos */}
+          {/* Rutas para los Juegos Diagnosticos */}
           <Route path="/diagnostico/juego01" element={<BotonColor />} />
-          <Route path="/diagnostico/juego2" element={<Imagenes />} />
+          <Route path="/diagnostico/juego02" element={<Imagenes />} />
+          <Route path="/diagnostico/juego03" element={<JuegoNumero />} />
+          <Route path="/diagnostico/juego04" element={<Juego04 />} />
 
           {/* 🔸 Layout principal con rutas protegidas */}
           <Route path="/" element={<Layout />}>

@@ -1,45 +1,47 @@
-/***import { useState, useEffect } from "react";
-
-const map = {
-    1: "uno",
-    2: "dos",
-    3: "tres",  
-    4: "cuatro",
-    5: "cinco",
-    6: "seis",
-    7: "siete",
-    8: "ocho",
-    9: "nueve",
-    10: "diez",
-};
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // 🔹 Importamos para navegar
 
 export default function JuegoNumero() {
-    const Total=10;
-    const [asked , setAsked] = useState(0);
-    const [score , setScore] = useState(0);
-    const [number , setNumber] = useState(null);
-    const [opcion , setOpcion] = useState([]);
-    const [feedback , setFeedback] = useState("");
+  const Total = 10;
+  const [asked, setAsked] = useState(0);
+  const [score, setScore] = useState(0);
+  const [number, setNumber] = useState(null);
+  const [options, setOptions] = useState([]);
+  const [feedback, setFeedback] = useState("");
+  const navigate = useNavigate(); // 🔹 Hook para navegación
 
-    function randomInt(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-    
-function shuffle(arr) {
+  function randInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  function shuffle(arr) {
     return arr.sort(() => Math.random() - 0.5);
   }
 
   function makeOptions(correctNumber) {
+    const map = {
+      1: "uno",
+      2: "dos",
+      3: "tres",
+      4: "cuatro",
+      5: "cinco",
+      6: "seis",
+      7: "siete",
+      8: "ocho",
+      9: "nueve",
+      10: "diez",
+    };
+
     const correctWord = map[correctNumber];
     const opts = new Set([correctWord]);
     while (opts.size < 3) {
       opts.add(map[randInt(1, 10)]);
     }
-    return shuffle([... opts]);
+    return shuffle([...opts]);
   }
 
   const nextQuestion = () => {
-    if (asked >= qTotal) return;
+    if (asked >= Total) return;
     const newNumber = randInt(1, 10);
     setNumber(newNumber);
     setOptions(makeOptions(newNumber));
@@ -48,6 +50,19 @@ function shuffle(arr) {
   };
 
   const handleChoice = (word) => {
+    const map = {
+      1: "uno",
+      2: "dos",
+      3: "tres",
+      4: "cuatro",
+      5: "cinco",
+      6: "seis",
+      7: "siete",
+      8: "ocho",
+      9: "nueve",
+      10: "diez",
+    };
+
     if (word === map[number]) {
       setFeedback("¡Es correcto!");
       setScore((s) => s + 1);
@@ -59,6 +74,15 @@ function shuffle(arr) {
   useEffect(() => {
     nextQuestion();
   }, []);
+
+  // 🔹 Cuando termine el juego, redirige al Juego04
+  useEffect(() => {
+    if (asked >= Total) {
+      setTimeout(() => {
+        navigate("/diagnostico/juego04");
+      }, 1500); // espera 1.5 seg antes de pasar al siguiente juego
+    }
+  }, [asked]);
 
   return (
     <div className="p-6 max-w-md mx-auto bg-white rounded-xl shadow-md text-center">
@@ -81,27 +105,20 @@ function shuffle(arr) {
         ))}
       </div>
 
-      /*de aqui asia abajo saque de chatgpt por que era algo ams que agregar y le daba un poco mas de estilo*/
-/***
       <p className="font-semibold mb-2">{feedback}</p>
 
       <p className="text-sm text-gray-500">
-        Pregunta {asked}/{qTotal} — Puntos: {score}
+        Pregunta {asked}/{Total} — Puntos: {score}
       </p>
 
-      {asked < qTotal ? (
+      {asked < Total && (
         <button
           onClick={nextQuestion}
           className="mt-3 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
         >
-          Siguiente
+          Continuar
         </button>
-      ) : (
-        <p className="text-green-600 font-semibold mt-3">
-          🎉 ¡Fin del juego! Puntuación: {score}/{qTotal}
-        </p>
       )}
     </div>
   );
 }
-  */
