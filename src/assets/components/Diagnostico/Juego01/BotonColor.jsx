@@ -4,7 +4,7 @@ function BotonColor() {
   const navigate = useNavigate();
 
   const handleContinuar = () => {
-    navigate("/diagnostico/juego2");
+    navigate("/diagnostico/juego02");
   };
 
   return (
