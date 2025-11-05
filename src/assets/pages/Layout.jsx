@@ -14,10 +14,11 @@ function Layout() {
   const navigate = useNavigate();
 
   const manejarLogout = () => {
-    logout();
-    // Redirigimos al Home o Login después de cerrar sesión
-    navigate("/login");
-  };
+
+  logout();
+  navigate("/home");
+};
+
 
   // Determinamos los roles para enlaces condicionales
   const isAdmin = user?.rol === 'ADMINISTRATIVO';
