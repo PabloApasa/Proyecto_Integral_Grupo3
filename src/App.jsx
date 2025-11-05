@@ -26,6 +26,10 @@ import FormularioRegistro from './assets/components/FormularioRegistro/Formulari
 import ProtectorRutas from './assets/components/ProtectorRutas';
 import { AutorizacionesProvider } from './assets/context/AutorizacionContext';
 
+// 🔹 Juegos de Diagnostico
+import BotonColor from "./assets/components/Diagnostico/Juego01/BotonColor";
+import Imagenes from "./assets/components/Diagnostico/Juego02/Imagenes";
+
 // 🔹 Página o componente para alumnos
 import Games from './assets/pages/Games';
 
@@ -42,6 +46,10 @@ function App() {
           <Route path="/registrar" element={<Registrar />} />
           <Route path="/formularioregistro" element={<FormularioRegistro />} />
           <Route path="/unauthorized" element={<NoAutorizado />} />
+
+          {/* Tutas para los Juegos Diagnosticos */}
+          <Route path="/diagnostico/juego01" element={<BotonColor />} />
+          <Route path="/diagnostico/juego2" element={<Imagenes />} />
 
           {/* 🔸 Layout principal con rutas protegidas */}
           <Route path="/" element={<Layout />}>

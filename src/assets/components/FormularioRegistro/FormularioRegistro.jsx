@@ -47,7 +47,7 @@ function FormularioRegistro() {
     }
 
     // Pasar los datos al primer juego
-    navigate("/diagnostico/juego1", {
+    navigate("/diagnostico/juego01", {
       state: {
         username,
         password,
