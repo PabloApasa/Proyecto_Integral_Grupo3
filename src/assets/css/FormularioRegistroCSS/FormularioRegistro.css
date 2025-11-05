@@ -1,30 +1,69 @@
+/* Fondo general */
+body, .registro-container {
+  background-color: #f8f9fa;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Tarjeta principal */
+.card {
+  border-radius: 15px;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Título */
+.card-title {
+  font-weight: 600;
+  text-align: center;
+  color: #0d6efd;
+}
+
+/* Formulario general */
 .formulario-registro {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 20px;
 }
 
-.fila-doble {
-  display: flex;
-  gap: 1rem;
+/* Agrupar dos columnas */
+.dos-columnas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
 }
 
-.fila-doble .campo {
-  flex: 1;
+/* Inputs */
+.form-control {
+  border-radius: 10px;
+  border: 1px solid #ced4da;
+  transition: all 0.3s ease;
 }
 
-button.continuar {
-  width: 100%;
+.form-control:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Botón principal */
+.boton-continuar {
   background-color: #0d6efd;
   border: none;
-  padding: 0.75rem;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 1.1rem;
+  font-weight: 500;
   color: white;
-  border-radius: 50px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
-button.continuar:hover {
-  background-color: #0b5ed7;
+.boton-continuar:hover {
+  background-color: #084298;
+  transform: translateY(-2px);
+}
+
+/* Para pantallas pequeñas */
+@media (max-width: 768px) {
+  .dos-columnas {
+    grid-template-columns: 1fr;
+  }
 }
