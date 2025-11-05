@@ -1,13 +1,8 @@
 
-
-// se usa una libreria para ver los iconos
-// npm install react-bootstrap-icons
-
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Form, Button, Card } from "react-bootstrap";
-import { ArrowRight } from "react-bootstrap-icons";
+
 
 function Registrar() {
   const [username, setUsername] = useState("");
@@ -60,12 +55,8 @@ function Registrar() {
               />
             </Form.Group>
 
-            <Button
-              variant="success"
-              type="submit"
-              className="w-100 mt-3 d-flex justify-content-center align-items-center gap-2"
-            >
-              Continuar <ArrowRight />
+            <Button variant="success" type="submit" className="w-100 mt-3">
+              Continuar →
             </Button>
           </Form>
         </Card.Body>
