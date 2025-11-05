@@ -70,12 +70,14 @@ body, .registro-container {
 
 .form-control {
   transition: all 0.3s ease;
+  font-size: 1rem; /* tamaño base */
 }
 
-/* Cuando el input está enfocado */
+/* 🔹 Cuando el usuario hace foco (clic en el campo) */
 .form-control:focus {
   transform: scale(1.08);
   z-index: 2;
-  box-shadow: 0 0 12px rgba(0, 123, 255, 0.4);
   position: relative;
+  box-shadow: 0 0 12px rgba(0, 123, 255, 0.4);
+  font-size: 1.2rem; /* ✅ aumenta el tamaño del texto */
 }
