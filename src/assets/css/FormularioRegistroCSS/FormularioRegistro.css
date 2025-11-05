@@ -67,3 +67,15 @@ body, .registro-container {
     grid-template-columns: 1fr;
   }
 }
+
+.form-control {
+  transition: all 0.3s ease;
+}
+
+/* Cuando el input está enfocado */
+.form-control:focus {
+  transform: scale(1.08);
+  z-index: 2;
+  box-shadow: 0 0 12px rgba(0, 123, 255, 0.4);
+  position: relative;
+}
