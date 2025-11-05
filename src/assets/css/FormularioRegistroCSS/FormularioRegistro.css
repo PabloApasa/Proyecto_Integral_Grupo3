@@ -70,14 +70,23 @@ body, .registro-container {
 
 .form-control {
   transition: all 0.3s ease;
-  font-size: 1rem; /* tamaño base */
+  font-size: 1rem;
 }
 
-/* 🔹 Cuando el usuario hace foco (clic en el campo) */
+/* 🔹 Efecto al enfocar el campo */
 .form-control:focus {
   transform: scale(1.08);
   z-index: 2;
   position: relative;
   box-shadow: 0 0 12px rgba(0, 123, 255, 0.4);
-  font-size: 1.2rem; /* ✅ aumenta el tamaño del texto */
+  font-size: 1.2rem;
+}
+
+/* 🔹 Cuando el input está en foco, agranda también el label */
+.form-group:focus-within label,
+.form-group:focus-within .form-label {
+  font-size: 1.1rem;
+  color: #0056b3; /* azul accesible */
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
