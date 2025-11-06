@@ -1,29 +1,43 @@
-import { Row, Container } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 // Importamos el nuevo componente
 import IntegranteCard from "../components/IntegranteCard";
 
 const integrantesData = [
     {
         id: 1,
-        nombre: "---",
-        rol: "---",
-        datosExtra: "----",
-        image: "----"
+        nombre: "Navarro Ana Florencia",
+        rol: "Diseñador UI/UX",
+        datosExtra: "Experiencia en diseño de interfaces",
+        image: "https://via.placeholder.com/150"
     },
     {
         id: 2,
-        nombre: "---",
-        rol: "----",
-        datosExtra: "-----",
-        image: "----"
+        nombre: "Quiroga Aldana Rocio",
+        rol: "Desarrolladora Backend",
+        datosExtra: "Experiencia en Node.js y Express",
+        image: "https://via.placeholder.com/150"
     },
     {
         id: 3,
-        nombre: "-----",
-        rol: "-----",
-        datosExtra: "-----",
-        image: "----"
+        nombre: "Gutierrez Efrain Julio Alberto",
+        rol: "Desarrollador Full Stack",
+        datosExtra: "Experiencia en MERN stack",
+        image: "https://via.placeholder.com/150"
     },
+    {
+        id: 4,
+        nombre: "Apasa Pablo Ariel",
+        rol: "Desarrollador Backend",
+        datosExtra: "Experiencia en Python y Django",
+        image: "https://via.placeholder.com/150"
+    },
+    {
+        id: 5,
+        nombre: "Cappiello Andrea Victoria",
+        rol: "Desarrolladora Frontend",
+        datosExtra: "Experiencia en React y Redux",
+        image: "https://via.placeholder.com/150"
+    }
 ];
 
 function InfoPersonal() {
@@ -31,7 +45,7 @@ function InfoPersonal() {
         <Container className="my-5">
             <h1 className="mb-4 text-center">Información Personal de los Integrantes</h1>
 
-            <Row xs={1} md={2} lg={3} className="g-4">
+            <div className="integrantes-list">
                 {/* Iteramos sobre los datos y usamos el componente IntegranteCard */}
                 {integrantesData.map((integrante) => (
                     <IntegranteCard
@@ -39,7 +53,7 @@ function InfoPersonal() {
                         integrante={integrante}
                     />
                 ))}
-            </Row>
+            </div>
         </Container>
     );
 }
