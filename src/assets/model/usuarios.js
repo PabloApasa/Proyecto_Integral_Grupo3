@@ -13,7 +13,7 @@ const esquemaUsuario = new esquema({
     name: String,
 });
 
-const listaUsuarios = mongoose.model('Usuarios', esquemaUsuario);
+const listaUsuarios = mongoose.model('usuarios', esquemaUsuario);
 
 //rutas, endopoints
 //promesa

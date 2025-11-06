@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 const archivoDB = require('./conection.js')
 const usuarios = require('../src/assets/model/usuarios.js')
 
-// midleware
+// midleware 
 
 app.use('/api', usuarios);
 

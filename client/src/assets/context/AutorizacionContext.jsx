@@ -10,7 +10,6 @@ export function AutorizacionesProvider({ children }) {
   const [usuariosBD, setUsuariosBD] = useState([]);
 
   //const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(false); // 🔹 agregado
 
   const [user, setUser] = useState(() => {
     try {
@@ -36,7 +35,7 @@ export function AutorizacionesProvider({ children }) {
     console.log(usuariosBD);
     try {
       const usuarioEncontrado = usuariosBD.find(
-        (u) => { u.username === credentials.username && u.password === credentials.password });
+        u => u.username === credentials.username && u.password === credentials.password);
       if (usuarioEncontrado) {
         const { password, ...userWithoutPassword } = usuarioEncontrado;
         setUser(userWithoutPassword);
