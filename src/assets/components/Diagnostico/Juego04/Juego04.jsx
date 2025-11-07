@@ -2,6 +2,26 @@
 const partesIngles= ["head", "eye","nose","mouth","eyebrown","hear"];
 //creo una lista pero con las traducciones de la lista anterior//
 const partesEspañol= ["cabeza","ojo","nariz","boca","ceja","cabello"];
+  //creo una funcion que retorna un mensaje en caso del que jugador se equivoque le devuelve la traduccion en español
+function mensajeError({palabraIngles,traducciónEspañol,continuar}){
+
+  return(<div>
+    <h2>"No es correcto, vuelve a intentarlo!</h2>
+    <p> <strong>{palabraIngles}</strong> significa: <strong>{traducciónEspañol}</strong> </p>
+    <button onClick={continuar}> continuar?</button>
+  </div>);
+
+}
+function BotonParteCuerpo({nombre,arriba,izquierda,onClick}){
+  return(
+    <button onClick={()=>onClick(nombre)} style={{top:arriba,left:izquierda}}>   </button>
+  )
+}
+function imagenCuerpo ({onClickBotonParteCuerpo}){
+  return (
+   <div></div>
+  )
+}
 function Juego04() {
  const [palabraActual,setpalabraActual]= useState (partesIngles[0]);
   const [indicePalabra,setindicepalabra]= useState ( 0);
