@@ -1,29 +1,23 @@
+//creo una lista y coloco partes del cuerpo en ingles//
+const partesIngles= ["head", "eye","nose","mouth","eyebrown","hear"];
+//creo una lista pero con las traducciones de la lista anterior//
+const partesEspañol= ["cabeza","ojo","nariz","boca","ceja","cabello"];
 function Juego04() {
-  const handleTerminar = () => {
-    alert("Funcionalidad en desarrollo 🚧");
-  };
-
+ const [palabraActual,setpalabraActual]= useState (partesIngles[0]);
+  const [indicePalabra,setindicepalabra]= useState ( 0);
+  const [acierta,setacierta]= useState (false);//jugador comienza la partida//
+  const [traduccion,settraduccion] = useState ("");//variable para guardar la traduccion de la palabra en caso de que se equivoque el jugador//
+  const nuevaPalabraAleatoria = ()=> {
+    const indiceAleatorio= Math.floor (Math.random()*partesIngles.length);
+    setpalabraActual(partesIngles[indiceAleatorio]);
+    setindicepalabra(indiceAleatorio);
+   // setacierta(true)//
+  }
   return (
-    <div style={{ textAlign: "center", padding: "50px" }}>
-      <h1>🎮 ¡Acá va el último juego!</h1>
-      <button
-        style={{
-          marginTop: "30px",
-          padding: "10px 25px",
-          fontSize: "1.1rem",
-          borderRadius: "10px",
-          backgroundColor: "#198754",
-          color: "white",
-          border: "none",
-          cursor: "pointer",
-          transition: "all 0.3s ease",
-        }}
-        onMouseOver={(e) => (e.target.style.backgroundColor = "#146c43")}
-        onMouseOut={(e) => (e.target.style.backgroundColor = "#198754")}
-        onClick={handleTerminar}
-      >
-        Terminar 🏁
-      </button>
+    
+    <div>
+      <h1>Juego de Anatomía en Inglés</h1>
+      <p>Identifica las partes del cuerpo en inglés haciendo clic en ellas.</p>
     </div>
   );
 }
