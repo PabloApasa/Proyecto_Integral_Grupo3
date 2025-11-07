@@ -1,42 +1,39 @@
 .color-game-container {
   text-align: center;
   padding: 40px;
-  background-color: #f9fafc;
+  background-color: #c28fab;
   border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   max-width: 500px;
   margin: 40px auto;
-  font-family: "Poppins", sans-serif;
 }
 
 .color-game-title {
-  font-size: 1.8rem;
-  font-weight: bold;
+  font-size: 2rem;
   color: #333;
   margin-bottom: 10px;
 }
 
 .color-game-instructions {
-  font-size: 1rem;
-  color: #666;
-  margin-bottom: 30px;
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  color: #555;
 }
 
 .color-buttons {
   display: flex;
   justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
+  gap: 15px;
   margin-bottom: 25px;
 }
 
 .color-button {
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   border: none;
-  border-radius: 15px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s;
 }
 
 .color-button:hover {
@@ -44,21 +41,73 @@
 }
 
 .color-word {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: bold;
   color: #222;
   margin-bottom: 15px;
 }
 
+.color-display-box {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 20px;
+  border-radius: 15px;
+  border: 2px solid #ccc;
+}
+
+.color-words {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.color-word-button {
+  padding: 10px 18px;
+  font-size: 1.1rem;
+  background-color: #e8eaf6;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.color-word-button:hover {
+  background-color: #c5cae9;
+  transform: scale(1.05);
+}
+
 .color-feedback {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 600;
-  color: #444;
-  min-height: 30px;
-  margin-bottom: 10px;
+  margin-top: 15px;
 }
 
 .color-progress {
+  margin-top: 10px;
   font-size: 1rem;
-  color: #777;
+  color: #666;
+}
+
+/* 🏁 Pantalla final */
+.color-final-score {
+  font-size: 1.3rem;
+  margin: 20px 0;
+  color: #444;
+}
+
+.continue-button {
+  padding: 12px 25px;
+  font-size: 1.2rem;
+  background-color: #64b5f6;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.continue-button:hover {
+  background-color: #42a5f5;
+  transform: scale(1.05);
 }
