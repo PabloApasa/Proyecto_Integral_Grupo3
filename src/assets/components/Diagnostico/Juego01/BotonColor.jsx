@@ -5,7 +5,6 @@ import "../../../css/DiagnosticoCSS/Juego01Css/BotonColor.css";
 function BotonColor() {
   const navigate = useNavigate();
 
-  // 🎨 Colores suaves para buena accesibilidad
   const colors = [
     { name: "red", label: "Red", hex: "#e57373" },
     { name: "blue", label: "Blue", hex: "#64b5f6" },
@@ -14,27 +13,49 @@ function BotonColor() {
     { name: "purple", label: "Purple", hex: "#ba68c8" },
   ];
 
+  const generateRounds = () => {
+    const base = Array(5).fill("normal").concat(Array(5).fill("inverse"));
+    return base.sort(() => Math.random() - 0.5);
+  };
+
+  const [modeList, setModeList] = useState(generateRounds());
+  const [currentMode, setCurrentMode] = useState("");
   const [targetColor, setTargetColor] = useState("");
   const [feedback, setFeedback] = useState("");
   const [score, setScore] = useState(0);
   const [round, setRound] = useState(1);
-  const totalRounds = 5;
+  const [finished, setFinished] = useState(false);
+  const [animate, setAnimate] = useState(false);
+  const [selected, setSelected] = useState(null);
+  const totalRounds = 10;
 
-  // 🔹 Generar color objetivo al inicio y en cada ronda
   const nextRound = () => {
-    const randomColor =
-      colors[Math.floor(Math.random() * colors.length)].name;
-    setTargetColor(randomColor);
+    const newColor = colors[Math.floor(Math.random() * colors.length)].name;
+    setTargetColor(newColor);
+    setCurrentMode(modeList[round - 1]);
     setFeedback("");
+    setSelected(null);
+    setAnimate(true);
+    setTimeout(() => setAnimate(false), 500);
   };
 
   useEffect(() => {
     nextRound();
   }, []);
 
-  // 🔹 Cuando el jugador elige un color
-  const handleChoice = (colorName) => {
-    if (colorName === targetColor) {
+  const handleChoice = (choice) => {
+    setSelected(choice);
+    let correct = false;
+
+    if (currentMode === "normal") {
+      correct = choice === targetColor;
+    } else {
+      const targetLabel =
+        colors.find((c) => c.name === targetColor)?.label || "";
+      correct = choice === targetLabel;
+    }
+
+    if (correct) {
       setFeedback("✅ ¡Correcto!");
       setScore((s) => s + 1);
     } else {
@@ -48,33 +69,104 @@ function BotonColor() {
       }, 1000);
     } else {
       setTimeout(() => {
-        navigate("/diagnostico/juego02"); // pasa al siguiente juego
-      }, 1500);
+        setFinished(true);
+      }, 1000);
     }
   };
 
   const targetLabel =
     colors.find((c) => c.name === targetColor)?.label || "";
+  const targetHex =
+    colors.find((c) => c.name === targetColor)?.hex || "#ccc";
+
+  if (finished) {
+    return (
+      <div className="color-game-container fade-in">
+        <h1 className="color-game-title">🎉 ¡Buen trabajo!</h1>
+        <p className="color-final-score">
+          Obtuviste <strong>{score}</strong> de <strong>{totalRounds}</strong> puntos.
+        </p>
+        <button
+          className="continue-button"
+          onClick={() => navigate("/diagnostico/juego02")}
+        >
+          Continuar ➡️
+        </button>
+      </div>
+    );
+  }
 
   return (
-    <div className="color-game-container">
+    <div className={`color-game-container fade-in ${animate ? "fade-in" : ""}`}>
       <h1 className="color-game-title">Juego — Colores 🎨</h1>
       <p className="color-game-instructions">
-        Pulsa el botón del color que corresponde a la palabra en inglés.
+        {currentMode === "normal"
+          ? "Pulsa el color correcto según la palabra en inglés."
+          : "Pulsa la palabra que coincide con el color mostrado."}
       </p>
 
-      <div className="color-buttons">
-        {colors.map((c) => (
-          <button
-            key={c.name}
-            className="color-button"
-            style={{ backgroundColor: c.hex }}
-            onClick={() => handleChoice(c.name)}
-          />
-        ))}
-      </div>
+      {currentMode === "normal" ? (
+        <>
+          <div className="color-buttons">
+            {colors.map((c) => {
+              const isSelected = selected === c.name;
+              const isCorrect = selected && selected === targetColor;
+              const isWrong = selected && selected !== targetColor && isSelected;
 
-      <div className="color-word">{targetLabel}</div>
+              return (
+                <button
+                  key={c.name}
+                  className={`color-button ${
+                    isCorrect && isSelected
+                      ? "correct"
+                      : isWrong
+                      ? "wrong"
+                      : ""
+                  }`}
+                  style={{ backgroundColor: c.hex }}
+                  onClick={() => handleChoice(c.name)}
+                  disabled={!!selected}
+                />
+              );
+            })}
+          </div>
+          <div className="color-word">{targetLabel}</div>
+        </>
+      ) : (
+        <>
+          <div
+            className="color-display-box"
+            style={{ backgroundColor: targetHex }}
+          ></div>
+          <div className="color-words">
+            {colors.map((c) => {
+              const isSelected = selected === c.label;
+              const targetLabelWord =
+                colors.find((clr) => clr.name === targetColor)?.label;
+              const isCorrect = selected && selected === targetLabelWord;
+              const isWrong =
+                selected && selected !== targetLabelWord && isSelected;
+
+              return (
+                <button
+                  key={c.label}
+                  className={`color-word-button ${
+                    isCorrect && isSelected
+                      ? "correct"
+                      : isWrong
+                      ? "wrong"
+                      : ""
+                  }`}
+                  onClick={() => handleChoice(c.label)}
+                  disabled={!!selected}
+                >
+                  {c.label}
+                </button>
+              );
+            })}
+          </div>
+        </>
+      )}
 
       <p className="color-feedback">{feedback}</p>
       <p className="color-progress">
