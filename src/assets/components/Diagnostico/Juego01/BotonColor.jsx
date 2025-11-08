@@ -5,7 +5,6 @@ import "../../../css/DiagnosticoCSS/Juego01Css/BotonColor.css";
 function BotonColor() {
   const navigate = useNavigate();
 
-  // 🎨 Colores accesibles (pasteles)
   const colors = [
     { name: "red", label: "Red", hex: "#e57373" },
     { name: "blue", label: "Blue", hex: "#64b5f6" },
@@ -14,7 +13,6 @@ function BotonColor() {
     { name: "purple", label: "Purple", hex: "#ba68c8" },
   ];
 
-  // 🔄 Generar 10 rondas: 5 normales + 5 inversas (mezcladas)
   const generateRounds = () => {
     const base = Array(5).fill("normal").concat(Array(5).fill("inverse"));
     return base.sort(() => Math.random() - 0.5);
@@ -27,22 +25,26 @@ function BotonColor() {
   const [score, setScore] = useState(0);
   const [round, setRound] = useState(1);
   const [finished, setFinished] = useState(false);
+  const [animate, setAnimate] = useState(false);
+  const [selected, setSelected] = useState(null);
   const totalRounds = 10;
 
-  // 🔹 Generar una nueva ronda
   const nextRound = () => {
     const newColor = colors[Math.floor(Math.random() * colors.length)].name;
     setTargetColor(newColor);
     setCurrentMode(modeList[round - 1]);
     setFeedback("");
+    setSelected(null);
+    setAnimate(true);
+    setTimeout(() => setAnimate(false), 500);
   };
 
   useEffect(() => {
     nextRound();
   }, []);
 
-  // 🔹 Cuando el jugador elige una opción
   const handleChoice = (choice) => {
+    setSelected(choice);
     let correct = false;
 
     if (currentMode === "normal") {
@@ -77,10 +79,9 @@ function BotonColor() {
   const targetHex =
     colors.find((c) => c.name === targetColor)?.hex || "#ccc";
 
-  // 🏁 Pantalla final
   if (finished) {
     return (
-      <div className="color-game-container">
+      <div className="color-game-container fade-in">
         <h1 className="color-game-title">🎉 ¡Buen trabajo!</h1>
         <p className="color-final-score">
           Obtuviste <strong>{score}</strong> de <strong>{totalRounds}</strong> puntos.
@@ -95,9 +96,8 @@ function BotonColor() {
     );
   }
 
-  // 🎮 Pantalla del juego
   return (
-    <div className="color-game-container">
+    <div className={`color-game-container fade-in ${animate ? "fade-in" : ""}`}>
       <h1 className="color-game-title">Juego — Colores 🎨</h1>
       <p className="color-game-instructions">
         {currentMode === "normal"
@@ -107,36 +107,63 @@ function BotonColor() {
 
       {currentMode === "normal" ? (
         <>
-          {/* Variante 1 — Palabra → Color */}
           <div className="color-buttons">
-            {colors.map((c) => (
-              <button
-                key={c.name}
-                className="color-button"
-                style={{ backgroundColor: c.hex }}
-                onClick={() => handleChoice(c.name)}
-              />
-            ))}
+            {colors.map((c) => {
+              const isSelected = selected === c.name;
+              const isCorrect = selected && selected === targetColor;
+              const isWrong = selected && selected !== targetColor && isSelected;
+
+              return (
+                <button
+                  key={c.name}
+                  className={`color-button ${
+                    isCorrect && isSelected
+                      ? "correct"
+                      : isWrong
+                      ? "wrong"
+                      : ""
+                  }`}
+                  style={{ backgroundColor: c.hex }}
+                  onClick={() => handleChoice(c.name)}
+                  disabled={!!selected}
+                />
+              );
+            })}
           </div>
           <div className="color-word">{targetLabel}</div>
         </>
       ) : (
         <>
-          {/* Variante 2 — Color → Palabra */}
           <div
             className="color-display-box"
             style={{ backgroundColor: targetHex }}
           ></div>
           <div className="color-words">
-            {colors.map((c) => (
-              <button
-                key={c.label}
-                className="color-word-button"
-                onClick={() => handleChoice(c.label)}
-              >
-                {c.label}
-              </button>
-            ))}
+            {colors.map((c) => {
+              const isSelected = selected === c.label;
+              const targetLabelWord =
+                colors.find((clr) => clr.name === targetColor)?.label;
+              const isCorrect = selected && selected === targetLabelWord;
+              const isWrong =
+                selected && selected !== targetLabelWord && isSelected;
+
+              return (
+                <button
+                  key={c.label}
+                  className={`color-word-button ${
+                    isCorrect && isSelected
+                      ? "correct"
+                      : isWrong
+                      ? "wrong"
+                      : ""
+                  }`}
+                  onClick={() => handleChoice(c.label)}
+                  disabled={!!selected}
+                >
+                  {c.label}
+                </button>
+              );
+            })}
           </div>
         </>
       )}
