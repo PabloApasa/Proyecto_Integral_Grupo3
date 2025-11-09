@@ -1,40 +1,52 @@
 import React, { useState } from "react";
 import "../../../css/DiagnosticoCSS/Juego04Css/Juego04.css";
 
+const partesIngles = [ "eye", "mouth", "neck", "arm", "hair", "hand", "torso", "leg", "foot"];
 
-//creo una lista y coloco partes del cuerpo en ingles//
-const partesIngles= ["head", "eye","nose","mouth","eyebrown","hear"];
-//creo una lista pero con las traducciones de la lista anterior//
-const partesEspañol= ["cabeza","ojo","nariz","boca","ceja","cabello"];
-  //creo una funcion que retorna un mensaje en caso del que jugador se equivoque le devuelve la traduccion en español
-function mensajeError({palabraIngles,traducciónEspañol,continuar}){
+const partesEspañol = [ "ojo", "boca", "cuello", "brazo", "cabello", "mano", "torso", "pierna", "pie"];
 
-  return(<div>
-    <h2>"No es correcto, vuelve a intentarlo!</h2>
-    <p> <strong>{palabraIngles}</strong> significa: <strong>{traducciónEspañol}</strong> </p>
-    <button onClick={continuar}> continuar?</button>
-  </div>);
-
+function MensajeError({ palabraIngles, traduccionEspanol, continuar }) {
+  return (
+    <div className="mensaje-error">
+      <h2>No es correcto, vuelve a intentarlo!</h2>
+      <p>
+        <strong>{palabraIngles}</strong> significa: <strong>{traduccionEspanol}</strong>
+      </p>
+      <button onClick={continuar}>Continuar</button>
+    </div>
+  );
 }
-function BotonParteCuerpo({nombre,arriba,izquierda,onClick}){
-  return(
-    <button onClick={()=>onClick(nombre)} style={{top:arriba,left:izquierda}}>   </button>
-  )
+
+function BotonParteCuerpo({ nombre, arriba, izquierda, onClick }) {
+  return (
+    <button
+      onClick={() => onClick(nombre)}
+      className="boton-parte"
+      style={{ top: arriba, left: izquierda }}
+    >
+      {" "}
+    </button>
+  );
 }
+
 function ImagenCuerpo({ onClickBotonParteCuerpo }) {
   const posiciones = [
-    { top: "10%", left: "50%" }, // head
-    { top: "18%", left: "43%" }, // eye
-    { top: "24%", left: "50%" }, // nose
-    { top: "32%", left: "50%" }, // mouth
-    { top: "15%", left: "58%" }, // eyebrown
-    { top: "4%", left: "50%" },  // hear (cabello)
+   
+    { top: "20%", left: "50%" },  // eye (ojo)
+    { top: "30%", left: "50%" },  // mouth (boca)
+    { top: "38%", left: "50%" },  // neck (cuello)
+    { top: "48%", left: "23%" },  // arm (brazo)
+    { top: "10%", left: "50%" },   // hair (cabello)
+    { top: "60%", left: "8%" },  // hand (mano)
+    { top: "53%", left: "50%" },  // torso (torso)
+    { top: "75%", left: "35%" },  // leg (pierna)
+    { top: "92%", left: "35%" },  // foot (pie)
   ];
 
   return (
     <div className="contenedor-imagen">
       <img
-        src="/img-Juego04/cuerpo humano.jpg"
+        src="https://i.pinimg.com/736x/66/fe/22/66fe228a23b286497baeb12684c039bc.jpg"
         alt="Cuerpo humano"
         className="imagen-cuerpo"
       />
@@ -55,7 +67,6 @@ function Juego04() {
   const [palabraActual, setPalabraActual] = useState(partesIngles[0]);
   const [indicePalabra, setIndicePalabra] = useState(0);
   const [mostrarError, setMostrarError] = useState(false);
-  const [traduccion, setTraduccion] = useState("");
 
   const nuevaPalabraAleatoria = () => {
     const indiceAleatorio = Math.floor(Math.random() * partesIngles.length);
@@ -66,16 +77,16 @@ function Juego04() {
 
   const manejarClickParte = (nombreParte) => {
     if (nombreParte === palabraActual) {
+      alert("¡Correcto! 🎉");
       nuevaPalabraAleatoria();
     } else {
-      setTraduccion(partesEspañol[indicePalabra]);
       setMostrarError(true);
     }
   };
 
   return (
     <div className="juego04-contenedor">
-      <h1>Juego de Anatomía en Inglés</h1>
+      <h1> Juego de Anatomía en Inglés</h1>
       <p>Identifica las partes del cuerpo en inglés haciendo clic en ellas.</p>
 
       <p>
@@ -90,7 +101,7 @@ function Juego04() {
       {mostrarError && (
         <MensajeError
           palabraIngles={palabraActual}
-          traduccionEspanol={traduccion}
+          traduccionEspanol={partesEspañol[indicePalabra]}
           continuar={nuevaPalabraAleatoria}
         />
       )}
