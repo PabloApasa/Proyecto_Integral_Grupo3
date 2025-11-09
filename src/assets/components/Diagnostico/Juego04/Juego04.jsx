@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../../css/DiagnosticoCSS/Juego04Css/Juego04.css";
 
-const partesIngles = ["eye", "mouth", "neck", "arm", "hair", "hand", "torso", "leg", "foot"];
+const partesIngles = ["eye", "mouth", "neck", "arm", "hair", "hand", "neck", "leg", "foot"];
 const partesEspañol = ["ojo", "boca", "cuello", "brazo", "cabello", "mano", "torso", "pierna", "pie"];
 
 function ErrorMessage({ onContinue }) {
