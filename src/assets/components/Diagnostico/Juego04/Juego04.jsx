@@ -1,62 +1,68 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../../css/DiagnosticoCSS/Juego04Css/Juego04.css";
 
-const partesIngles = [ "eye", "mouth", "neck", "arm", "hair", "hand", "torso", "leg", "foot"];
+const partesIngles = ["eye", "mouth", "neck", "arm", "hair", "hand", "torso", "leg", "foot"];
+const partesEspañol = ["ojo", "boca", "cuello", "brazo", "cabello", "mano", "torso", "pierna", "pie"];
 
-const partesEspañol = [ "ojo", "boca", "cuello", "brazo", "cabello", "mano", "torso", "pierna", "pie"];
-
-function MensajeError({ palabraIngles, traduccionEspanol, continuar }) {
+function ErrorMessage({ onContinue }) {
   return (
-    <div className="mensaje-error">
-      <h2>No es correcto, vuelve a intentarlo!</h2>
-      <p>
-        <strong>{palabraIngles}</strong> significa: <strong>{traduccionEspanol}</strong>
-      </p>
-      <button onClick={continuar}>Continuar</button>
+    <div className="message message-error" translate="no">
+      <h2>Not correct 🙃</h2>
+      <p>Try again! You can do it!</p>
+      <button onClick={onContinue}>Try again</button>
     </div>
   );
 }
 
-function BotonParteCuerpo({ nombre, arriba, izquierda, onClick }) {
+function SuccessMessage({ onContinue }) {
   return (
-    <button
-      onClick={() => onClick(nombre)}
-      className="boton-parte"
-      style={{ top: arriba, left: izquierda }}
-    >
-      {" "}
-    </button>
+    <div className="message message-success" translate="no">
+      <h2>VERY GOOD! 🎉</h2>
+      <p>Great job!</p>
+      <button onClick={onContinue}>Next</button>
+    </div>
   );
 }
 
-function ImagenCuerpo({ onClickBotonParteCuerpo }) {
-  const posiciones = [
-   
-    { top: "20%", left: "50%" },  // eye (ojo)
-    { top: "30%", left: "50%" },  // mouth (boca)
-    { top: "38%", left: "50%" },  // neck (cuello)
-    { top: "48%", left: "23%" },  // arm (brazo)
-    { top: "10%", left: "50%" },   // hair (cabello)
-    { top: "60%", left: "8%" },  // hand (mano)
-    { top: "53%", left: "50%" },  // torso (torso)
-    { top: "75%", left: "35%" },  // leg (pierna)
-    { top: "92%", left: "35%" },  // foot (pie)
+function BodyPartButton({ name, top, left, onClick }) {
+  return (
+    <button
+      onClick={() => onClick(name)}
+      className="boton-parte"
+      style={{ top, left }}
+      aria-label={name}
+      translate="no"
+    />
+  );
+}
+
+function BodyImage({ onClickPart }) {
+  const positions = [
+    { top: "20%", left: "50%" }, // eye
+    { top: "30%", left: "50%" }, // mouth
+    { top: "38%", left: "50%" }, // neck
+    { top: "48%", left: "23%" }, // arm
+    { top: "10%", left: "50%" }, // hair
+    { top: "60%", left: "8%" },  // hand
+    { top: "53%", left: "50%" }, // torso
+    { top: "75%", left: "35%" }, // leg
+    { top: "92%", left: "35%" }, // foot
   ];
 
   return (
-    <div className="contenedor-imagen">
+    <div className="contenedor-imagen notranslate" translate="no">
       <img
         src="https://i.pinimg.com/736x/66/fe/22/66fe228a23b286497baeb12684c039bc.jpg"
-        alt="Cuerpo humano"
+        alt="Human body"
         className="imagen-cuerpo"
       />
-      {partesIngles.map((parte, i) => (
-        <BotonParteCuerpo
-          key={parte}
-          nombre={parte}
-          arriba={posiciones[i].top}
-          izquierda={posiciones[i].left}
-          onClick={onClickBotonParteCuerpo}
+      {partesIngles.map((part, i) => (
+        <BodyPartButton
+          key={part}
+          name={part}
+          top={positions[i].top}
+          left={positions[i].left}
+          onClick={onClickPart}
         />
       ))}
     </div>
@@ -64,47 +70,96 @@ function ImagenCuerpo({ onClickBotonParteCuerpo }) {
 }
 
 function Juego04() {
-  const [palabraActual, setPalabraActual] = useState(partesIngles[0]);
-  const [indicePalabra, setIndicePalabra] = useState(0);
-  const [mostrarError, setMostrarError] = useState(false);
+  const [currentWord, setCurrentWord] = useState(partesIngles[0]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [showError, setShowError] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [score, setScore] = useState(0);
+  const [streak, setStreak] = useState(0);
+  const [femaleVoice, setFemaleVoice] = useState(null);
 
-  const nuevaPalabraAleatoria = () => {
-    const indiceAleatorio = Math.floor(Math.random() * partesIngles.length);
-    setPalabraActual(partesIngles[indiceAleatorio]);
-    setIndicePalabra(indiceAleatorio);
-    setMostrarError(false);
+  // Cargar voces disponibles del navegador
+  useEffect(() => {
+    const loadVoices = () => {
+      const voices = window.speechSynthesis.getVoices();
+      const englishFemale = voices.find(
+        (v) => v.lang.startsWith("en") && v.name.toLowerCase().includes("female")
+      ) || voices.find((v) => v.lang === "en-US");
+      setFemaleVoice(englishFemale);
+    };
+
+    loadVoices();
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+  }, []);
+
+  // Función para hablar
+  const speakWord = (word) => {
+    if ("speechSynthesis" in window) {
+      const utter = new SpeechSynthesisUtterance(word);
+      utter.lang = "en-US";
+      utter.rate = 1;
+      if (femaleVoice) utter.voice = femaleVoice; // usar voz femenina
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(utter);
+    }
   };
 
-  const manejarClickParte = (nombreParte) => {
-    if (nombreParte === palabraActual) {
-      alert("¡Correcto! 🎉");
-      nuevaPalabraAleatoria();
+  // Cada vez que cambia la palabra, la pronuncia
+  useEffect(() => {
+    speakWord(currentWord);
+  }, [currentWord, femaleVoice]);
+
+  const newRandomWord = () => {
+    const randomIndex = Math.floor(Math.random() * partesIngles.length);
+    setCurrentWord(partesIngles[randomIndex]);
+    setCurrentIndex(randomIndex);
+    setShowError(false);
+    setShowSuccess(false);
+  };
+
+  const handleClickPart = (partName) => {
+    if (partName === currentWord) {
+      setShowSuccess(true);
+      setShowError(false);
+      setScore((prev) => prev + 10);
+      setStreak((prev) => prev + 1);
     } else {
-      setMostrarError(true);
+      setShowError(true);
+      setShowSuccess(false);
+      setStreak(0);
     }
   };
 
   return (
-    <div className="juego04-contenedor">
-      <h1> Juego de Anatomía en Inglés</h1>
-      <p>Identifica las partes del cuerpo en inglés haciendo clic en ellas.</p>
+    <div className="juego04-contenedor notranslate" translate="no">
+      <h1 translate="no">Body Parts Game</h1>
+      <p translate="no">Click on the correct body part.</p>
 
-      <p>
-        Busca:{" "}
-        <span className="palabra-actual">
-          {palabraActual.toUpperCase()}
+      <div className="hud" translate="no">
+        <span>Score: {score}</span>
+        <span>Streak: {streak}</span>
+      </div>
+
+      <p translate="no">
+        Find:{" "}
+        <span className="palabra-actual" translate="no">
+          {currentWord.toUpperCase()}
         </span>
       </p>
 
-      <ImagenCuerpo onClickBotonParteCuerpo={manejarClickParte} />
+      <button
+        type="button"
+        className="voice-button"
+        onClick={() => speakWord(currentWord)}
+        translate="no"
+      >
+        🔊 Hear again
+      </button>
 
-      {mostrarError && (
-        <MensajeError
-          palabraIngles={palabraActual}
-          traduccionEspanol={partesEspañol[indicePalabra]}
-          continuar={nuevaPalabraAleatoria}
-        />
-      )}
+      <BodyImage onClickPart={handleClickPart} />
+
+      {showError && <ErrorMessage onContinue={() => setShowError(false)} />}
+      {showSuccess && <SuccessMessage onContinue={newRandomWord} />}
     </div>
   );
 }
