@@ -1,124 +1,123 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // 🔹 Importamos para navegar
+import { useNavigate } from "react-router-dom";
+import "../../../css/DiagnosticoCSS/Juego03Css/JuegoNumero.css";
 
-export default function JuegoNumero() {
-  const Total = 10;
-  const [asked, setAsked] = useState(0);
-  const [score, setScore] = useState(0);
-  const [number, setNumber] = useState(null);
+function JuegoNumero() {
+  const navigate = useNavigate();
+
+  // 🔢 Números y sus palabras
+  const numbers = [
+    { value: "1", word: "One" },
+    { value: "2", word: "Two" },
+    { value: "3", word: "Three" },
+    { value: "4", word: "Four" },
+    { value: "5", word: "Five" },
+    { value: "6", word: "Six" },
+    { value: "7", word: "Seven" },
+    { value: "8", word: "Eight" },
+    { value: "9", word: "Nine" },
+    { value: "10", word: "Ten" },
+  ];
+
+  // 📅 Días de la semana
+  const days = [
+    { value: "Lunes", word: "Monday" },
+    { value: "Martes", word: "Tuesday" },
+    { value: "Miércoles", word: "Wednesday" },
+    { value: "Jueves", word: "Thursday" },
+    { value: "Viernes", word: "Friday" },
+    { value: "Sábado", word: "Saturday" },
+    { value: "Domingo", word: "Sunday" },
+  ];
+
+  const [currentItem, setCurrentItem] = useState(null);
   const [options, setOptions] = useState([]);
   const [feedback, setFeedback] = useState("");
-  const navigate = useNavigate(); // 🔹 Hook para navegación
-
-  function randInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
-  function shuffle(arr) {
-    return arr.sort(() => Math.random() - 0.5);
-  }
-
-  function makeOptions(correctNumber) {
-    const map = {
-      1: "uno",
-      2: "dos",
-      3: "tres",
-      4: "cuatro",
-      5: "cinco",
-      6: "seis",
-      7: "siete",
-      8: "ocho",
-      9: "nueve",
-      10: "diez",
-    };
-
-    const correctWord = map[correctNumber];
-    const opts = new Set([correctWord]);
-    while (opts.size < 3) {
-      opts.add(map[randInt(1, 10)]);
-    }
-    return shuffle([...opts]);
-  }
-
-  const nextQuestion = () => {
-    if (asked >= Total) return;
-    const newNumber = randInt(1, 10);
-    setNumber(newNumber);
-    setOptions(makeOptions(newNumber));
-    setFeedback("");
-    setAsked((a) => a + 1);
-  };
-
-  const handleChoice = (word) => {
-    const map = {
-      1: "uno",
-      2: "dos",
-      3: "tres",
-      4: "cuatro",
-      5: "cinco",
-      6: "seis",
-      7: "siete",
-      8: "ocho",
-      9: "nueve",
-      10: "diez",
-    };
-
-    if (word === map[number]) {
-      setFeedback("¡Es correcto!");
-      setScore((s) => s + 1);
-    } else {
-      setFeedback(`Es incorrecto, era "${map[number]}"`);
-    }
-  };
+  const [score, setScore] = useState(0);
+  const [round, setRound] = useState(1);
+  const totalRounds = 5;
 
   useEffect(() => {
-    nextQuestion();
+    generateRound();
   }, []);
 
-  // 🔹 Cuando termine el juego, redirige al Juego04
-  useEffect(() => {
-    if (asked >= Total) {
+  const generateRound = () => {
+    // 👇 Decide si esta ronda será de número o de día
+    const isNumberRound = Math.random() < 0.5;
+
+    const dataset = isNumberRound ? numbers : days;
+    const randomIndex = Math.floor(Math.random() * dataset.length);
+    const correct = dataset[randomIndex];
+
+    // 🌀 Obtiene opciones incorrectas
+    const incorrect = dataset
+      .filter((item) => item.word !== correct.word)
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 2);
+
+    // 🔀 Mezcla las opciones
+    const newOptions = [...incorrect, correct].sort(() => Math.random() - 0.5);
+
+    setCurrentItem({ ...correct, isNumberRound });
+    setOptions(newOptions);
+    setFeedback("");
+  };
+
+  const handleChoice = (choice) => {
+    if (choice === currentItem.word) {
+      setFeedback("✅ ¡Correcto!");
+      setScore((s) => s + 1);
+    } else {
+      setFeedback("❌ Incorrecto");
+    }
+
+    if (round < totalRounds) {
+      setTimeout(() => {
+        setRound((r) => r + 1);
+        generateRound();
+      }, 1200);
+    } else {
       setTimeout(() => {
         navigate("/diagnostico/juego04");
-      }, 1500); // espera 1.5 seg antes de pasar al siguiente juego
+      }, 1500);
     }
-  }, [asked]);
+  };
 
   return (
-    <div className="p-6 max-w-md mx-auto bg-white rounded-xl shadow-md text-center">
-      <h1 className="text-xl font-bold mb-2">Juego — Números en inglés</h1>
-      <p className="text-gray-600 mb-4">
-        Pulsa la palabra en inglés que corresponde al número mostrado.
+    <div className="number-game-container">
+      <h1 className="number-game-title">Juego — Números o Días 🎯</h1>
+      <p className="number-game-instructions">
+        Observa lo que aparece y elige su nombre correcto en inglés.
       </p>
 
-      {number && <div className="text-6xl font-bold my-4">{number}</div>}
+      {currentItem && (
+        <>
+          <div className="number-display">
+            {currentItem.isNumberRound
+              ? currentItem.value
+              : currentItem.value.toUpperCase()}
+          </div>
 
-      <div className="flex justify-center gap-3 flex-wrap mb-3">
-        {options.map((opt) => (
-          <button
-            key={opt}
-            onClick={() => handleChoice(opt)}
-            className="px-4 py-2 bg-gray-100 rounded-lg hover:bg-blue-100"
-          >
-            {opt}
-          </button>
-        ))}
-      </div>
+          <div className="number-options">
+            {options.map((opt) => (
+              <button
+                key={opt.word}
+                className="number-option-button"
+                onClick={() => handleChoice(opt.word)}
+              >
+                {opt.word}
+              </button>
+            ))}
+          </div>
 
-      <p className="font-semibold mb-2">{feedback}</p>
-
-      <p className="text-sm text-gray-500">
-        Pregunta {asked}/{Total} — Puntos: {score}
-      </p>
-
-      {asked < Total && (
-        <button
-          onClick={nextQuestion}
-          className="mt-3 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-        >
-          Continuar
-        </button>
+          <p className="number-feedback">{feedback}</p>
+          <p className="number-progress">
+            Ronda {round}/{totalRounds} — Puntos: {score}
+          </p>
+        </>
       )}
     </div>
   );
 }
+
+export default JuegoNumero;

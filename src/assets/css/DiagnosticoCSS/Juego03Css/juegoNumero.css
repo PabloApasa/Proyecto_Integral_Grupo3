@@ -1,0 +1,68 @@
+body {
+  background-color: #fde4ec; /* rosado suave */
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+.number-game-container {
+  text-align: center;
+  padding: 40px;
+  background-color: #f8bbd0;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 60px auto;
+}
+
+.number-game-title {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.number-game-instructions {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.number-display {
+  font-size: 5rem;
+  font-weight: bold;
+  color: #4a148c;
+  margin-bottom: 25px;
+}
+
+.number-options {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.number-option-button {
+  padding: 12px 25px;
+  font-size: 1.3rem;
+  background-color: #f3e5f5;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.number-option-button:hover {
+  background-color: #ce93d8;
+  transform: scale(1.05);
+}
+
+.number-feedback {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-top: 15px;
+}
+
+.number-progress {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #555;
+}
