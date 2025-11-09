@@ -1,30 +1,27 @@
-//import './App.css'
+// import './App.css'
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
+import { Routes, Route, Navigate } from "react-router-dom";
+import { Container } from "react-bootstrap";
 
 // 🔹 Páginas del grupo
-import Home from './assets/pages/Home';
-import AboutUs from './assets/pages/AboutUs';
-import InfoPersonal from './assets/pages/InfoPersonal';
-import Error from './assets/pages/Error';
-import Layout from './assets/pages/Layout';
-
-// 🔹 Proyectos anteriores
-//import Proyecto2 from './assets/components/Proyecto2';
-//import Proyecto3 from './assets/components/Proyecto3';
-//import Proyecto4 from './PoryectosAnteriores/Proyecto4/Proyecto4App';
-//import Proyecto5 from './PoryectosAnteriores/Proyecto5/Proyecto5App';
+import Home from "./assets/pages/Home";
+import AboutUs from "./assets/pages/AboutUs";
+import InfoPersonal from "./assets/pages/InfoPersonal";
+import Error from "./assets/pages/Error";
+import Layout from "./assets/pages/Layout";
 
 // 🔹 Sistema de autenticación
-import Login from './assets/pages/Login';
-import NoAutorizado from './assets/pages/NoAutorizado';
-import FormularioRegistro from './assets/components/FormularioRegistro';
-import ProtectorRutas from './assets/components/ProtectorRutas';
-import { AutorizacionesProvider } from '../../client/src/assets/context/AutorizacionContext';
+import Login from "./assets/pages/Login";
+import NoAutorizado from "./assets/pages/NoAutorizado";
+import FormularioRegistro from "./assets/components/FormularioRegistro";
+import ProtectorRutas from "./assets/components/ProtectorRutas";
+import { AutorizacionesProvider } from "../../client/src/assets/context/AutorizacionContext";
 
-// 🔹 (opcional) Página o componente para alumnos
-import Games from './assets/pages/Games';
+// 🔹 Página o componente para alumnos
+import Games from "./assets/pages/Games";
+
+// 🔹 💜 Tu juego
+import Juego04 from "./assets/components/Diagnostico/Juego04/Juego04";
 
 function App() {
   return (
@@ -45,7 +42,7 @@ function App() {
             <Route
               path="home"
               element={
-                <ProtectorRutas allowedRoles={['ADMINISTRATIVO', 'ALUMNO']}>
+                <ProtectorRutas allowedRoles={["ADMINISTRATIVO", "ALUMNO"]}>
                   <Home />
                 </ProtectorRutas>
               }
@@ -54,7 +51,7 @@ function App() {
             <Route
               path="aboutus"
               element={
-                <ProtectorRutas allowedRoles={['ADMINISTRATIVO', 'ALUMNO']}>
+                <ProtectorRutas allowedRoles={["ADMINISTRATIVO", "ALUMNO"]}>
                   <AboutUs />
                 </ProtectorRutas>
               }
@@ -63,7 +60,7 @@ function App() {
             <Route
               path="infoPersonal"
               element={
-                <ProtectorRutas allowedRoles={['ADMINISTRATIVO', 'ALUMNO']}>
+                <ProtectorRutas allowedRoles={["ADMINISTRATIVO", "ALUMNO"]}>
                   <InfoPersonal />
                 </ProtectorRutas>
               }
@@ -73,23 +70,23 @@ function App() {
             <Route
               path="proyecto2"
               element={
-                <ProtectorRutas allowedRoles={['ADMINISTRATIVO']}>
-                  {/*<Proyecto2 projecPath="proyecto2" title="Proyecto 2" />*/}
+                <ProtectorRutas allowedRoles={["ADMINISTRATIVO"]}>
+                  {/*<Proyecto2 />*/}
                 </ProtectorRutas>
               }
             />
             <Route
               path="proyecto3"
               element={
-                <ProtectorRutas allowedRoles={['ADMINISTRATIVO']}>
-                  {/*<Proyecto3 projecPath="proyecto3" title="Proyecto 3" />*/}
+                <ProtectorRutas allowedRoles={["ADMINISTRATIVO"]}>
+                  {/*<Proyecto3 />*/}
                 </ProtectorRutas>
               }
             />
             <Route
               path="proyecto4"
               element={
-                <ProtectorRutas allowedRoles={['ADMINISTRATIVO']}>
+                <ProtectorRutas allowedRoles={["ADMINISTRATIVO"]}>
                   {/*<Proyecto4 />*/}
                 </ProtectorRutas>
               }
@@ -97,19 +94,28 @@ function App() {
             <Route
               path="proyecto5"
               element={
-                <ProtectorRutas allowedRoles={['ADMINISTRATIVO']}>
+                <ProtectorRutas allowedRoles={["ADMINISTRATIVO"]}>
                   {/*<Proyecto5 />*/}
                 </ProtectorRutas>
               }
             />
-            {/* */}
 
             {/* 🔸 Ruta exclusiva para ALUMNO */}
             <Route
               path="games"
               element={
-                <ProtectorRutas allowedRoles={['ALUMNO']}>
+                <ProtectorRutas allowedRoles={["ALUMNO"]}>
                   <Games />
+                </ProtectorRutas>
+              }
+            />
+
+            {/* 🔸 💜 Ruta de tu juego */}
+            <Route
+              path="juego04"
+              element={
+                <ProtectorRutas allowedRoles={["ALUMNO"]}>
+                  <Juego04 />
                 </ProtectorRutas>
               }
             />
