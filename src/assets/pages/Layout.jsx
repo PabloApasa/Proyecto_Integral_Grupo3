@@ -64,7 +64,7 @@ function Layout() {
       {/* 🌟 Importamos Header y le pasamos la lógica de autenticación 🌟 */}
       <Header authButtons={AuthAndRoleNavigation} />
 
-      <main className="p-3">
+      <main>
         {/* Aquí se renderiza el contenido de las rutas anidadas */}
         <Outlet />
       </main>
