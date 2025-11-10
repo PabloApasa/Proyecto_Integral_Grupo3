@@ -1,13 +1,21 @@
 // intalar npm install framer-motion para que se vea la transicion
 
 import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import BotonColor from "./Juego01/BotonColor";
 import Imagenes from "./Juego02/Imagenes";
 import JuegoNumero from "./Juego03/JuegoNumero";
 import Juego04 from "./Juego04/Juego04";
 
-function Diagnostico({ nombreUsuario = "Usuario" }) {
+function Diagnostico() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // 🧾 Datos que vienen del formulario o registro
+  const { nombreUsuario = "Usuario", nombreCompleto = "Nombre y Apellido" } =
+    location.state || {};
+
   const [currentGame, setCurrentGame] = useState(1);
   const [totalScore, setTotalScore] = useState(0);
   const [finished, setFinished] = useState(false);
@@ -52,14 +60,43 @@ function Diagnostico({ nombreUsuario = "Usuario" }) {
         animate={{ opacity: 1 }}
         className="flex flex-col items-center justify-center h-screen bg-pink-100 text-center font-[Poppins]"
       >
-        <h1 className="text-4xl font-bold mb-4">✅ ¡Diagnóstico completado!</h1>
-        <p className="text-xl mb-2">
-          <strong>Registrado:</strong> {nombreUsuario}
-        </p>
-        <h2 className="text-2xl mb-2">
-          Puntaje total: {totalScore} / 8
-        </h2>
-        <h3 className="text-2xl font-semibold">{getResultado(totalScore)}</h3>
+        <motion.h1
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          className="text-5xl font-extrabold text-pink-600 mb-6"
+        >
+          ✅ ¡Diagnóstico completado!
+        </motion.h1>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="bg-white shadow-lg rounded-3xl px-10 py-8 mb-8"
+        >
+          <p className="text-2xl mb-3 text-gray-700">
+            <strong>👤 Nombre de usuario:</strong> {nombreUsuario}
+          </p>
+          <p className="text-2xl mb-3 text-gray-700">
+            <strong>🪪 Nombre y apellido:</strong> {nombreCompleto}
+          </p>
+          <h2 className="text-3xl mt-6 text-gray-800 font-semibold">
+            Puntaje total: {totalScore} / 8
+          </h2>
+          <h3 className="text-3xl mt-2 font-bold text-pink-600">
+            {getResultado(totalScore)}
+          </h3>
+        </motion.div>
+
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => navigate("/")}
+          className="bg-pink-500 text-white px-6 py-3 rounded-full text-2xl font-semibold shadow-md hover:bg-pink-600 transition"
+        >
+          🔙 Volver al inicio
+        </motion.button>
       </motion.div>
     );
   }
