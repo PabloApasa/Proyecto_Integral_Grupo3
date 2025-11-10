@@ -22,7 +22,7 @@ function Layout() {
               <Nav.Link as={Link} to="/">Home</Nav.Link>
               <Nav.Link as={Link} to="/aboutus">About Us</Nav.Link>
               <Nav.Link as={Link} to="/infopersonal">InfoPersonal</Nav.Link>
-              
+
 
               {/* 🔽 Menú desplegable para los proyectos */}
               <NavDropdown title="Proyectos" id="proyectos-dropdown">
@@ -47,12 +47,17 @@ function Layout() {
                     </NavDropdown.Item>
                   </>
                 )}
-
-                {/* Solo ALUMNO puede ver Games */}
-                {isAuthenticated && user?.rol === "ALUMNO" && (
-                  <NavDropdown.Item as={Link} to="/games">Games</NavDropdown.Item>
-                )}
               </NavDropdown>
+              {/* Solo ALUMNO puede ver Games */}
+
+              {isAuthenticated && user?.rol === "ALUMNO" && (
+                <Nav.Link as={Link} to="/games">Games</Nav.Link>
+              )}
+
+              {/* ✅ NUEVO LINK: TestIngles - Visible solo para ALUMNO */}
+              {isAuthenticated && user?.rol === "ALUMNO" && (
+                <Nav.Link as={Link} to="/testingles">TestIngles</Nav.Link>
+              )}
             </Nav>
 
             {/* 🔒 Login / Logout */}

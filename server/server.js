@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
 // routing
 
 const archivoDB = require('./conection.js')
-const usuarios = require('../src/assets/model/usuarios.js')
+const usuarios = require('../src/assets/routes/usuariosRoutes.js')
 
 // midleware 
 
