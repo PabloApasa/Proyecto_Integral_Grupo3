@@ -26,6 +26,8 @@ import { AutorizacionesProvider } from '../../client/src/assets/context/Autoriza
 // 🔹 (opcional) Página o componente para alumnos
 import Games from './assets/pages/Games';
 
+import TestIngles from './assets/components/Registrar';
+
 function App() {
   return (
     <AutorizacionesProvider>
@@ -110,6 +112,14 @@ function App() {
               element={
                 <ProtectorRutas allowedRoles={['ALUMNO']}>
                   <Games />
+                </ProtectorRutas>
+              }
+            />
+            <Route
+              path="testingles" // <--- La URL que coincide con el 'to="/testingles"' en Layout.jsx
+              element={
+                <ProtectorRutas allowedRoles={['ALUMNO']}>
+                  <TestIngles /> {/* <--- EL COMPONENTE A RENDERIZAR */}
                 </ProtectorRutas>
               }
             />
