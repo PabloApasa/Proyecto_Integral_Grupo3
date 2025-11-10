@@ -1,9 +1,14 @@
+body {
+  background-color: #fde4ec; /* Fondo rosado claro en toda la pantalla */
+  margin: 0;
+  font-family: system-ui, sans-serif;
+}
+
 .juego04-contenedor {
   max-width: 480px;
   margin: 1.5rem auto;
   text-align: center;
-  font-family: system-ui, sans-serif;
-  background: radial-gradient(circle, #ffffff 0%, #e6f4ff 100%);
+  background: radial-gradient(circle, #ffffff 0%, #f8bbd0 100%);
   padding: 1.5rem 1rem 2rem;
   border-radius: 1.5rem;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
@@ -49,21 +54,22 @@
   background: rgba(0, 119, 255, 0.55);
 }
 
-
-.mensaje-error {
+.mensaje-feedback {
   margin-top: 1rem;
-  padding: 0.8rem 1rem;
-  border-radius: 1rem;
-  background: #ffeaea;
-  border: 1px solid #ff5c5c;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
-.mensaje-error button {
-  margin-top: 0.5rem;
-  background: #0077ff;
-  border: none;
-  color: #fff;
-  padding: 0.4rem 0.7rem;
-  border-radius: 999px;
-  cursor: pointer;
+.mensaje-feedback.correcto {
+  color: #2e7d32;
+}
+
+.mensaje-feedback.incorrecto {
+  color: #c62828;
+}
+
+.puntaje {
+  margin-top: 0.8rem;
+  font-size: 1.1rem;
+  color: #333;
 }
