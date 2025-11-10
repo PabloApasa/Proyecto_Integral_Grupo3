@@ -20,7 +20,7 @@ import { AutorizacionesProvider } from "../../client/src/assets/context/Autoriza
 // 🔹 Página o componente para alumnos
 import Games from "./assets/pages/Games";
 
-// 🔹 💜 Tu juego
+// 🔹 💜 juego04 
 import Juego04 from "./assets/components/Diagnostico/Juego04/Juego04";
 
 function App() {
