@@ -1,29 +1,18 @@
 import { useState, useEffect } from "react";
 import "../../../css/DiagnosticoCSS/Juego03Css/JuegoNumero.css";
 
-function JuegoNumero({ onFinish, roundsLimit = 10 }) {
-  // 🔢 Números y sus palabras
+function JuegoNumero({ onFinish, roundsLimit = 2 }) {
   const numbers = [
-    { value: "1", word: "One" },
-    { value: "2", word: "Two" },
-    { value: "3", word: "Three" },
-    { value: "4", word: "Four" },
-    { value: "5", word: "Five" },
-    { value: "6", word: "Six" },
-    { value: "7", word: "Seven" },
-    { value: "8", word: "Eight" },
-    { value: "9", word: "Nine" },
+    { value: "1", word: "One" }, { value: "2", word: "Two" }, { value: "3", word: "Three" },
+    { value: "4", word: "Four" }, { value: "5", word: "Five" }, { value: "6", word: "Six" },
+    { value: "7", word: "Seven" }, { value: "8", word: "Eight" }, { value: "9", word: "Nine" },
     { value: "10", word: "Ten" },
   ];
 
-  // 📅 Días de la semana
   const days = [
-    { value: "Lunes", word: "Monday" },
-    { value: "Martes", word: "Tuesday" },
-    { value: "Miércoles", word: "Wednesday" },
-    { value: "Jueves", word: "Thursday" },
-    { value: "Viernes", word: "Friday" },
-    { value: "Sábado", word: "Saturday" },
+    { value: "Lunes", word: "Monday" }, { value: "Martes", word: "Tuesday" },
+    { value: "Miércoles", word: "Wednesday" }, { value: "Jueves", word: "Thursday" },
+    { value: "Viernes", word: "Friday" }, { value: "Sábado", word: "Saturday" },
     { value: "Domingo", word: "Sunday" },
   ];
 
@@ -40,19 +29,16 @@ function JuegoNumero({ onFinish, roundsLimit = 10 }) {
   }, []);
 
   const generateRound = () => {
-    // 👇 Decide si esta ronda será de número o de día
     const isNumberRound = Math.random() < 0.5;
     const dataset = isNumberRound ? numbers : days;
     const randomIndex = Math.floor(Math.random() * dataset.length);
     const correct = dataset[randomIndex];
 
-    // 🌀 Obtiene opciones incorrectas
     const incorrect = dataset
       .filter((item) => item.word !== correct.word)
       .sort(() => Math.random() - 0.5)
       .slice(0, 2);
 
-    // 🔀 Mezcla las opciones
     const newOptions = [...incorrect, correct].sort(() => Math.random() - 0.5);
 
     setCurrentItem({ ...correct, isNumberRound });
@@ -61,7 +47,8 @@ function JuegoNumero({ onFinish, roundsLimit = 10 }) {
   };
 
   const handleChoice = (choice) => {
-    if (choice === currentItem.word) {
+    const isCorrect = choice === currentItem.word;
+    if (isCorrect) {
       setFeedback("✅ ¡Correcto!");
       setScore((s) => s + 1);
     } else {
@@ -72,12 +59,12 @@ function JuegoNumero({ onFinish, roundsLimit = 10 }) {
       setTimeout(() => {
         setRound((r) => r + 1);
         generateRound();
-      }, 1200);
+      }, 1000);
     } else {
       setTimeout(() => {
         setFinished(true);
-        if (onFinish) onFinish(score + (choice === animals[current].name ? 1 : 0));
-      }, 1200);
+        if (onFinish) onFinish(score + (isCorrect ? 1 : 0)); // ✅ ahora sí correcto
+      }, 1000);
     }
   };
 
@@ -102,18 +89,12 @@ function JuegoNumero({ onFinish, roundsLimit = 10 }) {
       {currentItem && (
         <>
           <div className="number-display">
-            {currentItem.isNumberRound
-              ? currentItem.value
-              : currentItem.value.toUpperCase()}
+            {currentItem.isNumberRound ? currentItem.value : currentItem.value.toUpperCase()}
           </div>
 
           <div className="number-options">
             {options.map((opt) => (
-              <button
-                key={opt.word}
-                className="number-option-button"
-                onClick={() => handleChoice(opt.word)}
-              >
+              <button key={opt.word} className="number-option-button" onClick={() => handleChoice(opt.word)}>
                 {opt.word}
               </button>
             ))}
