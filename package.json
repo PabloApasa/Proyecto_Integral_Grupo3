@@ -17,6 +17,7 @@
   "dependencies": {
     "bootstrap": "^5.3.8",
     "express": "^5.1.0",
+    "framer-motion": "^12.23.24",
     "mongoose": "^8.19.2",
     "mongose": "^0.0.2-security",
     "nodemon": "^3.1.10",
