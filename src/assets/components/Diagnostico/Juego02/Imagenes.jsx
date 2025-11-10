@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "../../../css/DiagnosticoCSS/Juego02Css/Imagenes.css";
 
-function Imagenes() {
+function Imagenes({ onFinish, roundsLimit = 10 }) {
   const animals = [
     {
       name: "Dog",
@@ -35,6 +35,7 @@ function Imagenes() {
   const [feedback, setFeedback] = useState("");
   const [shuffledOptions, setShuffledOptions] = useState([]);
   const [finished, setFinished] = useState(false);
+  const totalRounds = roundsLimit;
 
   useEffect(() => {
     shuffleOptions();
@@ -59,6 +60,7 @@ function Imagenes() {
         setCurrent((c) => c + 1);
       } else {
         setFinished(true);
+        if (onFinish) onFinish(score + (choice === animals[current].name ? 1 : 0));
       }
     }, 1200);
   };

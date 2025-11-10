@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "../../../css/DiagnosticoCSS/Juego03Css/JuegoNumero.css";
 
-function JuegoNumero() {
+function JuegoNumero({ onFinish, roundsLimit = 10 }) {
   // 🔢 Números y sus palabras
   const numbers = [
     { value: "1", word: "One" },
@@ -32,8 +32,8 @@ function JuegoNumero() {
   const [feedback, setFeedback] = useState("");
   const [score, setScore] = useState(0);
   const [round, setRound] = useState(1);
-  const totalRounds = 5;
   const [finished, setFinished] = useState(false);
+  const totalRounds = roundsLimit;
 
   useEffect(() => {
     generateRound();
@@ -76,6 +76,7 @@ function JuegoNumero() {
     } else {
       setTimeout(() => {
         setFinished(true);
+        if (onFinish) onFinish(score + (choice === animals[current].name ? 1 : 0));
       }, 1200);
     }
   };

@@ -47,11 +47,13 @@ function ImagenCuerpo({ onClickBotonParteCuerpo }) {
   );
 }
 
-function Juego04() {
+function Juego04({ onFinish, roundsLimit = 10 }) {
   const [palabraActual, setPalabraActual] = useState(partesIngles[0]);
   const [indicePalabra, setIndicePalabra] = useState(0);
   const [mensaje, setMensaje] = useState("");
   const [score, setScore] = useState(0);
+  const [round, setRound] = useState(1);
+  const totalRounds = roundsLimit;
 
   const nuevaPalabraAleatoria = () => {
     const indiceAleatorio = Math.floor(Math.random() * partesIngles.length);
@@ -62,12 +64,22 @@ function Juego04() {
 
   const manejarClickParte = (nombreParte) => {
     if (nombreParte === palabraActual) {
-      setMensaje("✅ ¡Correcto!");
-      setScore((s) => s + 1);
-      setTimeout(nuevaPalabraAleatoria, 1000);
-    } else {
-      setMensaje(`❌ Incorrecto — "${palabraActual}" significa "${partesEspañol[indicePalabra]}"`);
-    }
+  setMensaje("✅ ¡Correcto!");
+  setScore((s) => s + 1);
+} else {
+  setMensaje(`❌ Incorrecto — "${palabraActual}" significa "${partesEspañol[indicePalabra]}"`);
+}
+
+// 👇 Control de rondas
+setTimeout(() => {
+  if (round < totalRounds) {
+    setRound((r) => r + 1);
+    nuevaPalabraAleatoria();
+  } else {
+    if (onFinish) onFinish(score + (nombreParte === palabraActual ? 1 : 0)); // ✅ Enviar puntaje final
+  }
+}, 1000);
+
   };
 
   return (
@@ -89,8 +101,10 @@ function Juego04() {
       </p>
 
       <p className="puntaje">Puntaje: {score}</p>
+      <p className="rondas">Ronda {round}/{totalRounds}</p>
     </div>
   );
+  
 }
 
 export default Juego04;

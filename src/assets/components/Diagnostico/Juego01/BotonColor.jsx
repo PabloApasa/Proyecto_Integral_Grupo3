@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "../../../css/DiagnosticoCSS/Juego01Css/BotonColor.css";
 
-function BotonColor() {
+function BotonColor({ onFinish, roundsLimit = 10 }) {
   const colors = [
     { name: "red", label: "Red", hex: "#e57373" },
     { name: "blue", label: "Blue", hex: "#64b5f6" },
@@ -24,7 +24,7 @@ function BotonColor() {
   const [finished, setFinished] = useState(false);
   const [animate, setAnimate] = useState(false);
   const [selected, setSelected] = useState(null);
-  const totalRounds = 10;
+  const totalRounds = roundsLimit;
 
   const nextRound = () => {
     const newColor = colors[Math.floor(Math.random() * colors.length)].name;
@@ -67,6 +67,7 @@ function BotonColor() {
     } else {
       setTimeout(() => {
         setFinished(true);
+        if (onFinish) onFinish(score);
       }, 1000);
     }
   };
