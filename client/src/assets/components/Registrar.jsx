@@ -89,7 +89,7 @@ function Registrar() {
 
     return (
         <>
-            <Form noValidate validate={validado} onSubmit={manejarSubmit} className="p-a borderrounded shadow-sm">
+            <Form noValidate validated={validado} onSubmit={manejarSubmit} className="p-a borderrounded shadow-sm">
                 <Row className="mb-3">
                     <Form.Group as={Col} md="6" controlld="validacionNombre">
                         <Form.Label>Nombre</Form.Label>
