@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import "../../../css/DiagnosticoCSS/Juego01Css/BotonColor.css";
 
 function BotonColor() {
-  const navigate = useNavigate();
-
   const colors = [
     { name: "red", label: "Red", hex: "#e57373" },
     { name: "blue", label: "Blue", hex: "#64b5f6" },
@@ -18,7 +15,7 @@ function BotonColor() {
     return base.sort(() => Math.random() - 0.5);
   };
 
-  const [modeList, setModeList] = useState(generateRounds());
+  const [modeList] = useState(generateRounds());
   const [currentMode, setCurrentMode] = useState("");
   const [targetColor, setTargetColor] = useState("");
   const [feedback, setFeedback] = useState("");
@@ -82,16 +79,10 @@ function BotonColor() {
   if (finished) {
     return (
       <div className="color-game-container fade-in">
-        <h1 className="color-game-title">🎉 ¡Buen trabajo!</h1>
+        <h1 className="color-game-title">🎉 ¡Juego completado!</h1>
         <p className="color-final-score">
-          Obtuviste <strong>{score}</strong> de <strong>{totalRounds}</strong> puntos.
+          Puntaje final: <strong>{score}</strong> / <strong>{totalRounds}</strong>
         </p>
-        <button
-          className="continue-button"
-          onClick={() => navigate("/diagnostico/juego02")}
-        >
-          Continuar ➡️
-        </button>
       </div>
     );
   }

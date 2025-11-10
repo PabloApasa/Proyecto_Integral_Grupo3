@@ -1,21 +1,8 @@
 import React, { useState } from "react";
 import "../../../css/DiagnosticoCSS/Juego04Css/Juego04.css";
 
-const partesIngles = [ "eye", "mouth", "neck", "arm", "hair", "hand", "torso", "leg", "foot"];
-
-const partesEspañol = [ "ojo", "boca", "cuello", "brazo", "cabello", "mano", "torso", "pierna", "pie"];
-
-function MensajeError({ palabraIngles, traduccionEspanol, continuar }) {
-  return (
-    <div className="mensaje-error">
-      <h2>No es correcto, vuelve a intentarlo!</h2>
-      <p>
-        <strong>{palabraIngles}</strong> significa: <strong>{traduccionEspanol}</strong>
-      </p>
-      <button onClick={continuar}>Continuar</button>
-    </div>
-  );
-}
+const partesIngles = ["eye", "mouth", "neck", "arm", "hair", "hand", "torso", "leg", "foot"];
+const partesEspañol = ["ojo", "boca", "cuello", "brazo", "cabello", "mano", "torso", "pierna", "pie"];
 
 function BotonParteCuerpo({ nombre, arriba, izquierda, onClick }) {
   return (
@@ -23,24 +10,21 @@ function BotonParteCuerpo({ nombre, arriba, izquierda, onClick }) {
       onClick={() => onClick(nombre)}
       className="boton-parte"
       style={{ top: arriba, left: izquierda }}
-    >
-      {" "}
-    </button>
+    />
   );
 }
 
 function ImagenCuerpo({ onClickBotonParteCuerpo }) {
   const posiciones = [
-   
-    { top: "20%", left: "50%" },  // eye (ojo)
-    { top: "30%", left: "50%" },  // mouth (boca)
-    { top: "38%", left: "50%" },  // neck (cuello)
-    { top: "48%", left: "23%" },  // arm (brazo)
-    { top: "10%", left: "50%" },   // hair (cabello)
-    { top: "60%", left: "8%" },  // hand (mano)
-    { top: "53%", left: "50%" },  // torso (torso)
-    { top: "75%", left: "35%" },  // leg (pierna)
-    { top: "92%", left: "35%" },  // foot (pie)
+    { top: "20%", left: "50%" },  // eye
+    { top: "30%", left: "50%" },  // mouth
+    { top: "38%", left: "50%" },  // neck
+    { top: "48%", left: "23%" },  // arm
+    { top: "10%", left: "50%" },  // hair
+    { top: "60%", left: "8%" },   // hand
+    { top: "53%", left: "50%" },  // torso
+    { top: "75%", left: "35%" },  // leg
+    { top: "92%", left: "35%" },  // foot
   ];
 
   return (
@@ -66,27 +50,29 @@ function ImagenCuerpo({ onClickBotonParteCuerpo }) {
 function Juego04() {
   const [palabraActual, setPalabraActual] = useState(partesIngles[0]);
   const [indicePalabra, setIndicePalabra] = useState(0);
-  const [mostrarError, setMostrarError] = useState(false);
+  const [mensaje, setMensaje] = useState("");
+  const [score, setScore] = useState(0);
 
   const nuevaPalabraAleatoria = () => {
     const indiceAleatorio = Math.floor(Math.random() * partesIngles.length);
     setPalabraActual(partesIngles[indiceAleatorio]);
     setIndicePalabra(indiceAleatorio);
-    setMostrarError(false);
+    setMensaje("");
   };
 
   const manejarClickParte = (nombreParte) => {
     if (nombreParte === palabraActual) {
-      alert("¡Correcto! 🎉");
-      nuevaPalabraAleatoria();
+      setMensaje("✅ ¡Correcto!");
+      setScore((s) => s + 1);
+      setTimeout(nuevaPalabraAleatoria, 1000);
     } else {
-      setMostrarError(true);
+      setMensaje(`❌ Incorrecto — "${palabraActual}" significa "${partesEspañol[indicePalabra]}"`);
     }
   };
 
   return (
     <div className="juego04-contenedor">
-      <h1> Juego de Anatomía en Inglés</h1>
+      <h1>Juego de Anatomía en Inglés</h1>
       <p>Identifica las partes del cuerpo en inglés haciendo clic en ellas.</p>
 
       <p>
@@ -98,13 +84,11 @@ function Juego04() {
 
       <ImagenCuerpo onClickBotonParteCuerpo={manejarClickParte} />
 
-      {mostrarError && (
-        <MensajeError
-          palabraIngles={palabraActual}
-          traduccionEspanol={partesEspañol[indicePalabra]}
-          continuar={nuevaPalabraAleatoria}
-        />
-      )}
+      <p className={`mensaje-feedback ${mensaje.includes("❌") ? "incorrecto" : "correcto"}`}>
+        {mensaje}
+      </p>
+
+      <p className="puntaje">Puntaje: {score}</p>
     </div>
   );
 }

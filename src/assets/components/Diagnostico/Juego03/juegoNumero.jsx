@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import "../../../css/DiagnosticoCSS/Juego03Css/JuegoNumero.css";
 
 function JuegoNumero() {
-  const navigate = useNavigate();
-
   // 🔢 Números y sus palabras
   const numbers = [
     { value: "1", word: "One" },
@@ -36,6 +33,7 @@ function JuegoNumero() {
   const [score, setScore] = useState(0);
   const [round, setRound] = useState(1);
   const totalRounds = 5;
+  const [finished, setFinished] = useState(false);
 
   useEffect(() => {
     generateRound();
@@ -44,7 +42,6 @@ function JuegoNumero() {
   const generateRound = () => {
     // 👇 Decide si esta ronda será de número o de día
     const isNumberRound = Math.random() < 0.5;
-
     const dataset = isNumberRound ? numbers : days;
     const randomIndex = Math.floor(Math.random() * dataset.length);
     const correct = dataset[randomIndex];
@@ -78,10 +75,21 @@ function JuegoNumero() {
       }, 1200);
     } else {
       setTimeout(() => {
-        navigate("/diagnostico/juego04");
-      }, 1500);
+        setFinished(true);
+      }, 1200);
     }
   };
+
+  if (finished) {
+    return (
+      <div className="number-game-container">
+        <h1 className="number-game-title">🎉 ¡Juego completado!</h1>
+        <p className="number-final-score">
+          Puntaje final: <strong>{score}</strong> / <strong>{totalRounds}</strong>
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="number-game-container">

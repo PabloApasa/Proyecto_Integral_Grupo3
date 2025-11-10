@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import "../../../css/DiagnosticoCSS/Juego02Css/Imagenes.css";
 
 function Imagenes() {
-  const navigate = useNavigate();
-
   const animals = [
     {
       name: "Dog",
@@ -37,6 +34,7 @@ function Imagenes() {
   const [score, setScore] = useState(0);
   const [feedback, setFeedback] = useState("");
   const [shuffledOptions, setShuffledOptions] = useState([]);
+  const [finished, setFinished] = useState(false);
 
   useEffect(() => {
     shuffleOptions();
@@ -60,10 +58,21 @@ function Imagenes() {
       if (current < animals.length - 1) {
         setCurrent((c) => c + 1);
       } else {
-        navigate("/diagnostico/juego03");
+        setFinished(true);
       }
     }, 1200);
   };
+
+  if (finished) {
+    return (
+      <div className="image-game-container">
+        <h1 className="image-game-title">🎉 ¡Juego completado!</h1>
+        <p className="image-final-score">
+          Puntaje final: <strong>{score}</strong> / <strong>{animals.length}</strong>
+        </p>
+      </div>
+    );
+  }
 
   const animal = animals[current];
 
