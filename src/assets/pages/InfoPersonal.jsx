@@ -16,8 +16,8 @@ const integrantesData = [
         nombre: "Quiroga Aldana Rocio",
         rol: "Desarrolladora Backend",
         datosExtra: "Experiencia en Node.js y Express",
-        image: "https://via.placeholder.com/150",
-        github: "https://github.com/Andycap98"
+        image: "public/image/profileUserAldana.jpeg",
+        github: "https://github.com/AldiRQ"
     },
     {
         id: 3,
@@ -41,7 +41,7 @@ const integrantesData = [
         rol: "Desarrolladora Frontend",
         datosExtra: "Experiencia en React y Redux",
         image: "https://via.placeholder.com/150",
-        github: "https://github.com/AldiRQ"
+        github: "https://github.com/Andycap98"
     }
 ];
 
