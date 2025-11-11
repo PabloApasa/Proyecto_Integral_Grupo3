@@ -48,6 +48,29 @@ function Layout() {
                   </>
                 )}
               </NavDropdown>
+              
+              {/* 🎮 Menú desplegable para Games (solo para ALUMNO) */}
+              {isAuthenticated && user?.rol === "ALUMNO" && (
+                <NavDropdown title="Games" id="games-dropdown">
+                  <NavDropdown.Item as={Link} to="/juego01">
+                    🎨 Juego 01 - Botón Color
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/juego02">
+                    🖼️ Juego 02 - Imágenes
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/juego03">
+                    🔢 Juego 03 - Números
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/juego04">
+                    ⏰ Juego 04 - Días/Semana
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item as={Link} to="/diagnostico">
+                    🧠 Diagnóstico
+                  </NavDropdown.Item>
+                </NavDropdown>
+              )}
+              
               {/* Solo ALUMNO puede ver Games */}
 
               {isAuthenticated && user?.rol === "ALUMNO" && (
