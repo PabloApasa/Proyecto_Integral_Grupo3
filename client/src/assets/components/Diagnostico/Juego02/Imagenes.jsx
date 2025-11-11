@@ -3,6 +3,7 @@ import "../../../css/DiagnosticoCSS/Juego02Css/Imagenes.css";
 
 function Imagenes({ onFinish, roundsLimit = 2 }) {
   const animals = [
+    
     { name: "Dog", img: "/Img-Juego02/perro.gif", options: ["Dog", "Dgo", "Doc", "Doggy", "Bog"] },
     { name: "Cat", img: "/Img-Juego02/gato.gif", options: ["Kat", "Cat", "Cut", "Cart", "Caat"] },
     { name: "Monkey", img: "/Img-Juego02/mono.gif", options: ["Monkei", "Monkey", "Mokey", "Monky", "Moneky"] },

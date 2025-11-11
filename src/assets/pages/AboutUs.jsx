@@ -3,7 +3,6 @@ import InfoCard from '../components/InfoCard';
 
 function AboutUs() {
     const data = [
- origin/efrain_gutierrez
         { title: "Misión", text: "Nuestra misión es explorar el mundo de la tecnologia diceñarla y moldearla para que la sociedad la hacepte en sus vidas" },
         { title: "Visión", text: "Nuestra visión es mejorar eh innobar la sociedad humana mediante la tecnologia y el reconocimiento por lo nuevos logros que haremos " },
         { title: "Valores", text: "Honestidad, Pasión, Innovación." },
