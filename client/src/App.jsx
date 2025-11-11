@@ -23,6 +23,8 @@ import Games from "./assets/pages/Games";
 // 🔹 💜 juego04 
 import Juego04 from "./assets/components/Diagnostico/Juego04/Juego04";
 
+import TestIngles from './assets/components/Registrar';
+
 function App() {
   return (
     <AutorizacionesProvider>
@@ -36,7 +38,7 @@ function App() {
           {/* 🔸 Layout principal con rutas protegidas */}
           <Route path="/" element={<Layout />}>
             {/* Redirección al login si entra sin loguearse */}
-            <Route index element={<Navigate to="/login" />} />
+            {/*<Route index element={<Navigate to="/login" />} />*/}
 
             {/* Rutas accesibles a todos los roles autenticados */}
             <Route
@@ -106,6 +108,14 @@ function App() {
               element={
                 <ProtectorRutas allowedRoles={["ALUMNO"]}>
                   <Games />
+                </ProtectorRutas>
+              }
+            />
+            <Route
+              path="testingles" // <--- La URL que coincide con el 'to="/testingles"' en Layout.jsx
+              element={
+                <ProtectorRutas allowedRoles={['ALUMNO']}>
+                  <TestIngles /> {/* <--- EL COMPONENTE A RENDERIZAR */}
                 </ProtectorRutas>
               }
             />

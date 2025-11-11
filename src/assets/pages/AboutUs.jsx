@@ -1,29 +1,25 @@
-import { Card, Row, Col } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
+import InfoCard from '../components/InfoCard';
 
 function AboutUs() {
     const data = [
-        { title: "Misión", text: "Nuestra misión es..." },
-        { title: "Visión", text: "Nuestra visión es..." },
-        { title: "Valores", text: "Honestidad, Pasión, Innovación." },
+        { title: "Misión", text: "Nuestra misión es...", icon: "🎯" },
+        { title: "Visión", text: "Nuestra visión es...", icon: "🔮" },
+        { title: "Valores", text: "Honestidad, Pasión, Innovación.", icon: "💎" },
     ];
 
     return (
-        <>
-            <h2>Conócenos</h2>
-            <Row xs={1} md={3} className="g-4">
-                {/* Crea 3 columnas para las cards en pantallas medianas o grandes */}
+        <Container className="my-5">
+            <h2 className="mb-4 text-center">Conócenos</h2>
+            <div className="info-list">
                 {data.map((item, index) => (
-                    <Col key={index}>
-                        <Card>
-                            <Card.Body>
-                                <Card.Title>{item.title}</Card.Title>
-                                <Card.Text>{item.text}</Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
+                    <InfoCard
+                        key={index}
+                        info={item}
+                    />
                 ))}
-            </Row>
-        </>
+            </div>
+        </Container>
     );
 }
 

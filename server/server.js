@@ -11,10 +11,11 @@ app.get('/', (req, res) => {
 // routing
 
 const archivoDB = require('./conection.js')
-const usuarios = require('../src/assets/model/usuarios.js')
+const usuarios = require('../src/assets/routes/usuariosRoutes.js')
 
 // midleware 
 
+app.use(express.json());
 app.use('/api', usuarios);
 
 // listening
@@ -22,3 +23,4 @@ app.use('/api', usuarios);
 app.listen(5000, () => {
     console.log('Servidor Node Corriendo PERFECTAMENTE');
 });
+

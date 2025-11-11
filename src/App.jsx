@@ -32,6 +32,9 @@ import Imagenes from "./assets/components/Diagnostico/Juego02/Imagenes";
 import JuegoNumero from "./assets/components/Diagnostico/Juego03/JuegoNumero";
 import Juego04 from "./assets/components/Diagnostico/Juego04/Juego04";
 
+// diagnostico
+import Diagnostico from "./assets/components/Diagnostico/Diagnostico";
+
 // 🔹 Página o componente para alumnos
 import Games from './assets/pages/Games';
 
@@ -54,6 +57,9 @@ function App() {
           <Route path="/diagnostico/juego02" element={<Imagenes />} />
           <Route path="/diagnostico/juego03" element={<JuegoNumero />} />
           <Route path="/diagnostico/juego04" element={<Juego04 />} />
+
+           {/* Rutas para el Diagnostico */}
+           <Route path="/diagnostico" element={<Diagnostico />} />
 
           {/* 🔸 Layout principal con rutas protegidas */}
           <Route path="/" element={<Layout />}>

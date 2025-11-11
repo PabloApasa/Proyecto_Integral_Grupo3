@@ -22,7 +22,7 @@ function Layout() {
               <Nav.Link as={Link} to="/">Home</Nav.Link>
               <Nav.Link as={Link} to="/aboutus">About Us</Nav.Link>
               <Nav.Link as={Link} to="/infopersonal">InfoPersonal</Nav.Link>
-              
+
 
               {/* 🔽 Menú desplegable para los proyectos */}
               <NavDropdown title="Proyectos" id="proyectos-dropdown">
@@ -47,12 +47,40 @@ function Layout() {
                     </NavDropdown.Item>
                   </>
                 )}
-
-                {/* Solo ALUMNO puede ver Games */}
-                {isAuthenticated && user?.rol === "ALUMNO" && (
-                  <NavDropdown.Item as={Link} to="/games">Games</NavDropdown.Item>
-                )}
               </NavDropdown>
+              
+              {/* 🎮 Menú desplegable para Games (solo para ALUMNO) */}
+              {isAuthenticated && user?.rol === "ALUMNO" && (
+                <NavDropdown title="Games" id="games-dropdown">
+                  <NavDropdown.Item as={Link} to="/juego01">
+                    🎨 Juego 01 - Botón Color
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/juego02">
+                    🖼️ Juego 02 - Imágenes
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/juego03">
+                    🔢 Juego 03 - Números
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/juego04">
+                    ⏰ Juego 04 - Días/Semana
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item as={Link} to="/diagnostico">
+                    🧠 Diagnóstico
+                  </NavDropdown.Item>
+                </NavDropdown>
+              )}
+              
+              {/* Solo ALUMNO puede ver Games */}
+
+              {isAuthenticated && user?.rol === "ALUMNO" && (
+                <Nav.Link as={Link} to="/games">Games</Nav.Link>
+              )}
+
+              {/* ✅ NUEVO LINK: TestIngles - Visible solo para ALUMNO */}
+              {isAuthenticated && user?.rol === "ALUMNO" && (
+                <Nav.Link as={Link} to="/testingles">TestIngles</Nav.Link>
+              )}
             </Nav>
 
             {/* 🔒 Login / Logout */}

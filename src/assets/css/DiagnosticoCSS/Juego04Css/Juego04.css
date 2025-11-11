@@ -1,10 +1,16 @@
+body {
+  background-color: #fde4ec; /* Fondo rosado claro en toda la pantalla */
+  margin: 0;
+  font-family: system-ui, sans-serif;
+}
+
 .juego04-contenedor {
   max-width: 520px;
   margin: 1.5rem auto;
   text-align: center;
   font-family: system-ui, sans-serif;
   background: radial-gradient(circle, #ffffff 0%, #e6f4ff 100%);
-  padding: 1.5rem 1rem 2.5rem;
+  padding: 1.5rem 1rem 2rem;
   border-radius: 1.5rem;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
   position: relative;
@@ -78,23 +84,16 @@
   background: rgba(0, 119, 255, 0.55);
 }
 
-.message {
+
+.mensaje-error {
   margin-top: 1rem;
   padding: 0.8rem 1rem;
   border-radius: 1rem;
-}
-
-.message-error {
   background: #ffeaea;
   border: 1px solid #ff5c5c;
 }
 
-.message-success {
-  background: #e0ffe7;
-  border: 1px solid #31b34b;
-}
-
-.message button {
+.mensaje-error button {
   margin-top: 0.5rem;
   background: #0077ff;
   border: none;

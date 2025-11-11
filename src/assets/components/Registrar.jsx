@@ -2,7 +2,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Form, Button, Card } from "react-bootstrap";
+//import axios from "axios"
 
+//* validacioin de Contraseña
+//const PASSWORD_REGEX ={
+//  minLength: /^.{8,}$/,
+  //uppercase: /(?=.*[A-Z])/,
+  //lowercase: /(?=.*[a-z])/,
+ // number: /(?=.*\d)/,
+  //isValid: /^(?=.*[a_z])(?=.*[A_Z])(?=.*\d)[A-Z a-z\d]{8,}$/
+// };
 
 function Registrar() {
   const [username, setUsername] = useState("");
@@ -17,8 +26,6 @@ function Registrar() {
       return;
     }
 
-    // 🔹 Guarda temporalmente los datos o pásalos por estado, si lo necesitás luego.
-    // Ejemplo: navigate("/formularioregistro", { state: { username, password } });
     navigate("/formularioregistro");
   };
 

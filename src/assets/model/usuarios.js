@@ -1,39 +1,18 @@
-
-const express = require('express');
-const routes = express.Router();
-
 //modelo de Datos
 const mongoose = require('mongoose');
 const esquema = mongoose.Schema;
 
 const esquemaUsuario = new esquema({
     username: String,
+    nombre: String,
+    apellido: String,
+    fechNac: Date,
+    estado: Boolean,
     password: String,
     rol: String,
-    name: String,
+    puntaje: Number
 });
 
-const listaUsuarios = mongoose.model('usuarios', esquemaUsuario);
 
-//rutas, endopoints
-//promesa
-//routes.get('/obtenerUsuarios', (req, res) => {
-//obtener sitios
-//listaUsuarios.find({}.then(docs) => {
-//res.send(docs)
-//}).catch(err => {
-//res.send(err)
-//})
-//})
 
-routes.get('/obtenerUsuarios', async (req, res) => {
-    try {
-        const docs = await listaUsuarios.find();
-        res.send(docs);
-    } catch (error) {
-        console.error('Error al obtener usuarios', error);
-        res.status(500).send({ message: 'Error al obtener usuarios', error: error });
-    }
-});
-
-module.exports = routes;
+module.exports = mongoose.model('usuarios', esquemaUsuario);
