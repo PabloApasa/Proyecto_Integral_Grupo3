@@ -75,8 +75,8 @@ function IntegranteCard({ integrante }) {
     }
 
     .avatar {
-        width: 120px;
-        height: 120px;
+        width: 110px;
+        height: 110px;
         object-fit: cover;
         border-radius: 50%;
         border: 4px solid rgba(255,255,255,0.7);
@@ -85,7 +85,6 @@ function IntegranteCard({ integrante }) {
     }
 
     .extra {
-        margin-top: 12px;
         font-size: 14px;
         color: rgba(255,255,255,0.95);
         text-align: center;
