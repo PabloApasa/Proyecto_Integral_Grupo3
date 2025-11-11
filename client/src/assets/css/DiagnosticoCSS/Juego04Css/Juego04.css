@@ -1,0 +1,104 @@
+body {
+  background-color: #fde4ec; /* Fondo rosado claro en toda la pantalla */
+  margin: 0;
+  font-family: system-ui, sans-serif;
+}
+
+.juego04-contenedor {
+  max-width: 520px;
+  margin: 1.5rem auto;
+  text-align: center;
+  font-family: system-ui, sans-serif;
+  background: radial-gradient(circle, #ffffff 0%, #e6f4ff 100%);
+  padding: 1.5rem 1rem 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+
+.notranslate {
+  translate: no;
+}
+
+.hud {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0.5rem 0 1rem;
+  font-weight: 600;
+  color: #235;
+}
+
+.palabra-actual {
+  background: #0077ff;
+  color: #fff;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.voice-button {
+  margin-top: 0.4rem;
+  margin-bottom: 0.6rem;
+  background: #fff;
+  border: 1px solid #0077ff33;
+  color: #004fbd;
+  border-radius: 999px;
+  padding: 0.25rem 0.85rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+.voice-button:hover {
+  background: #e6f2ff;
+}
+
+.contenedor-imagen {
+  position: relative;
+  width: 260px;
+  height: 420px;
+  margin: 1rem auto;
+}
+
+.imagen-cuerpo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 1rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.boton-parte {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  background: rgba(0, 119, 255, 0.35);
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.boton-parte:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  background: rgba(0, 119, 255, 0.55);
+}
+
+
+.mensaje-error {
+  margin-top: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 1rem;
+  background: #ffeaea;
+  border: 1px solid #ff5c5c;
+}
+
+.mensaje-error button {
+  margin-top: 0.5rem;
+  background: #0077ff;
+  border: none;
+  color: #fff;
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+  cursor: pointer;
+}

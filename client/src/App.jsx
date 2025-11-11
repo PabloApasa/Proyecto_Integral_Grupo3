@@ -30,9 +30,6 @@ import Juego04 from "./assets/components/Diagnostico/Juego04/Juego04";
 // diagnostico
 import Diagnostico from "./assets/components/Diagnostico/Diagnostico";
 
-// 🔹 Página o componente para alumnos
-import Games from './assets/pages/Games';
-
 
 import TestIngles from './assets/components/Registrar';
 
@@ -43,7 +40,7 @@ function App() {
         <Routes>
           {/* 🔸 Rutas públicas */}
           <Route path="/login" element={<Login />} />
-         {/* <Route path="/registrar" element={<Registrar />} />*/}
+          {/* <Route path="/registrar" element={<Registrar />} />*/}
           <Route path="/formularioregistro" element={<FormularioRegistro />} />
           <Route path="/unauthorized" element={<NoAutorizado />} />
 
@@ -79,7 +76,7 @@ function App() {
                 </ProtectorRutas>
               }
             />
-            
+
 
             {/* 🔸 Rutas exclusivas para ADMINISTRATIVO */}
             <Route

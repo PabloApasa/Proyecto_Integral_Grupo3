@@ -108,13 +108,12 @@ function BotonColor({ onFinish, roundsLimit = 10 }) {
               return (
                 <button
                   key={c.name}
-                  className={`color-button ${
-                    isCorrect && isSelected
+                  className={`color-button ${isCorrect && isSelected
                       ? "correct"
                       : isWrong
-                      ? "wrong"
-                      : ""
-                  }`}
+                        ? "wrong"
+                        : ""
+                    }`}
                   style={{ backgroundColor: c.hex }}
                   onClick={() => handleChoice(c.name)}
                   disabled={!!selected}
@@ -142,13 +141,12 @@ function BotonColor({ onFinish, roundsLimit = 10 }) {
               return (
                 <button
                   key={c.label}
-                  className={`color-word-button ${
-                    isCorrect && isSelected
+                  className={`color-word-button ${isCorrect && isSelected
                       ? "correct"
                       : isWrong
-                      ? "wrong"
-                      : ""
-                  }`}
+                        ? "wrong"
+                        : ""
+                    }`}
                   onClick={() => handleChoice(c.label)}
                   disabled={!!selected}
                 >
