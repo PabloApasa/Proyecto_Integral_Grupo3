@@ -1,31 +1,42 @@
-
-
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
-// Componente genérico para mostrar un proyecto HTML
-const Proyecto3 = ({ projectPath, title }) => {
-    // La URL se construye a partir de la ruta base pública (ej: /proyecto-html-1/index.html)
-    const fullUrl = `/${projectPath}index.html`;
+function Proyecto03() {
+    // Inicializa el hook para manejar la navegación
+    const navigate = useNavigate();
+
+    // Función para manejar el botón "Volver"
+    const handleVolver = () => {
+        // Redirige al usuario a la ruta principal de la aplicación ('/')
+        navigate('/');
+    };
 
     return (
-        <div style={{ padding: '20px' }}>
-            <h1>{title}</h1>
-            <p>Este proyecto se está mostrando dentro de un iframe.</p>
+        <div className="proyecto3-container">
+            <h1>¡Bienvenido al Proyecto Anterior!</h1>
 
-            {/* Botón para volver al Home (usando Link de react-router-dom) */}
-            {/* Asumo que ya tienes la importación de Link en este archivo o lo agregarás */}
-            {/* <Link to="/" className="btn btn-secondary">Volver al Home</Link> */}
+            {/* El evento onclick se reemplaza por onClick y una función de React */}
+            <button onClick={handleVolver}>Volver a la Aplicación Principal</button>
 
-            <div style={{ height: '80vh', width: '100%', border: '1px solid #ccc', marginTop: '15px' }}>
-                <iframe
-                    src={fullUrl}
-                    title={title}
-                    style={{ width: '100%', height: '100%', border: 'none' }}
-                // El 'frameBorder="0"' es una propiedad antigua, 'style={{ border: 'none' }}' es más moderno.
-                />
-            </div>
+            <hr />
+
+            <ul>
+                {/* Los <li> y <a> se convierten en <li> y <Link>. 
+                  Las rutas 'to' deben coincidir con las definidas en <Route> en App.jsx.
+                */}
+
+                {/* Asumiendo que el Ejercicio 1 se mapea a la ruta /ejercicio1 */}
+                <li>
+                    <a href="/public/Proyecto3/Ejercicio01/public/index.html">punto_1</a>
+                </li>
+
+                {/* Asumiendo que el Ejercicio 2 se mapea a la ruta /ejercicio2 */}
+                <li>
+                    <a href="/public/Proyecto3/Ejercicio02/punto2.html">punto_2</a>
+                </li>
+            </ul>
         </div>
     );
-};
+}
 
-export default Proyecto3;
+export default Proyecto03;

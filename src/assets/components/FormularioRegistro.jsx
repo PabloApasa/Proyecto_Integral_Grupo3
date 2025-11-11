@@ -1,1 +1,0 @@
-// Formulario para entrar al juego o pagina de Ingles

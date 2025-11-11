@@ -1,4 +1,5 @@
 import React from "react";
+import styles from '../../../assets/css/P_4/styles/estiloAdivinarNumero.module.css';
 import { juegoAdivinarNumero } from "./juegoAdivinar";
 import Mensaje from "./Mensaje";
 import Intentos from "./Intentos";
@@ -20,7 +21,7 @@ export default function Juego() {
 
   return (
 
-    <div className="juego-container">
+    <div className={styles['juego-container']}>
       <h3>Componente Juego funcionando</h3>
       <Mensaje mensaje={mensaje} />
       <IngresarNumero

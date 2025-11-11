@@ -1,0 +1,70 @@
+/* Header.css */
+
+/* 1. Estilo para la barra de navegación (Navbar) */
+.custom-navbar {
+    /* Color de fondo moderno (por ejemplo, un azul oscuro sutil) */
+    background-color: #004c8c !important;
+    /* Altura consistente (opcional) */
+    min-height: 70px;
+    /* Asegura que el contenido esté visible si hay superposición */
+    z-index: 1030;
+    /* Valor por defecto de Bootstrap para navbars fijos */
+}
+
+/* 2. Estilo para el Branding (Título del proyecto) */
+.custom-navbar .navbar-brand {
+    font-size: 1.5rem;
+    /* Hace el título un poco más grande */
+    font-weight: 700;
+}
+
+/* 3. Estilo para los enlaces de navegación (NavLink) */
+.custom-navbar .nav-link {
+    /* Color del texto (si 'navbar-dark' no es suficiente) */
+    color: rgba(255, 255, 255, 0.8) !important;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+/* 4. Efecto Hover (al pasar el ratón) */
+.custom-navbar .nav-link:hover {
+    color: #ffc107 !important;
+    /* Cambia a amarillo (warning) al pasar el ratón */
+}
+
+/* 5. Estilo para el Enlace ACTIVO (Resaltar la página actual) */
+/* La clase 'active' la aplica NavLink de React Router */
+.custom-navbar .nav-link.active {
+    color: #ffc107 !important;
+    /* Color destacado (amarillo) */
+    font-weight: bold;
+    /* Opcional: una línea debajo para resaltar */
+    border-bottom: 3px solid #ffc107;
+}
+
+/* 6. Estilo para los elementos del Dropdown */
+/* Estilos para el título del desplegable cuando está abierto */
+.custom-navbar .nav-item.dropdown.show .nav-link {
+    color: #ffc107 !important;
+}
+
+/* Estilo para el menú desplegable en sí */
+.dropdown-menu {
+    background-color: #004c8c;
+    /* Mismo color de fondo */
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo para los ítems dentro del desplegable */
+.dropdown-item {
+    color: rgba(255, 255, 255, 0.8);
+    transition: background-color 0.2s;
+}
+
+.dropdown-item:hover,
+.dropdown-item.active {
+    background-color: #0069a1;
+    /* Color de fondo sutil al pasar el ratón */
+    color: white;
+}

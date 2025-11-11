@@ -1,6 +1,6 @@
 
 import { useJuegoDeClicks } from './useJuegoDeClicks';
-import '../../../assets/css/P_4/styles/estilosBotones.css';
+import styles from '../../../assets/css/P_4/styles/estilosBotones.module.css';
 
 function EjercicioBotones() {
     const {
@@ -16,8 +16,8 @@ function EjercicioBotones() {
 
     return (
         <>
-            <div className="contenedor-juego">
-                <h1 className="titulo"> Desafío de Velocidad de Clic </h1>
+            <div className={styles['contenedor-juego']}>
+                <h1 className={styles.titulo}> Desafío de Velocidad de Clic </h1>
                 <p> Tienes {TIEMPO_LIMITE} segundos para presionar un botón. Si lo logras, el tiempo se reinicia.</p>
 
                 <h2>Clicks Exitosos: {clicsExitosos}</h2>
@@ -28,23 +28,23 @@ function EjercicioBotones() {
                     </h2>
                 )}
 
-                <p className="mensaje-resultado">{resultado}</p>
+                <p className={styles['mensaje-resultado']}>{resultado}</p>
 
                 {/* Botón de Inicio/Reinicio */}
                 {!juegoActivo && (
-                    <button onClick={iniciarJuego} className="boton-inicio">
+                    <button onClick={iniciarJuego} className={styles['boton-inicio']}>
                         {clicsExitosos > 0 ? 'Reiniciar Juego' : 'Iniciar Juego'}
                     </button>
                 )}
 
-                <div className="contenedor-botones">
+                <div className={styles['contenedor-botones']}>
                     {colorBotones.map((c, i) => (
                         <button
                             key={i}
                             disabled={!juegoActivo}
                             onClick={manejarClickEnElBoton}
                             style={{ backgroundColor: c }}
-                            className="boton-color"
+                            className={styles['boton-color']}
                         >
                             Boton {i + 1}
                         </button>

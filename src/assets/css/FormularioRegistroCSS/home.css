@@ -1,0 +1,108 @@
+/* 🎨 Fondo general */
+.home-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #7c3aed, #a855f7, #9333ea);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+}
+
+/* 💫 Brillos suaves en el fondo */
+.home-overlay::before,
+.home-overlay::after {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08), transparent 70%);
+  filter: blur(70px);
+  border-radius: 50%;
+  z-index: 0;
+}
+.home-overlay::before {
+  top: -50px;
+  left: 10%;
+}
+.home-overlay::after {
+  bottom: -60px;
+  right: 10%;
+}
+
+.home-content {
+  position: relative;
+  z-index: 2;
+  padding: 4rem 2rem;
+}
+
+/* 🧾 Texto */
+.text-section {
+  color: #fff;
+  padding: 2rem;
+}
+
+.home-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.home-subtitle {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+/* 🧩 Login */
+.login-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-wrapper {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  padding: 2rem;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+  animation: fadeIn 1s ease;
+  transform: translateY(0);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-wrapper:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* ✨ Animación suave */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .home-content {
+    text-align: center;
+  }
+
+  .text-section {
+    padding-bottom: 2rem;
+  }
+
+  .login-wrapper {
+    width: 100%;
+  }
+}

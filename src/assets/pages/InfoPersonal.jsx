@@ -1,29 +1,48 @@
-import { Row, Container } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 // Importamos el nuevo componente
 import IntegranteCard from "../components/IntegranteCard";
 
 const integrantesData = [
     {
         id: 1,
-        nombre: "Juan Pérez",
-        rol: "Desarrollador Frontend",
-        datosExtra: "Le gusta el React.",
-        image: "ruta/a/imagen/juan.jpg"
+        nombre: "Navarro Ana Florencia",
+        rol: "Diseñador UI/UX",
+        datosExtra: "Experiencia en diseño de interfaces",
+        image: "public/image/profileUserAna.jpeg",
+        github: "https://github.com/mineroFI"
     },
     {
         id: 2,
-        nombre: "María López",
-        rol: "Diseñadora UX/UI",
-        datosExtra: "Experta en CSS y Bootstrap.",
-        image: "ruta/a/imagen/maria.jpg"
+        nombre: "Quiroga Aldana Rocio",
+        rol: "Desarrolladora Backend",
+        datosExtra: "Experiencia en Node.js y Express",
+        image: "public/image/profileUserAldana.jpeg",
+        github: "https://github.com/AldiRQ"
     },
     {
         id: 3,
-        nombre: "Carlos Gómez",
-        rol: "Backend/Database",
-        datosExtra: "Maneja Node.js y MongoDB.",
-        image: "ruta/a/imagen/carlos.jpg"
+        nombre: "Gutierrez Efrain Julio Alberto",
+        rol: "Desarrollador Full Stack",
+        datosExtra: "Experiencia en MERN stack",
+        image: "public/image/profileUserEfrain.jpeg",
+        github: "https://github.com/xxx2131N"
     },
+    {
+        id: 4,
+        nombre: "Apasa Pablo Ariel",
+        rol: "Desarrollador Backend",
+        datosExtra: "Experiencia en Python y Django",
+        image: "public/image/profileUserApasa.jpeg",
+        github: "https://github.com/PabloApasa"
+    },
+    {
+        id: 5,
+        nombre: "Cappiello Andrea Victoria",
+        rol: "Desarrolladora Frontend",
+        datosExtra: "Experiencia en React y Redux",
+        image: "public/image/profileUserAndrea.jpeg",
+        github: "https://github.com/Andycap98"
+    }
 ];
 
 function InfoPersonal() {
@@ -31,7 +50,7 @@ function InfoPersonal() {
         <Container className="my-5">
             <h1 className="mb-4 text-center">Información Personal de los Integrantes</h1>
 
-            <Row xs={1} md={2} lg={3} className="g-4">
+            <div className="integrantes-list">
                 {/* Iteramos sobre los datos y usamos el componente IntegranteCard */}
                 {integrantesData.map((integrante) => (
                     <IntegranteCard
@@ -39,7 +58,7 @@ function InfoPersonal() {
                         integrante={integrante}
                     />
                 ))}
-            </Row>
+            </div>
         </Container>
     );
 }

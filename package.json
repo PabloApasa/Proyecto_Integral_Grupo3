@@ -2,22 +2,31 @@
   "name": "proyecto-integrador",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "main": "server.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "echo\"Error: no test specified\"&&exit 1",
+    "start": "nodemon server/server.js"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "bootstrap": "^5.3.8",
     "express": "^5.1.0",
+    "framer-motion": "^12.23.24",
+    "mongoose": "^8.19.2",
     "mongose": "^0.0.2-security",
     "nodemon": "^3.1.10",
     "react": "^19.1.1",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.1.1",
-    "react-router-dom": "^7.9.4"
+    "react-google-recaptcha": "^3.1.0",
+    "react-router-dom": "^7.9.4",
+    "styled-components": "^6.1.19"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",

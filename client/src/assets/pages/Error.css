@@ -1,0 +1,32 @@
+/***
+.error-page{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:48px 20px;
+}
+.error-page h1{
+  font-size:96px;
+  margin-bottom:16px;
+}
+.btn-volver{
+  display:inline-block;
+  margin-top:18px;
+  padding:14px 28px;
+  background:var(--blue);
+  color:#fff;
+  text-decoration:none;
+  border-radius:var(--btn-radius);
+  font-weight:600;
+  box-shadow: 0 6px 18px rgba(51,80,138,0.12);
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-volver:hover{
+  background:var(--dark-blue);
+  box-shadow: 0 10px 20px rgba(51,80,138,0.2);
+  transform: translateY(-2px);
+}
+
+*/
