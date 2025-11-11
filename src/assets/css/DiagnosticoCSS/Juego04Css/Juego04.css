@@ -29,6 +29,7 @@ body {
   color: #235;
 }
 
+/* texto de la palabra a buscar */
 .palabra-actual {
   background: #0077ff;
   color: #fff;
@@ -37,21 +38,7 @@ body {
   font-weight: 600;
 }
 
-.voice-button {
-  margin-top: 0.4rem;
-  margin-bottom: 0.6rem;
-  background: #fff;
-  border: 1px solid #0077ff33;
-  color: #004fbd;
-  border-radius: 999px;
-  padding: 0.25rem 0.85rem;
-  cursor: pointer;
-  font-weight: 500;
-}
-.voice-button:hover {
-  background: #e6f2ff;
-}
-
+/* contenedor de la imagen del cuerpo */
 .contenedor-imagen {
   position: relative;
   width: 260px;
@@ -59,6 +46,7 @@ body {
   margin: 1rem auto;
 }
 
+/* imagen del cuerpo */
 .imagen-cuerpo {
   width: 100%;
   height: 100%;
@@ -67,6 +55,7 @@ body {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 }
 
+/* 🔴 estos son los botoncitos sobre el cuerpo */
 .boton-parte {
   position: absolute;
   transform: translate(-50%, -50%);
@@ -84,16 +73,24 @@ body {
   background: rgba(0, 119, 255, 0.55);
 }
 
-
-.mensaje-error {
+/* mensajes de correcto / incorrecto */
+.message {
   margin-top: 1rem;
-  padding: 0.8rem 1rem;
+  padding: 0.75rem 1rem;
   border-radius: 1rem;
+}
+
+.message-error {
   background: #ffeaea;
   border: 1px solid #ff5c5c;
 }
 
-.mensaje-error button {
+.message-success {
+  background: #e0ffe7;
+  border: 1px solid #31b34b;
+}
+
+.message button {
   margin-top: 0.5rem;
   background: #0077ff;
   border: none;
