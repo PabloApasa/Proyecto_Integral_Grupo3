@@ -7,6 +7,7 @@ function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
+  const[captchaToken, setCaptchToken] = useState(null);
 
   const { login, isAuthenticated, user } = useAutorizacion();
   const navigate = useNavigate();
@@ -14,9 +15,9 @@ function Login() {
   useEffect(() => {
     if (isAuthenticated) {
       if (user?.rol === 'ADMINISTRATIVO') {
-        navigate('/proyectos', { replace: true });
+        navigate('/home', { replace: true });
       } else if (user?.rol === 'ALUMNO') {
-        navigate('/games', { replace: true });
+        navigate('/home', { replace: true });
       } else {
         navigate('/error', { replace: true });
       }

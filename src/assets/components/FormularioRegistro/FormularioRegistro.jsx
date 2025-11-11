@@ -19,7 +19,6 @@ function FormularioRegistro() {
   const datosPrevios = location.state || {};
   const { username, password } = datosPrevios;
 
-  // 🔹 Agregá este bloque justo acá:
   useEffect(() => {
     const handleClickOutside = (event) => {
       const activeElement = document.activeElement;

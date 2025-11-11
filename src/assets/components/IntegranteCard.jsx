@@ -15,10 +15,10 @@ function IntegranteCard({ integrante }) {
                     <div className="subtitle">{rol}</div>
                     {datosExtra && <div className="extra">{datosExtra}</div>}
                     {github && (
-                        <a 
-                            href={github} 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
+                        <a
+                            href={github}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="github-link"
                         >
                             <svg className="github-icon" viewBox="0 0 16 16" width="20" height="20" fill="currentColor">
@@ -31,7 +31,7 @@ function IntegranteCard({ integrante }) {
             </div>
         </StyledWrapper>
     );
-}const StyledWrapper = styled.div`
+} const StyledWrapper = styled.div`
     width: 100%;
     margin-bottom: 2rem;
     display: flex;

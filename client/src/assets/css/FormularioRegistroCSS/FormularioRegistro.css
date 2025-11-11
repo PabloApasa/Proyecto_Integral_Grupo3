@@ -1,0 +1,92 @@
+/* Fondo general */
+body, .registro-container {
+  background-color: #f8f9fa;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Tarjeta principal */
+.card {
+  border-radius: 15px;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Título */
+.card-title {
+  font-weight: 600;
+  text-align: center;
+  color: #0d6efd;
+}
+
+/* Formulario general */
+.formulario-registro {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Agrupar dos columnas */
+.dos-columnas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+/* Inputs */
+.form-control {
+  border-radius: 10px;
+  border: 1px solid #ced4da;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Botón principal */
+.boton-continuar {
+  background-color: #0d6efd;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.boton-continuar:hover {
+  background-color: #084298;
+  transform: translateY(-2px);
+}
+
+/* Para pantallas pequeñas */
+@media (max-width: 768px) {
+  .dos-columnas {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-control {
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+/* 🔹 Efecto al enfocar el campo */
+.form-control:focus {
+  transform: scale(1.08);
+  z-index: 2;
+  position: relative;
+  box-shadow: 0 0 12px rgba(0, 123, 255, 0.4);
+  font-size: 1.2rem;
+}
+
+/* 🔹 Cuando el input está en foco, agranda también el label */
+.form-group:focus-within label,
+.form-group:focus-within .form-label {
+  font-size: 1.1rem;
+  color: #0056b3; /* azul accesible */
+  font-weight: 600;
+  transition: all 0.3s ease;
+}

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "../../../css/DiagnosticoCSS/Juego04Css/Juego04.css";
 
-const partesIngles = [ "eye", "mouth", "neck", "arm", "hair", "hand", "torso", "leg", "foot"];
+const partesIngles = ["eye", "mouth", "neck", "arm", "hair", "hand", "torso", "leg", "foot"];
 
-const partesEspañol = [ "ojo", "boca", "cuello", "brazo", "cabello", "mano", "torso", "pierna", "pie"];
+const partesEspañol = ["ojo", "boca", "cuello", "brazo", "cabello", "mano", "torso", "pierna", "pie"];
 
 function MensajeError({ palabraIngles, traduccionEspanol, continuar }) {
   return (
@@ -31,7 +31,7 @@ function BodyPartButton({ name, top, left, onClick }) {
 
 function ImagenCuerpo({ onClickBotonParteCuerpo }) {
   const posiciones = [
-   
+
     { top: "20%", left: "50%" },  // eye (ojo)
     { top: "30%", left: "50%" },  // mouth (boca)
     { top: "38%", left: "50%" },  // neck (cuello)
@@ -107,7 +107,7 @@ function Juego04() {
       )}
     </div>
   );
-  
+
 }
 
 export default Juego04;
