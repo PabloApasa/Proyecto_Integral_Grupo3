@@ -14,7 +14,6 @@ function Login() {
 
   const captchaContainerRef = useRef(null);
 
-  // 👇 esto es solo para mostrar si cargó o no
   const grecaptchaLoaded =
     typeof window !== "undefined" && typeof window.grecaptcha !== "undefined";
 
