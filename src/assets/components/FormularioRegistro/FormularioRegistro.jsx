@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Container, Form, Button, Card } from "react-bootstrap";
-import ReCAPTCHA from "react-google-recaptcha";
 import "../../css/FormularioRegistroCSS/FormularioRegistro.css";
 
 function FormularioRegistro() {
