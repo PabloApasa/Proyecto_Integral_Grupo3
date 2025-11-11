@@ -6,7 +6,7 @@ const partesEspañol = ["ojo", "boca", "cuello", "brazo", "cabello", "mano", "to
 
 function ErrorMessage({ onContinue }) {
   return (
-    <div className="message message-error">
+    <div className="message message-error" translate="no">
       <h2>Not correct 🙃</h2>
       <p>Try again! You can do it!</p>
       <button onClick={onContinue}>Try again</button>
@@ -16,7 +16,7 @@ function ErrorMessage({ onContinue }) {
 
 function SuccessMessage({ onContinue }) {
   return (
-    <div className="message message-success">
+    <div className="message message-success" translate="no">
       <h2>VERY GOOD! 🎉</h2>
       <p>Great job!</p>
       <button onClick={onContinue}>Next</button>
@@ -31,6 +31,7 @@ function BodyPartButton({ name, top, left, onClick }) {
       className="boton-parte"
       style={{ top, left }}
       aria-label={name}
+      translate="no"
     />
   );
 }
@@ -73,6 +74,40 @@ function Juego04() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showError, setShowError] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [score, setScore] = useState(0);
+  const [streak, setStreak] = useState(0);
+  const [femaleVoice, setFemaleVoice] = useState(null);
+
+  // Cargar voces disponibles del navegador
+  useEffect(() => {
+    const loadVoices = () => {
+      const voices = window.speechSynthesis.getVoices();
+      const englishFemale = voices.find(
+        (v) => v.lang.startsWith("en") && v.name.toLowerCase().includes("female")
+      ) || voices.find((v) => v.lang === "en-US");
+      setFemaleVoice(englishFemale);
+    };
+
+    loadVoices();
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+  }, []);
+
+  // Función para hablar
+  const speakWord = (word) => {
+    if ("speechSynthesis" in window) {
+      const utter = new SpeechSynthesisUtterance(word);
+      utter.lang = "en-US";
+      utter.rate = 1;
+      if (femaleVoice) utter.voice = femaleVoice; // usar voz femenina
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(utter);
+    }
+  };
+
+  // Cada vez que cambia la palabra, la pronuncia
+  useEffect(() => {
+    speakWord(currentWord);
+  }, [currentWord, femaleVoice]);
 
   const newRandomWord = () => {
     const randomIndex = Math.floor(Math.random() * partesIngles.length);
@@ -86,39 +121,47 @@ function Juego04() {
     if (partName === currentWord) {
       setShowSuccess(true);
       setShowError(false);
+      setScore((prev) => prev + 10);
+      setStreak((prev) => prev + 1);
     } else {
       setShowError(true);
       setShowSuccess(false);
+      setStreak(0);
     }
   };
 
   return (
-    <div className="juego04-contenedor">
-      <h1>Body Parts Game</h1>
-      <p>Click on the correct body part.</p>
+    <div className="juego04-contenedor notranslate" translate="no">
+      <h1 translate="no">Body Parts Game</h1>
+      <p translate="no">Click on the correct body part.</p>
 
-      <p>
+      <div className="hud" translate="no">
+        <span>Score: {score}</span>
+        <span>Streak: {streak}</span>
+      </div>
+
+      <p translate="no">
         Find:{" "}
-        <span className="palabra-actual">
+        <span className="palabra-actual" translate="no">
           {currentWord.toUpperCase()}
         </span>
       </p>
 
+      <button
+        type="button"
+        className="voice-button"
+        onClick={() => speakWord(currentWord)}
+        translate="no"
+      >
+        🔊 Hear again
+      </button>
+
       <BodyImage onClickPart={handleClickPart} />
 
-      {showError && (
-        <ErrorMessage onContinue={() => setShowError(false)} />
-      )}
-
-      {showSuccess && (
-        <SuccessMessage onContinue={newRandomWord} />
-      )}
-
-      {/* opcional: para el profe o para el niño como ayuda */}
-      {/* <p className="traduccion-hint">(= {partesEspañol[currentIndex]})</p> */}
+      {showError && <ErrorMessage onContinue={() => setShowError(false)} />}
+      {showSuccess && <SuccessMessage onContinue={newRandomWord} />}
     </div>
   );
-  
 }
 
 export default Juego04;
