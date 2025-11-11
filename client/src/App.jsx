@@ -20,8 +20,16 @@ import { AutorizacionesProvider } from "../../client/src/assets/context/Autoriza
 // 🔹 Página o componente para alumnos
 import Games from "./assets/pages/Games";
 
-// 🔹 💜 juego04 
+
+// 🔹 Juegos de Diagnostico
+import BotonColor from "./assets/components/Diagnostico/Juego01/BotonColor";
+import Imagenes from "./assets/components/Diagnostico/Juego02/Imagenes";
+import JuegoNumero from "./assets/components/Diagnostico/Juego03/JuegoNumero";
 import Juego04 from "./assets/components/Diagnostico/Juego04/Juego04";
+
+// diagnostico
+import Diagnostico from "./assets/components/Diagnostico/Diagnostico";
+
 
 import TestIngles from './assets/components/Registrar';
 
@@ -32,6 +40,7 @@ function App() {
         <Routes>
           {/* 🔸 Rutas públicas */}
           <Route path="/login" element={<Login />} />
+          {/* <Route path="/registrar" element={<Registrar />} />*/}
           <Route path="/formularioregistro" element={<FormularioRegistro />} />
           <Route path="/unauthorized" element={<NoAutorizado />} />
 
@@ -67,6 +76,7 @@ function App() {
                 </ProtectorRutas>
               }
             />
+
 
             {/* 🔸 Rutas exclusivas para ADMINISTRATIVO */}
             <Route
@@ -112,6 +122,39 @@ function App() {
               }
             />
             <Route
+              path="Juego01"
+              element={
+                <ProtectorRutas allowedRoles={["ALUMNO"]}>
+                  <BotonColor />
+                </ProtectorRutas>
+              }
+            />
+            <Route
+              path="Juego02"
+              element={
+                <ProtectorRutas allowedRoles={["ALUMNO"]}>
+                  <Imagenes />
+                </ProtectorRutas>
+              }
+            />
+            <Route
+              path="Juego03"
+              element={
+                <ProtectorRutas allowedRoles={["ALUMNO"]}>
+                  <JuegoNumero />
+                </ProtectorRutas>
+              }
+            />
+            <Route
+              path="Juego04"
+              element={
+                <ProtectorRutas allowedRoles={["ALUMNO"]}>
+                  <Juego04 />
+                </ProtectorRutas>
+              }
+            />
+
+            <Route
               path="testingles" // <--- La URL que coincide con el 'to="/testingles"' en Layout.jsx
               element={
                 <ProtectorRutas allowedRoles={['ALUMNO']}>
@@ -120,15 +163,6 @@ function App() {
               }
             />
 
-            {/* 🔸 💜 Ruta de tu juego */}
-            <Route
-              path="juego04"
-              element={
-                <ProtectorRutas allowedRoles={["ALUMNO"]}>
-                  <Juego04 />
-                </ProtectorRutas>
-              }
-            />
 
             {/* 🔸 Error por defecto */}
             <Route path="*" element={<Error />} />

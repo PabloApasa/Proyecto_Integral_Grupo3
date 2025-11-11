@@ -1,0 +1,77 @@
+body {
+  background-color: #e2d4d7ff; /* rosado clarito */
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+.image-game-container {
+  text-align: center;
+  padding: 40px;
+  background-color: #f0e1e6ff;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 60px auto;
+}
+
+.image-game-title {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.image-game-instructions {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.image-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.animal-gif {
+  width: 200px;
+  height: 200px;
+  border-radius: 15px;
+  border: 3px solid #fff;
+  object-fit: cover;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.options-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.animal-option-button {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  background-color: #f3e5f5;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.animal-option-button:hover {
+  background-color: #ce93d8;
+  transform: scale(1.05);
+}
+
+.image-feedback {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-top: 15px;
+}
+
+.image-progress {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #555;
+}
