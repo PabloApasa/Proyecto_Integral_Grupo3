@@ -1,7 +1,10 @@
-// import './App.css'
+// import react dom y bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
+
+//estilo
+import './assets/css/App.css'
 
 // 🔹 Páginas del grupo
 import Home from "./assets/pages/Home";
@@ -10,8 +13,16 @@ import InfoPersonal from "./assets/pages/InfoPersonal";
 import Error from "./assets/pages/Error";
 import Layout from "./assets/pages/Layout";
 
+// 🔹 Proyectos anteriores
+import Proyecto2 from './assets/components/Proyecto2';
+import Proyecto3 from './assets/components/Proyecto3';
+import Proyecto4 from './assets/PoryectosAnteriores/Proyecto4/Proyecto4App';
+import Proyecto5 from './assets/PoryectosAnteriores/Proyecto5/Proyecto5App';
+
+
 // 🔹 Sistema de autenticación
 import Login from "./assets/pages/Login";
+import Registrar from './assets/components/Registrar';
 import NoAutorizado from "./assets/pages/NoAutorizado";
 import FormularioRegistro from "./assets/components/FormularioRegistro";
 import ProtectorRutas from "./assets/components/ProtectorRutas";
@@ -44,73 +55,54 @@ function App() {
           <Route path="/formularioregistro" element={<FormularioRegistro />} />
           <Route path="/unauthorized" element={<NoAutorizado />} />
 
+
+          {/* 🔸 Rutas protegidas */}
+
           {/* 🔸 Layout principal con rutas protegidas */}
           <Route path="/" element={<Layout />}>
+
             {/* Redirección al login si entra sin loguearse */}
-            {/*<Route index element={<Navigate to="/login" />} />*/}
+            <Route index element={<Home />} />
 
-            {/* Rutas accesibles a todos los roles autenticados */}
-            <Route
-              path="home"
-              element={
-                <ProtectorRutas allowedRoles={["ADMINISTRATIVO", "ALUMNO"]}>
-                  <Home />
-                </ProtectorRutas>
-              }
-            />
+            {/* Rutas ABIERTAS a cualquier usuario con acceso al Layout */}
+            <Route path="home" element={<Home />} />
+            <Route path="aboutus" element={<AboutUs />} />
+            <Route path="infoPersonal" element={<InfoPersonal />} />
 
-            <Route
-              path="aboutus"
-              element={
-                <ProtectorRutas allowedRoles={["ADMINISTRATIVO", "ALUMNO"]}>
-                  <AboutUs />
-                </ProtectorRutas>
-              }
-            />
-
-            <Route
-              path="infoPersonal"
-              element={
-                <ProtectorRutas allowedRoles={["ADMINISTRATIVO", "ALUMNO"]}>
-                  <InfoPersonal />
-                </ProtectorRutas>
-              }
-            />
-
-
-            {/* 🔸 Rutas exclusivas para ADMINISTRATIVO */}
+            {/* 🔒 Rutas de Proyectos PROTEGIDAS: Solo para ADMINISTRATIVO */}
             <Route
               path="proyecto2"
               element={
-                <ProtectorRutas allowedRoles={["ADMINISTRATIVO"]}>
-                  {/*<Proyecto2 />*/}
+                <ProtectorRutas allowedRoles={['ADMIN']}>
+                  <Proyecto2 />
                 </ProtectorRutas>
               }
             />
             <Route
               path="proyecto3"
               element={
-                <ProtectorRutas allowedRoles={["ADMINISTRATIVO"]}>
-                  {/*<Proyecto3 />*/}
+                <ProtectorRutas allowedRoles={['ADMIN']}>
+                  <Proyecto3 />
                 </ProtectorRutas>
               }
             />
             <Route
               path="proyecto4"
               element={
-                <ProtectorRutas allowedRoles={["ADMINISTRATIVO"]}>
-                  {/*<Proyecto4 />*/}
+                <ProtectorRutas allowedRoles={['ADMIN']}>
+                  <Proyecto4 />
                 </ProtectorRutas>
               }
             />
             <Route
               path="proyecto5"
               element={
-                <ProtectorRutas allowedRoles={["ADMINISTRATIVO"]}>
-                  {/*<Proyecto5 />*/}
+                <ProtectorRutas allowedRoles={['ADMIN']}>
+                  <Proyecto5 />
                 </ProtectorRutas>
               }
             />
+
 
             {/* 🔸 Ruta exclusiva para ALUMNO */}
             <Route
@@ -118,6 +110,15 @@ function App() {
               element={
                 <ProtectorRutas allowedRoles={["ALUMNO"]}>
                   <Games />
+                </ProtectorRutas>
+              }
+            />
+
+            <Route
+              path="diagnostico"
+              element={
+                <ProtectorRutas allowedRoles={['ALUMNO']}>
+                  <Diagnostico />
                 </ProtectorRutas>
               }
             />

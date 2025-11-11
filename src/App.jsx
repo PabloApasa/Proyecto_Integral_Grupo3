@@ -1,4 +1,5 @@
 // 🔹Importaciones raeact dom y booststrap
+import "bootstrap/dist/css/bootstrap.min.css"
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
@@ -26,6 +27,9 @@ import FormularioRegistro from './assets/components/FormularioRegistro/Formulari
 import ProtectorRutas from './assets/components/ProtectorRutas';
 import { AutorizacionesProvider } from './assets/context/AutorizacionContext';
 
+// 🔹 Página o componente para alumnos
+import Games from "./assets/pages/Games";
+
 // 🔹 Juegos de Diagnostico
 import BotonColor from "./assets/components/Diagnostico/Juego01/BotonColor";
 import Imagenes from "./assets/components/Diagnostico/Juego02/Imagenes";
@@ -35,11 +39,9 @@ import Juego04 from "./assets/components/Diagnostico/Juego04/Juego04";
 // diagnostico
 import Diagnostico from "./assets/components/Diagnostico/Diagnostico";
 
-// 🔹 Página o componente para alumnos
-import Games from './assets/pages/Games';
 
-// 🔹 Pagina para Administrativos
-import GamesResultados from './assets/pages/GamesResultados';
+import TestIngles from './assets/components/Registrar'
+
 
 function App() {
   return (
@@ -48,7 +50,7 @@ function App() {
         <Routes>
           {/* 🔸 Rutas públicas y de autenticacion */}
           <Route path="/login" element={<Login />} />
-          <Route path="/registrar" element={<Registrar />} />
+          {/*<Route path="/registrar" element={<Registrar />} />*/}
           <Route path="/formularioregistro" element={<FormularioRegistro />} />
           <Route path="/unauthorized" element={<NoAutorizado />} />
 
@@ -58,8 +60,6 @@ function App() {
           <Route path="/diagnostico/juego03" element={<JuegoNumero />} />
           <Route path="/diagnostico/juego04" element={<Juego04 />} />
 
-           {/* Rutas para el Diagnostico */}
-           <Route path="/diagnostico" element={<Diagnostico />} />
 
           {/* 🔸 Layout principal con rutas protegidas */}
           <Route path="/" element={<Layout />}>
@@ -73,11 +73,39 @@ function App() {
             <Route path="aboutus" element={<AboutUs />} />
             <Route path="infoPersonal" element={<InfoPersonal />} />
 
-            {/* Rutas de Proyectos (Ahora ABIERTAS) */}
-            <Route path="proyecto2" element={<Proyecto2 />} />
-            <Route path="proyecto3" element={<Proyecto3 />} />
-            <Route path="proyecto4" element={<Proyecto4 />} />
-            <Route path="proyecto5" element={<Proyecto5 />} />
+            {/* 🔒 Rutas de Proyectos PROTEGIDAS: Solo para ADMINISTRATIVO */}
+            <Route
+              path="proyecto2"
+              element={
+                <ProtectorRutas allowedRoles={['ADMINISTRATIVO']}>
+                  <Proyecto2 />
+                </ProtectorRutas>
+              }
+            />
+            <Route
+              path="proyecto3"
+              element={
+                <ProtectorRutas allowedRoles={['ADMINISTRATIVO']}>
+                  <Proyecto3 />
+                </ProtectorRutas>
+              }
+            />
+            <Route
+              path="proyecto4"
+              element={
+                <ProtectorRutas allowedRoles={['ADMINISTRATIVO']}>
+                  <Proyecto4 />
+                </ProtectorRutas>
+              }
+            />
+            <Route
+              path="proyecto5"
+              element={
+                <ProtectorRutas allowedRoles={['ADMINISTRATIVO']}>
+                  <Proyecto5 />
+                </ProtectorRutas>
+              }
+            />
 
             {/* 🔸 Ruta PROTEGIDA 1: Solo para el rol ALUMNO */}
             <Route
@@ -89,13 +117,53 @@ function App() {
               }
             />
 
-            {/* 🔸 Ruta PROTEGIDA 2: Solo para el rol ADMINISTRATIVO */}
             <Route
-              path="games-resultados"
+              path="diagnostico"
               element={
-                <ProtectorRutas allowedRoles={['ADMINISTRATIVO']}>
-                  {/* NOTA: Asegúrate de que el archivo GamesResultados.jsx exista en su ruta. */}
-                  <GamesResultados />
+                <ProtectorRutas allowedRoles={['ALUMNO']}>
+                  <Diagnostico />
+                </ProtectorRutas>
+              }
+            />
+
+            <Route
+              path="Juego01"
+              element={
+                <ProtectorRutas allowedRoles={["ALUMNO"]}>
+                  <BotonColor />
+                </ProtectorRutas>
+              }
+            />
+            <Route
+              path="Juego02"
+              element={
+                <ProtectorRutas allowedRoles={["ALUMNO"]}>
+                  <Imagenes />
+                </ProtectorRutas>
+              }
+            />
+            <Route
+              path="Juego03"
+              element={
+                <ProtectorRutas allowedRoles={["ALUMNO"]}>
+                  <JuegoNumero />
+                </ProtectorRutas>
+              }
+            />
+            <Route
+              path="Juego04"
+              element={
+                <ProtectorRutas allowedRoles={["ALUMNO"]}>
+                  <Juego04 />
+                </ProtectorRutas>
+              }
+            />
+
+            <Route
+              path="testIngles"
+              element={
+                <ProtectorRutas allowedRoles={['ALUMNO']}>
+                  <TestIngles />
                 </ProtectorRutas>
               }
             />

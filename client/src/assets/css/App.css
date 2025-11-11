@@ -1,0 +1,38 @@
+/* src/assets/css/App.css */
+
+/* 1. Reset básico y Fuente moderna */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* Fondo ligeramente gris claro (estándar moderno) */
+  background-color: #f4f7f9;
+  color: #333;
+  /* Texto oscuro para buena legibilidad */
+}
+
+/* 2. Compensación para el Navbar fijo */
+/* Esto es crucial si tu Navbar está fijo en la parte superior. */
+.main-content {
+  /* Ajusta este valor si tu barra es más alta */
+  padding-top: 6rem;
+  padding-bottom: 3rem;
+}
+/* src/assets/css/App.css o Header.css */
+
+/* Estilo de fondo y altura */
+.custom-navbar {
+  /* Color de tu elección, por ejemplo, un azul moderno */
+  background-color: #0077c2 !important;
+  height: 70px;
+  /* Asegura una altura consistente */
+  transition: background-color 0.3s ease;
+  /* Transición suave */
+}
+
+/* Estilo de los enlaces activos */
+.custom-navbar .nav-link.active {
+  /* Resaltar la página actual con un borde o un color diferente */
+  border-bottom: 3px solid #ffc107;
+  /* Borde amarillo (warning) */
+  color: #ffc107 !important;
+  font-weight: bold;
+}

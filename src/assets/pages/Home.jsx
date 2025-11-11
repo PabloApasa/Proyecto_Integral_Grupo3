@@ -9,13 +9,13 @@ function Home() {
                 <div className="hero-section">
                     <div className="logo-container">
                         {/* Aquí irá el logo - puedes reemplazar el src con la ruta de tu imagen */}
-                        <img 
-                            src="/image/GlamrockHelpy.jpg" 
-                            alt="Logo del proyecto" 
+                        <img
+                            src="/image/GlamrockHelpy.jpg"
+                            alt="Logo del proyecto"
                             className="logo"
                         />
                     </div>
-                    
+
                     <div className="welcome-card">
                         <h1 className="title">Bienvenido</h1>
                         <p className="subtitle">Proyecto Integral - Grupo N°3</p>

@@ -1,0 +1,48 @@
+:root {
+font-family: 'Press Start 2P', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: dark;
+  color: #ffe6ff;
+  background: linear-gradient(135deg, #1a1a2e 0%, #3a0ca3 100%);
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  font-family: 'Press Start 2P', cursive, Arial, sans-serif;
+}
+
+h2, h3, b, strong {
+  color: #ffb347;
+  text-shadow: 0 0 5px #ff00cc, 0 0 10px #3333ff;
+}
+
+.gif-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.img-responsive {
+  max-width: 250px;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0 20px #ff00cc) drop-shadow(0 0 10px #3333ff);
+  transition: transform 0.3s;
+}
+
+.img-responsive:hover {
+  transform: scale(1.08) rotate(-3deg);
+  filter: drop-shadow(0 0 40px #ff00cc) drop-shadow(0 0 20px #3333ff);
+}
+

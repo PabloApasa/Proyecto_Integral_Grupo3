@@ -6,10 +6,46 @@ function Layout() {
   const { user, isAuthenticated, logout } = useAutorizacion();
   const navigate = useNavigate();
 
+  console.log("Usuario Autenticado:", isAuthenticated);
+  console.log("Rol del Usuario:", user?.rol);
+
   const manejarLogout = () => {
     logout();
-    navigate("/login");
+    navigate("/home");
   };
+
+  // Determinamos los roles para enlaces condicionales
+  const isAdmin = user?.rol === 'ADMIN';
+  const isAlumno = user?.rol === 'ALUMNO';
+
+  // 🌟 DEFINICIÓN DE LA LÓGICA DE AUTENTICACIÓN (a inyectar en Header) 🌟
+  const AuthAndRoleNavigation = (
+    <Nav>
+      {/* Enlaces Condicionales por Rol (Solo si está autenticado) */}
+      {isAuthenticated && (
+        <>
+
+          {/* 🎮 ALUMNO */}
+          {isAlumno && (
+            <Nav.Link as={Link} to="/Games">
+              Games
+            </Nav.Link>
+          )}
+        </>
+      )}
+
+      {/* 🔒 Botón Login/Logout */}
+      {isAuthenticated ? (
+        <Button variant="outline-danger" onClick={manejarLogout} className="ms-lg-3">
+          Cerrar Sesión ({user?.username})
+        </Button>
+      ) : (
+        <Nav.Link as={Link} to="/login" className="ms-lg-3">
+          Iniciar Sesión
+        </Nav.Link>
+      )}
+    </Nav>
+  );
 
   return (
     <>
@@ -27,7 +63,7 @@ function Layout() {
               {/* 🔽 Menú desplegable para los proyectos */}
               <NavDropdown title="Proyectos" id="proyectos-dropdown">
                 {/* Solo ADMINISTRATIVO puede ver Proyectos */}
-                {isAuthenticated && user?.rol === "ADMINISTRATIVO" && (
+                {isAuthenticated && user?.rol === "ADMIN" && (
                   <>
                     <NavDropdown.Item as={Link} to="/proyectos">
                       Panel de Proyectos
@@ -48,7 +84,7 @@ function Layout() {
                   </>
                 )}
               </NavDropdown>
-              
+
               {/* 🎮 Menú desplegable para Games (solo para ALUMNO) */}
               {isAuthenticated && user?.rol === "ALUMNO" && (
                 <NavDropdown title="Games" id="games-dropdown">
@@ -70,16 +106,11 @@ function Layout() {
                   </NavDropdown.Item>
                 </NavDropdown>
               )}
-              
-              {/* Solo ALUMNO puede ver Games */}
 
-              {isAuthenticated && user?.rol === "ALUMNO" && (
-                <Nav.Link as={Link} to="/games">Games</Nav.Link>
-              )}
 
               {/* ✅ NUEVO LINK: TestIngles - Visible solo para ALUMNO */}
               {isAuthenticated && user?.rol === "ALUMNO" && (
-                <Nav.Link as={Link} to="/testingles">TestIngles</Nav.Link>
+                <Nav.Link as={Link} to="/testingles">New User</Nav.Link>
               )}
             </Nav>
 
