@@ -8,7 +8,7 @@ const integrantesData = [
         nombre: "Navarro Ana Florencia",
         rol: "Diseñador UI/UX",
         datosExtra: "Experiencia en diseño de interfaces",
-        image: "https://via.placeholder.com/150",
+        image: "public/image/profileUserAna.jpeg",
         github: "https://github.com/mineroFI"
     },
     {
@@ -24,7 +24,7 @@ const integrantesData = [
         nombre: "Gutierrez Efrain Julio Alberto",
         rol: "Desarrollador Full Stack",
         datosExtra: "Experiencia en MERN stack",
-        image: "https://via.placeholder.com/150",
+        image: "public/image/profileUserEfrain.jpeg",
         github: "https://github.com/xxx2131N"
     },
     {
@@ -32,7 +32,7 @@ const integrantesData = [
         nombre: "Apasa Pablo Ariel",
         rol: "Desarrollador Backend",
         datosExtra: "Experiencia en Python y Django",
-        image: "https://via.placeholder.com/150",
+        image: "public/image/profileUserApasa.jpeg",
         github: "https://github.com/PabloApasa"
     },
     {
@@ -40,7 +40,7 @@ const integrantesData = [
         nombre: "Cappiello Andrea Victoria",
         rol: "Desarrolladora Frontend",
         datosExtra: "Experiencia en React y Redux",
-        image: "https://via.placeholder.com/150",
+        image: "public/image/profileUserAndrea.jpeg",
         github: "https://github.com/Andycap98"
     }
 ];
