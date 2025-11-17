@@ -49,9 +49,11 @@ function Login() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      if (user?.rol === "ADMINISTRATIVO") {
+      if (user?.rol === "ADMIN") {
         navigate("/home", { replace: true });
       } else if (user?.rol === "ALUMNO") {
+        navigate("/home", { replace: true });
+      } else if (user?.rol === "ALUMNO-INGLES") {
         navigate("/home", { replace: true });
       } else {
         navigate("/error", { replace: true });
