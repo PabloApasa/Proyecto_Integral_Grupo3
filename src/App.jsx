@@ -29,7 +29,7 @@ import { AutorizacionesProvider } from './assets/context/AutorizacionContext';
 
 // 🔹 Página o componente para alumnos
 import Games from "./assets/pages/Games";
-
+import Resultados from "./assets/components/FormularioRegistro/Resultados"
 // 🔹 Juegos de Diagnostico
 import BotonColor from "./assets/components/Diagnostico/Juego01/BotonColor";
 import Imagenes from "./assets/components/Diagnostico/Juego02/Imagenes";
@@ -122,6 +122,15 @@ function App() {
               element={
                 <ProtectorRutas allowedRoles={['ALUMNO']}>
                   <Diagnostico />
+                </ProtectorRutas>
+              }
+            />
+
+            <Route
+              path="resultados"
+              element={
+                <ProtectorRutas allowedRoles={["ADMINISTRATIVO"]}>
+                  <Resultados />
                 </ProtectorRutas>
               }
             />
