@@ -1,6 +1,9 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import axios from 'axios'
+import { useAutorizacion } from '../hooks/AutorizacionSegura'; // ✅ importante
+
 
 const PASSWORD_REGEX = {
     minLength: /^.{8,}$/,
@@ -31,6 +34,10 @@ function Registrar() {
         rol: 'ALUMNO-INGLES'
     });
 
+    const navigate = useNavigate();
+    const { setUser } = useAutorizacion(); // 👈 para actualizar el contexto global
+
+
     const manejarCambio = (e) => {
         const { name, value } = e.target;
         setUsuario(prevData => ({
@@ -48,11 +55,11 @@ function Registrar() {
     };
 
     const manejarSubmit = async (e) => {
+        e.preventDefault();
         setRegError('');
         const form = e.currentTarget;
         const passwordValido = PASSWORD_REGEX.isValid.test(usuario.password);
 
-        e.preventDefault();
 
         if (form.checkValidity() === false || !passwordValido) {
             setValidado(true);
@@ -63,9 +70,41 @@ function Registrar() {
             try {
                 const response = await axios.post('/api/registrarUsuario', usuario);
 
+                /***if (response.data.success) {
+                    console.log('Usuario registrado con exito en la BD');
+                    setUser({
+                        username: usuario.username,
+                        rol: 'ALUMNO-INGLES',
+                        nombre: usuario.nombre,
+                        apellido: usuario.apellido,
+                    })
+                    alert('¡Formulario enviado con éxito! Redirigiendo al diagnóstico...');
+                    // 🚀 Redirige al diagnóstico
+                    navigate('/diagnostico');*/
+
                 if (response.data.success) {
                     console.log('Usuario registrado con exito en la BD');
-                } else {
+
+                    const datosUsuario = {
+                        username: usuario.username,
+                        rol: 'ALUMNO-INGLES',
+                        nombre: usuario.nombre,
+                        apellido: usuario.apellido
+                    };
+
+                    // Guardar en contexto global
+                    setUser(datosUsuario);
+
+                    // Guardar también en localStorage (💥 clave)
+                    localStorage.setItem("user", JSON.stringify(datosUsuario));
+
+                    alert('¡Formulario enviado con éxito! Redirigiendo al diagnóstico...');
+
+                    //navigate('/diagnostico');
+                    navigate("/");
+
+                }
+                else {
                     setRegError(response.data.message || 'Error desconocido durante el registro');
                 }
             } catch (error) {
@@ -73,7 +112,7 @@ function Registrar() {
                 setRegError(error.message || 'Fallo de conexion. Intentelo mas tarde');
             }
 
-            setUsuario({ nombre: '', apellido: '', username: '', password: ''});
+            setUsuario({ nombre: '', apellido: '', username: '', password: '' });
             setValidado(false);
             setErroresPassword({ minLength: false, uppercase: false, lowercase: false, number: false });
         }
@@ -114,21 +153,21 @@ function Registrar() {
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Row>
-                    <Form.Group className="mb-3" controlId='validacionUsername'>
-                        <Form.Label>Nombre de Usuario</Form.Label>
-                        <Form.Control
-                            required
-                            type="text"
-                            name="username"
-                            value={usuario.username}
-                            onChange={manejarCambio}
-                            placeholder="Ingrese su Nombre de Usuario"
-                            minLength="5" //validacion HTML5 para minimo de 5 caracteres
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            El nombre de usuario es requerido y debe tener al menos 5 caracteres.
-                        </Form.Control.Feedback>
-                    </Form.Group>
+                <Form.Group className="mb-3" controlId='validacionUsername'>
+                    <Form.Label>Nombre de Usuario</Form.Label>
+                    <Form.Control
+                        required
+                        type="text"
+                        name="username"
+                        value={usuario.username}
+                        onChange={manejarCambio}
+                        placeholder="Ingrese su Nombre de Usuario"
+                        minLength="5" //validacion HTML5 para minimo de 5 caracteres
+                    />
+                    <Form.Control.Feedback type="invalid">
+                        El nombre de usuario es requerido y debe tener al menos 5 caracteres.
+                    </Form.Control.Feedback>
+                </Form.Group>
                 <Form.Group>
                     <Form.Control
                         required
