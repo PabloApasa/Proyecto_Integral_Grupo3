@@ -17,6 +17,7 @@ function Layout() {
   // Determinamos los roles para enlaces condicionales
   const isAdmin = user?.rol === 'ADMIN';
   const isAlumno = user?.rol === 'ALUMNO';
+  const isAlumnoIngles = user?.rol === "ALUMNO-INGLES";
 
   // 🌟 DEFINICIÓN DE LA LÓGICA DE AUTENTICACIÓN (a inyectar en Header) 🌟
   const AuthAndRoleNavigation = (
@@ -100,17 +101,24 @@ function Layout() {
                   <NavDropdown.Item as={Link} to="/juego04">
                     ⏰ Juego 04 - Días/Semana
                   </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item as={Link} to="/diagnostico">
-                    🧠 Diagnóstico
-                  </NavDropdown.Item>
                 </NavDropdown>
               )}
+
+              {/* Diagnostico (solo para ALUMNO-INGLES) */}
+              {isAuthenticated && user?.rol === "ALUMNO-INGLES" && (
+                <Nav.Link as={Link} to="/diagnostico">Diagnóstico</Nav.Link>
+              )}
+
+              {/* ✅ Resultados: solo visible para ADMINISTRATIVO */}
+              {isAuthenticated && user?.rol === "ADMIN" && (
+                <Nav.Link as={Link} to="/resultados">Resultados</Nav.Link>
+              )}
+
 
 
               {/* ✅ NUEVO LINK: TestIngles - Visible solo para ALUMNO */}
               {isAuthenticated && user?.rol === "ALUMNO" && (
-                <Nav.Link as={Link} to="/testingles">New User</Nav.Link>
+                <Nav.Link as={Link} to="/registrar">Nuevo usuario de ingles</Nav.Link>
               )}
             </Nav>
 
