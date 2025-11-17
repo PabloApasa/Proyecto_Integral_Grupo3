@@ -1,5 +1,5 @@
-// intalar npm install framer-motion para que se vea la transicion
 
+// intalar npm install framer-motion para que se vea la transicion// Instalar npm install framer-motion si no lo tienes
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -12,9 +12,11 @@ function Diagnostico() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // 🧾 Datos que vienen del formulario o registro
-  const { nombreUsuario = "Usuario", nombreCompleto = "Nombre y Apellido" } =
-    location.state || {};
+  // ✅ Datos que vienen del formulario o registro
+  const usuario = location.state || {}; // 👈 AQUÍ se define usuario
+  console.log("🧠 Usuario recibido desde FormularioRegistro:", usuario);
+  const nombreUsuario = usuario.username || "Usuario";
+  const nombreCompleto = `${usuario.nombre || ""} ${usuario.apellido || ""}`.trim();
 
   const [currentGame, setCurrentGame] = useState(1);
   const [totalScore, setTotalScore] = useState(0);
@@ -23,6 +25,42 @@ function Diagnostico() {
   const [countdown, setCountdown] = useState(3);
 
   const fondos = ["#ffe6f2", "#e6f7ff", "#e8ffe6", "#fffbe6"];
+
+  // ✅ Guarda el puntaje en localStorage
+  const guardarPuntaje = (username, nuevoPuntaje) => {
+    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+    // Buscar si ya existe
+    const existe = usuarios.find((u) => u.username === username);
+
+    let actualizados;
+
+    if (existe) {
+      // Si existe → actualizar solo el puntaje
+      actualizados = usuarios.map((u) =>
+        u.username === username
+          ? { ...u, puntaje: nuevoPuntaje }
+          : u
+      );
+    } else {
+      // Si NO existe → CREAR un registro completo
+      actualizados = [
+        ...usuarios,
+        {
+          username: usuario.username,
+          nombre: usuario.nombre,
+          apellido: usuario.apellido,
+          email: usuario.email,
+          pais: usuario.pais,
+          puntaje: nuevoPuntaje,
+        },
+      ];
+    }
+
+    localStorage.setItem("usuarios", JSON.stringify(actualizados));
+    console.log("💾 Usuario guardado/actualizado:", actualizados);
+  };
+
 
   const handleFinishGame = (score) => {
     setTotalScore((prev) => prev + score);
@@ -42,6 +80,7 @@ function Diagnostico() {
         }
       }, 1000);
     } else {
+      guardarPuntaje(usuario.username, totalScore + score); // 👈 usa el usuario correcto
       setFinished(true);
     }
   };
@@ -101,7 +140,7 @@ function Diagnostico() {
     );
   }
 
-  // 🌀 Pantalla de transición animada entre juegos
+  // 🌀 Pantalla de transición entre juegos
   if (showTransition) {
     return (
       <motion.div
