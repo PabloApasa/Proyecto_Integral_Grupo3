@@ -2,6 +2,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
+import { useAutorizacion } from "./assets/hooks/AutorizacionSegura";
 
 //estilo
 import './assets/css/App.css'
@@ -24,7 +25,7 @@ import Proyecto5 from './assets/PoryectosAnteriores/Proyecto5/Proyecto5App';
 import Login from "./assets/pages/Login";
 import Registrar from './assets/components/Registrar';
 import NoAutorizado from "./assets/pages/NoAutorizado";
-import FormularioRegistro from "./assets/components/FormularioRegistro";
+import FormularioRegistro from "./assets/components/FormularioRegistro/FormularioRegistro";
 import ProtectorRutas from "./assets/components/ProtectorRutas";
 import { AutorizacionesProvider } from "../../client/src/assets/context/AutorizacionContext";
 
@@ -40,9 +41,24 @@ import Juego04 from "./assets/components/Diagnostico/Juego04/Juego04";
 
 // diagnostico
 import Diagnostico from "./assets/components/Diagnostico/Diagnostico";
+import Resultados from "./assets/components/FormularioRegistro/Resultados";
 
+function RedireccionDiagnostico() {
+  const { user } = useAutorizacion();
 
-import TestIngles from './assets/components/Registrar';
+  // Si es la primera vez o no tiene registro previo → va al formulario
+  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+  const existeUsuario = usuarios.some(
+    (u) => u.username === user?.username
+  );
+
+  if (!existeUsuario) {
+    return <Navigate to="/formularioregistro" replace />;
+  }
+
+  // Si ya tiene datos en localStorage → entra al Diagnóstico directo
+  return <Diagnostico />;
+}
 
 function App() {
   return (
@@ -115,11 +131,20 @@ function App() {
             />
 
             <Route
+              path="formularioregistro"
+              element={
+                <ProtectorRutas allowedRoles={['ALUMNO-INGLES']}>
+                  <FormularioRegistro />
+                </ProtectorRutas>
+              }
+            />
+
+            <Route
               path="diagnostico"
               element={
-                <ProtectorRutas allowedRoles={['ALUMNO']}>
-                  <Diagnostico />
-                </ProtectorRutas>
+                //<ProtectorRutas allowedRoles={['ALUMNO-INGLES']}>
+                <Diagnostico />
+                //</ProtectorRutas>
               }
             />
             <Route
@@ -156,14 +181,15 @@ function App() {
             />
 
             <Route
-              path="testingles" // <--- La URL que coincide con el 'to="/testingles"' en Layout.jsx
+              path="resultados"
               element={
-                <ProtectorRutas allowedRoles={['ALUMNO']}>
-                  <TestIngles /> {/* <--- EL COMPONENTE A RENDERIZAR */}
+                <ProtectorRutas allowedRoles={["ADMIN"]}>
+                  <Resultados />
                 </ProtectorRutas>
               }
             />
 
+            <Route path="registrar" element={<Registrar />} />
 
             {/* 🔸 Error por defecto */}
             <Route path="*" element={<Error />} />
