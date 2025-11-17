@@ -105,9 +105,6 @@ function Layout() {
                     ⏰ Juego 04 - Días/Semana
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item as={Link} to="/diagnostico">
-                    🧠 Diagnóstico
-                  </NavDropdown.Item>
                 </NavDropdown>
               )}
 
@@ -115,6 +112,14 @@ function Layout() {
               {isAuthenticated && user?.rol === "ALUMNO" && (
                 <Nav.Link as={Link} to="/testingles">TestIngles</Nav.Link>
               )}
+
+              {/* 📊 Resultados - solo visible para ADMINISTRATIVO */}
+              {isAuthenticated && isAdmin && (
+                <Nav.Link as={Link} to="/resultados">
+                  📊 Resultados
+                </Nav.Link>
+              )}
+
             </Nav>
 
             {/* 🔒 Login / Logout */}
