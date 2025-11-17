@@ -28,7 +28,7 @@ function Registrar() {
         username: '',
         password: '',
         puntaje: 0,
-        rol: 'ALUMNO'
+        rol: 'ALUMNO-INGLES'
     });
 
     const manejarCambio = (e) => {
@@ -60,12 +60,6 @@ function Registrar() {
         } else {
             alert('Formulario enviado con exito!' + usuario.apellido);
 
-            //const nuevoUsuario = {
-            //  ...usuario,
-            //  fechaNac: new Date(),
-            //  estado: true,
-            //};
-
             try {
                 const response = await axios.post('/api/registrarUsuario', usuario);
 
@@ -79,7 +73,7 @@ function Registrar() {
                 setRegError(error.message || 'Fallo de conexion. Intentelo mas tarde');
             }
 
-            setUsuario({ nombre: '', apellido: '', username: '', password: '' });
+            setUsuario({ nombre: '', apellido: '', username: '', password: ''});
             setValidado(false);
             setErroresPassword({ minLength: false, uppercase: false, lowercase: false, number: false });
         }
@@ -120,21 +114,21 @@ function Registrar() {
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Row>
-                <Form.Group className="mb-3" controlId='validacionUsername'>
-                    <Form.Label>Nombre de Usuario</Form.Label>
-                    <Form.Control
-                        required
-                        type="text"
-                        name="username"
-                        value={usuario.username}
-                        onChange={manejarCambio}
-                        placeholder="Ingrese su Nombre de Usuario"
-                        minLength="5" //validacion HTML5 para minimo de 5 caracteres
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        El nombre de usuario es requerido y debe tener al menos 5 caracteres.
-                    </Form.Control.Feedback>
-                </Form.Group>
+                    <Form.Group className="mb-3" controlId='validacionUsername'>
+                        <Form.Label>Nombre de Usuario</Form.Label>
+                        <Form.Control
+                            required
+                            type="text"
+                            name="username"
+                            value={usuario.username}
+                            onChange={manejarCambio}
+                            placeholder="Ingrese su Nombre de Usuario"
+                            minLength="5" //validacion HTML5 para minimo de 5 caracteres
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            El nombre de usuario es requerido y debe tener al menos 5 caracteres.
+                        </Form.Control.Feedback>
+                    </Form.Group>
                 <Form.Group>
                     <Form.Control
                         required
