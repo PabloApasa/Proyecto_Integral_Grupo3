@@ -6,10 +6,8 @@ export const AutorizacionesContext = createContext(null);
 
 // 2. componente proveedor del contexto de Autenticacion
 export function AutorizacionesProvider({ children }) {
-
   const [usuariosBD, setUsuariosBD] = useState([]);
-
-  //const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [user, setUser] = useState(() => {
     try {
@@ -28,11 +26,13 @@ export function AutorizacionesProvider({ children }) {
       console.log('Usuarios cargados:', res.data);
     } catch (err) {
       console.error('Error al cargar los usuarios:', err);
+    } finally {
+      setIsLoading(false);
     }
   }, []);
 
   const login = useCallback((credentials) => {
-    console.log(usuariosBD);
+    console.log("usuarios en BD:", usuariosBD);
     try {
       const usuarioEncontrado = usuariosBD.find(
         u => u.username === credentials.username && u.password === credentials.password);
@@ -50,7 +50,6 @@ export function AutorizacionesProvider({ children }) {
       //errores inesperados en el find, aunque es de importancia en carga de datos
       console.error('Error al iniciar sesión:', error.message);
       setUser(null);
-      setIsLoading(false);
       return { success: false, message: 'Error al iniciar sesión' };
     }
   }, [usuariosBD]);
@@ -69,15 +68,17 @@ export function AutorizacionesProvider({ children }) {
 
   useEffect(() => {
     buscarUsuarios();
-  }, []);
+  }, [buscarUsuarios]);
 
   const valorDelContexto = useMemo(() => ({
     user,
+    setUser,
     isAuthenticated: !!user,
+    isLoading,
     login,
     logout,
     usuariosBD
-  }), [user, login, logout, usuariosBD]);
+  }), [user, isLoading, login, logout, usuariosBD]);
 
   // 3. Proveer el valor del contexto a los hijos
   return (
@@ -86,3 +87,4 @@ export function AutorizacionesProvider({ children }) {
     </AutorizacionesContext.Provider>
   );
 }
+
