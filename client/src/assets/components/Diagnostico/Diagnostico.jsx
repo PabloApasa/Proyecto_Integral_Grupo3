@@ -28,37 +28,23 @@ function Diagnostico() {
 
   // ✅ Guarda el puntaje en localStorage
   const guardarPuntaje = (username, nuevoPuntaje) => {
+    // Guardar cada intento como un registro independiente
     const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
-    // Buscar si ya existe
-    const existe = usuarios.find((u) => u.username === username);
+    const nuevoRegistro = {
+      id: Date.now(),
+      username: username || usuario.username || "-",
+      nombre: usuario.nombre || "-",
+      apellido: usuario.apellido || "-",
+      email: usuario.email || "-",
+      pais: usuario.pais || "-",
+      puntaje: nuevoPuntaje,
+      timestamp: new Date().toISOString(),
+    };
 
-    let actualizados;
-
-    if (existe) {
-      // Si existe → actualizar solo el puntaje
-      actualizados = usuarios.map((u) =>
-        u.username === username
-          ? { ...u, puntaje: nuevoPuntaje }
-          : u
-      );
-    } else {
-      // Si NO existe → CREAR un registro completo
-      actualizados = [
-        ...usuarios,
-        {
-          username: usuario.username,
-          nombre: usuario.nombre,
-          apellido: usuario.apellido,
-          email: usuario.email,
-          pais: usuario.pais,
-          puntaje: nuevoPuntaje,
-        },
-      ];
-    }
-
-    localStorage.setItem("usuarios", JSON.stringify(actualizados));
-    console.log("💾 Usuario guardado/actualizado:", actualizados);
+    const actualizado = [...usuarios, nuevoRegistro];
+    localStorage.setItem("usuarios", JSON.stringify(actualizado));
+    console.log("💾 Nuevo intento guardado:", nuevoRegistro);
   };
 
 

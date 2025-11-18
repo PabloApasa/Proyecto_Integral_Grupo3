@@ -1,26 +1,49 @@
 
-import React, { useEffect, useState } from "react";
-import { Table, Container, Card } from "react-bootstrap";
+import React, { useEffect, useState, useCallback } from "react";
+import { Table, Container, Card, Button } from "react-bootstrap";
+import { useAutorizacion } from "../../hooks/AutorizacionSegura";
 
 function Resultados() {
     const [usuarios, setUsuarios] = useState([]);
 
-    useEffect(() => {
-        // Leer usuarios del localStorage
+    const cargarDesdeLocalStorage = useCallback(() => {
         const data = JSON.parse(localStorage.getItem("usuarios")) || [];
-        //setUsuarios(usuarios.sort((a, b) => b.puntaje - a.puntaje));
-        setUsuarios(data);
+        // Filtrar sólo entradas que tengan puntaje o que provengan del formulario
+        const filtrados = data.filter(u => u && (u.puntaje !== undefined || u.username));
+        filtrados.sort((a, b) => (b.puntaje || 0) - (a.puntaje || 0));
+        setUsuarios(filtrados);
     }, []);
+
+    useEffect(() => {
+        cargarDesdeLocalStorage();
+
+        // Escuchar cambios en localStorage (si otra pestaña actualiza)
+        const onStorage = (e) => {
+            if (e.key === 'usuarios') cargarDesdeLocalStorage();
+        };
+        window.addEventListener('storage', onStorage);
+        return () => window.removeEventListener('storage', onStorage);
+    }, [cargarDesdeLocalStorage]);
+
+    const { user } = useAutorizacion() || {};
 
     return (
         <Container className="my-5">
             <Card className="shadow-sm p-4">
-                <h2 className="text-center mb-4">📊 Resultados del Diagnóstico</h2>
+                <div className="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h2 className="mb-0">📊 Resultados del Diagnóstico</h2>
+                        {user?.username && (
+                            <small className="text-muted">Sesión: <strong>{user.nombre ? `${user.nombre} ${user.apellido || ''}` : user.username}</strong></small>
+                        )}
+                    </div>
+                    <Button variant="outline-primary" size="sm" onClick={cargarDesdeLocalStorage}>
+                        Actualizar
+                    </Button>
+                </div>
 
                 {usuarios.length === 0 ? (
-                    <p className="text-center text-muted">
-                        No hay resultados registrados todavía.
-                    </p>
+                    <p className="text-center text-muted">No hay resultados registrados todavía.</p>
                 ) : (
                     <Table striped bordered hover responsive>
                         <thead>
@@ -34,16 +57,19 @@ function Resultados() {
                             </tr>
                         </thead>
                         <tbody>
-                            {usuarios.map((u, index) => (
-                                <tr key={index}>
-                                    <td>{index + 1}</td>
-                                    <td>{u.nombre}</td>
-                                    <td>{u.apellido} {u.apellido}</td>
-                                    <td>{u.username}</td>
-                                    <td>{u.email}</td>
-                                    <td><strong>{u.puntaje ?? "-"}</strong></td>
-                                </tr>
-                            ))}
+                            {usuarios.map((u, index) => {
+                                const isCurrent = user && u.username && user.username === u.username;
+                                return (
+                                    <tr key={u.username || index} className={isCurrent ? 'table-primary' : ''}>
+                                        <td>{index + 1}</td>
+                                        <td>{u.nombre || '-'}</td>
+                                        <td>{u.apellido || '-'}</td>
+                                        <td>{u.username || '-'}</td>
+                                        <td>{u.email || '-'}</td>
+                                        <td><strong>{u.puntaje ?? "-"}</strong></td>
+                                    </tr>
+                                )
+                            })}
                         </tbody>
                     </Table>
                 )}

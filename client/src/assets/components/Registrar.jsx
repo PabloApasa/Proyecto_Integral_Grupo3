@@ -35,7 +35,7 @@ function Registrar() {
     });
 
     const navigate = useNavigate();
-    const { setUser } = useAutorizacion(); // 👈 para actualizar el contexto global
+    const { buscarUsuarios } = useAutorizacion(); // para refrescar la lista de usuarios en el contexto
 
 
     const manejarCambio = (e) => {
@@ -85,23 +85,18 @@ function Registrar() {
                 if (response.data.success) {
                     console.log('Usuario registrado con exito en la BD');
 
-                    const datosUsuario = {
-                        username: usuario.username,
-                        rol: 'ALUMNO-INGLES',
-                        nombre: usuario.nombre,
-                        apellido: usuario.apellido
-                    };
+                    // Refrescar usuarios en el contexto sin recargar la página
+                    try {
+                        if (typeof buscarUsuarios === 'function') {
+                            await buscarUsuarios();
+                        }
+                    } catch (err) {
+                        console.warn('No se pudo refrescar lista de usuarios en contexto:', err);
+                    }
 
-                    // Guardar en contexto global
-                    setUser(datosUsuario);
-
-                    // Guardar también en localStorage (💥 clave)
-                    localStorage.setItem("user", JSON.stringify(datosUsuario));
-
-                    alert('¡Formulario enviado con éxito! Redirigiendo al diagnóstico...');
-
-                    //navigate('/diagnostico');
-                    navigate("/");
+                    // No iniciar sesión automáticamente: solo registrar en la BD.
+                    alert('Usuario registrado con éxito. Por favor, inicia sesión para continuar.');
+                    navigate('/login');
 
                 }
                 else {

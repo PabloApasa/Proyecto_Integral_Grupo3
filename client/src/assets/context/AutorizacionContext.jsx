@@ -77,7 +77,8 @@ export function AutorizacionesProvider({ children }) {
     isLoading,
     login,
     logout,
-    usuariosBD
+    usuariosBD,
+    buscarUsuarios
   }), [user, isLoading, login, logout, usuariosBD]);
 
   // 3. Proveer el valor del contexto a los hijos
