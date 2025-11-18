@@ -40,7 +40,7 @@ import Juego04 from "./assets/components/Diagnostico/Juego04/Juego04";
 import Diagnostico from "./assets/components/Diagnostico/Diagnostico";
 
 
-import TestIngles from './assets/components/Registrar'
+// TestIngles antes apuntaba a Registrar; usaremos directamente FormularioRegistro
 
 
 function App() {
@@ -50,7 +50,7 @@ function App() {
         <Routes>
           {/* 🔸 Rutas públicas y de autenticacion */}
           <Route path="/login" element={<Login />} />
-          {/*<Route path="/registrar" element={<Registrar />} />*/}
+          <Route path="/registrar" element={<Registrar />} />
           <Route path="/formularioregistro" element={<FormularioRegistro />} />
           <Route path="/unauthorized" element={<NoAutorizado />} />
 
@@ -73,39 +73,11 @@ function App() {
             <Route path="aboutus" element={<AboutUs />} />
             <Route path="infoPersonal" element={<InfoPersonal />} />
 
-            {/* 🔒 Rutas de Proyectos PROTEGIDAS: Solo para ADMINISTRATIVO */}
-            <Route
-              path="proyecto2"
-              element={
-                <ProtectorRutas allowedRoles={['ADMINISTRATIVO']}>
-                  <Proyecto2 />
-                </ProtectorRutas>
-              }
-            />
-            <Route
-              path="proyecto3"
-              element={
-                <ProtectorRutas allowedRoles={['ADMINISTRATIVO']}>
-                  <Proyecto3 />
-                </ProtectorRutas>
-              }
-            />
-            <Route
-              path="proyecto4"
-              element={
-                <ProtectorRutas allowedRoles={['ADMINISTRATIVO']}>
-                  <Proyecto4 />
-                </ProtectorRutas>
-              }
-            />
-            <Route
-              path="proyecto5"
-              element={
-                <ProtectorRutas allowedRoles={['ADMINISTRATIVO']}>
-                  <Proyecto5 />
-                </ProtectorRutas>
-              }
-            />
+            {/* Rutas de Proyectos: públicas (visibles sin importar rol o login) */}
+            <Route path="proyecto2" element={<Proyecto2 />} />
+            <Route path="proyecto3" element={<Proyecto3 />} />
+            <Route path="proyecto4" element={<Proyecto4 />} />
+            <Route path="proyecto5" element={<Proyecto5 />} />
 
             {/* 🔸 Ruta PROTEGIDA 1: Solo para el rol ALUMNO */}
             <Route
@@ -135,8 +107,9 @@ function App() {
               }
             />
 
+            {/* Rutas de juegos (protegidas por rol ALUMNO) - rutas en minúsculas para coincidir con Layout */}
             <Route
-              path="Juego01"
+              path="juego01"
               element={
                 <ProtectorRutas allowedRoles={["ALUMNO"]}>
                   <BotonColor />
@@ -144,7 +117,7 @@ function App() {
               }
             />
             <Route
-              path="Juego02"
+              path="juego02"
               element={
                 <ProtectorRutas allowedRoles={["ALUMNO"]}>
                   <Imagenes />
@@ -152,7 +125,7 @@ function App() {
               }
             />
             <Route
-              path="Juego03"
+              path="juego03"
               element={
                 <ProtectorRutas allowedRoles={["ALUMNO"]}>
                   <JuegoNumero />
@@ -160,7 +133,7 @@ function App() {
               }
             />
             <Route
-              path="Juego04"
+              path="juego04"
               element={
                 <ProtectorRutas allowedRoles={["ALUMNO"]}>
                   <Juego04 />
@@ -172,7 +145,7 @@ function App() {
               path="testIngles"
               element={
                 <ProtectorRutas allowedRoles={['ALUMNO']}>
-                  <TestIngles />
+                  <FormularioRegistro />
                 </ProtectorRutas>
               }
             />

@@ -54,6 +54,7 @@ function Resultados() {
                                 <th>USUARIO</th>
                                 <th>EMAIL</th>
                                 <th>Puntaje</th>
+                                <th>Respuestas</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -67,6 +68,20 @@ function Resultados() {
                                         <td>{u.username || '-'}</td>
                                         <td>{u.email || '-'}</td>
                                         <td><strong>{u.puntaje ?? "-"}</strong></td>
+                                        <td>
+                                            {u.respuestas && typeof u.respuestas === 'object' ? (
+                                                <details>
+                                                    <summary style={{ cursor: 'pointer' }}>Ver</summary>
+                                                    <div style={{ textAlign: 'left', marginTop: 8 }}>
+                                                        {Object.entries(u.respuestas).map(([k, v]) => (
+                                                            <div key={k}><strong>{k}:</strong> {v}</div>
+                                                        ))}
+                                                    </div>
+                                                </details>
+                                            ) : (
+                                                <span className="text-muted">-</span>
+                                            )}
+                                        </td>
                                     </tr>
                                 )
                             })}
