@@ -64,30 +64,34 @@ function Layout() {
               <Nav.Link as={Link} to="/infopersonal">InfoPersonal</Nav.Link>
 
 
-              {/* 🔽 Menú desplegable para los proyectos */}
+              {/* 🌟 Proyectos - SIEMPRE visible y SIEMPRE desplegable */}
               <NavDropdown title="Proyectos" id="proyectos-dropdown">
-                {/* Solo ADMINISTRATIVO puede ver Proyectos */}
-                {isAuthenticated && user?.rol === "ADMINISTRATIVO" && (
-                  <>
-                    <NavDropdown.Item as={Link} to="/proyectos">
-                      Panel de Proyectos
-                    </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item as={Link} to="/proyecto2">
-                      Proyecto 2
-                    </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/proyecto3">
-                      Proyecto 3
-                    </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/proyecto4">
-                      Proyecto 4
-                    </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/proyecto5">
-                      Proyecto 5
-                    </NavDropdown.Item>
-                  </>
-                )}
+
+                {/* Lista de proyectos accesibles desde cualquier rol */}
+                <NavDropdown.Item as={Link} to="/proyectos">
+                  📁 Panel de Proyectos
+                </NavDropdown.Item>
+
+                <NavDropdown.Divider />
+
+                <NavDropdown.Item as={Link} to="/proyecto2">
+                  🚀 Proyecto 2
+                </NavDropdown.Item>
+
+                <NavDropdown.Item as={Link} to="/proyecto3">
+                  🧩 Proyecto 3
+                </NavDropdown.Item>
+
+                <NavDropdown.Item as={Link} to="/proyecto4">
+                  🎧 Proyecto 4
+                </NavDropdown.Item>
+
+                <NavDropdown.Item as={Link} to="/proyecto5">
+                  📚 Proyecto 5
+                </NavDropdown.Item>
+
               </NavDropdown>
+
 
               {/* 🎮 Menú desplegable para Games (solo para ALUMNO) */}
               {isAuthenticated && user?.rol === "ALUMNO" && (
