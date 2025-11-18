@@ -114,7 +114,7 @@ function Layout() {
 
               {/* ✅ NUEVO LINK: TestIngles - Visible solo para ALUMNO */}
               {isAuthenticated && user?.rol === "ALUMNO" && (
-                <Nav.Link as={Link} to="/testingles">TestIngles</Nav.Link>
+                <Nav.Link as={Link} to="/testIngles">TestIngles</Nav.Link>
               )}
 
               {/* 📊 Resultados - solo visible para ADMINISTRATIVO */}

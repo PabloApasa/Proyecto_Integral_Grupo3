@@ -26,19 +26,35 @@ function Diagnostico() {
 
   const fondos = ["#ffe6f2", "#e6f7ff", "#e8ffe6", "#fffbe6"];
 
-  // ✅ Guarda el puntaje en localStorage
-  const guardarPuntaje = (username, nuevoPuntaje) => {
-    // Guardar cada intento como un registro independiente
+  // ✅ Guarda el puntaje en localStorage y asegura un username útil
+  const guardarPuntaje = (usernameParam, nuevoPuntaje) => {
     const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+    const sanitize = (s) =>
+      String(s || "")
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, "_")
+        .replace(/[^a-z0-9_@.\-]/g, "");
+
+    // Generar un username fallback a partir de email o nombre+timestamp
+    let keyUsername = usernameParam || usuario.username || usuario.email || (usuario.nombre ? `${sanitize(usuario.nombre)}${usuario.apellido ? '_' + sanitize(usuario.apellido) : ''}_${Date.now()}` : `user_${Date.now()}`);
+
+    // Si existe una cuenta con el mismo email y esa cuenta tiene username, úsala
+    if (usuario.email) {
+      const cuentaPorEmail = usuarios.find((u) => u.email && u.email === usuario.email && u.username);
+      if (cuentaPorEmail) keyUsername = cuentaPorEmail.username;
+    }
 
     const nuevoRegistro = {
       id: Date.now(),
-      username: username || usuario.username || "-",
+      username: keyUsername,
       nombre: usuario.nombre || "-",
       apellido: usuario.apellido || "-",
       email: usuario.email || "-",
       pais: usuario.pais || "-",
       puntaje: nuevoPuntaje,
+      respuestas: usuario.respuestas || {},
       timestamp: new Date().toISOString(),
     };
 

@@ -24,24 +24,6 @@ function Home() {
                             Navega por las diferentes secciones para conocer más sobre nuestro equipo y trabajo.
                         </p>
                     </div>
-
-                    <div className="features">
-                        <div className="feature-item">
-                            <div className="feature-icon">⚡</div>
-                            <h3>Rápido</h3>
-                            <p>Desarrollado con React y Vite</p>
-                        </div>
-                        <div className="feature-item">
-                            <div className="feature-icon">🎨</div>
-                            <h3>Moderno</h3>
-                            <p>Diseño responsive y atractivo</p>
-                        </div>
-                        <div className="feature-item">
-                            <div className="feature-icon">🚀</div>
-                            <h3>Innovador</h3>
-                            <p>Tecnologías de vanguardia</p>
-                        </div>
-                    </div>
                 </div>
             </Container>
         </StyledWrapper>

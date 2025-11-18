@@ -22,7 +22,7 @@ function BodyPartButton({ name, top, left, onClick }) {
     <button
       onClick={() => onClick(name)}
       className="boton-parte"
-      style={{ top: arriba, left: izquierda }}
+      style={{ top: top, left: left }}
     >
       {" "}
     </button>
@@ -54,19 +54,22 @@ function ImagenCuerpo({ onClickBotonParteCuerpo }) {
         <BodyPartButton
           key={part}
           name={part}
-          top={positions[i].top}
-          left={positions[i].left}
-          onClick={onClickPart}
+          top={posiciones[i].top}
+          left={posiciones[i].left}
+          onClick={onClickBotonParteCuerpo}
         />
       ))}
     </div>
   );
 }
 
-function Juego04() {
+function Juego04({ onFinish, roundsLimit = null }) {
   const [palabraActual, setPalabraActual] = useState(partesIngles[0]);
   const [indicePalabra, setIndicePalabra] = useState(0);
   const [mostrarError, setMostrarError] = useState(false);
+  const [roundsPlayed, setRoundsPlayed] = useState(0);
+  const [gameScore, setGameScore] = useState(0);
+  const [finished, setFinished] = useState(false);
 
   const nuevaPalabraAleatoria = () => {
     const indiceAleatorio = Math.floor(Math.random() * partesIngles.length);
@@ -75,13 +78,37 @@ function Juego04() {
     setMostrarError(false);
   };
 
+  const finishGame = (finalScore) => {
+    setFinished(true);
+    // notificar al diagnóstico (el padre) con el puntaje de este juego
+    if (typeof onFinish === "function") {
+      // Pequeña demora para que el usuario vea el último estado
+      setTimeout(() => onFinish(finalScore), 400);
+    }
+  };
+
   const manejarClickParte = (nombreParte) => {
-    if (nombreParte === palabraActual) {
+    if (finished) return;
+
+    const isCorrect = nombreParte === palabraActual;
+    const newScore = isCorrect ? gameScore + 1 : gameScore;
+
+    if (isCorrect) {
+      // mostrar breve mensaje y avanzar
       alert("¡Correcto! 🎉");
-      nuevaPalabraAleatoria();
     } else {
       setMostrarError(true);
     }
+
+    const nextRounds = roundsPlayed + 1;
+    setGameScore(newScore);
+    setRoundsPlayed(nextRounds);
+    if (roundsLimit != null && nextRounds >= roundsLimit) {
+      finishGame(newScore);
+    } else if (isCorrect) {
+      nuevaPalabraAleatoria();
+    }
+    // si fue incorrecto, el usuario verá el mensaje y deberá pulsar continuar
   };
 
   return (
@@ -92,7 +119,7 @@ function Juego04() {
       <p translate="no">
         Find:{" "}
         <span className="palabra-actual" translate="no">
-          {currentWord.toUpperCase()}
+          {palabraActual.toUpperCase()}
         </span>
       </p>
 
@@ -102,8 +129,24 @@ function Juego04() {
         <MensajeError
           palabraIngles={palabraActual}
           traduccionEspanol={partesEspañol[indicePalabra]}
-          continuar={nuevaPalabraAleatoria}
+          continuar={() => {
+            // continuar tras error: cerrar mensaje, avanzar ronda y decidir si termina
+            setMostrarError(false);
+            const nextRounds = roundsPlayed; // roundsPlayed ya fue incrementado en manejarClickParte
+            if (roundsLimit != null && nextRounds >= roundsLimit) {
+              finishGame(gameScore);
+            } else {
+              nuevaPalabraAleatoria();
+            }
+          }}
         />
+      )}
+
+      {finished && (
+        <div className="resultado-juego04">
+          <h3>Rondas completadas</h3>
+          <p>Tu puntaje en este juego: <strong>{gameScore}</strong> / {roundsLimit ?? roundsPlayed}</p>
+        </div>
       )}
     </div>
   );

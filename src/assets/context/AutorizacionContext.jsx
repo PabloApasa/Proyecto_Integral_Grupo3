@@ -13,10 +13,18 @@ export function AutorizacionesProvider({ children }) {
   const login = useCallback((credentials) => {
     try {
       setIsLoading(true); // 🔹 comenzamos "carga"
-      const usuarioEncontrado = usuarioGuardados.find(
-        (u) =>
-          u.username === credentials.username &&
-          u.password === credentials.password
+      // Combinar usuarios desde el JSON con los usuarios almacenados en localStorage
+      const usuariosLocalStorage = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+      // Creamos un mapa por username para que los locales sobreescriban al archivo si hay conflicto
+      const mapa = new Map();
+      usuarioGuardados.forEach((u) => mapa.set(u.username, u));
+      usuariosLocalStorage.forEach((u) => mapa.set(u.username, { ...mapa.get(u.username), ...u }));
+
+      const usuariosCombinados = Array.from(mapa.values());
+
+      const usuarioEncontrado = usuariosCombinados.find(
+        (u) => u.username === credentials.username && u.password === credentials.password
       );
 
       if (usuarioEncontrado) {

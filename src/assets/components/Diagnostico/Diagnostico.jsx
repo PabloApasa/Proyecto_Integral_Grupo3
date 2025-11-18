@@ -27,32 +27,51 @@ function Diagnostico() {
   const fondos = ["#ffe6f2", "#e6f7ff", "#e8ffe6", "#fffbe6"];
 
   // ✅ Guarda el puntaje en localStorage
-  const guardarPuntaje = (username, nuevoPuntaje) => {
+  const guardarPuntaje = (usernameParam, nuevoPuntaje) => {
     const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
-    // Buscar si ya existe
-    const existe = usuarios.find((u) => u.username === username);
+    const sanitize = (s) =>
+      String(s || "")
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, "_")
+        .replace(/[^a-z0-9_@.\-]/g, "");
+
+    let keyUsername = usernameParam || usuario.username || usuario.email || (usuario.nombre ? `${sanitize(usuario.nombre)}${usuario.apellido ? '_' + sanitize(usuario.apellido) : ''}_${Date.now()}` : `user_${Date.now()}`);
+
+    if (usuario.email) {
+      const cuentaPorEmail = usuarios.find((u) => u.email && u.email === usuario.email && u.username);
+      if (cuentaPorEmail) keyUsername = cuentaPorEmail.username;
+    }
+
+    // Buscar si ya existe por la clave calculada
+    const existe = usuarios.find((u) => u.username === keyUsername);
 
     let actualizados;
 
     if (existe) {
-      // Si existe → actualizar solo el puntaje
+      // Si existe → actualizar puntaje y respuestas cuando estén disponibles
       actualizados = usuarios.map((u) =>
-        u.username === username
-          ? { ...u, puntaje: nuevoPuntaje }
+        u.username === keyUsername
+          ? {
+            ...u,
+            puntaje: nuevoPuntaje,
+            respuestas: usuario.respuestas || u.respuestas || {},
+          }
           : u
       );
     } else {
-      // Si NO existe → CREAR un registro completo
+      // Si NO existe → CREAR un registro completo (con fallback de username)
       actualizados = [
         ...usuarios,
         {
-          username: usuario.username,
+          username: keyUsername,
           nombre: usuario.nombre,
           apellido: usuario.apellido,
           email: usuario.email,
           pais: usuario.pais,
           puntaje: nuevoPuntaje,
+          respuestas: usuario.respuestas || {},
         },
       ];
     }

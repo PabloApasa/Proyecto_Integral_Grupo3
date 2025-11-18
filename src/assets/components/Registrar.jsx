@@ -7,10 +7,10 @@ import { Container, Form, Button, Card } from "react-bootstrap";
 //* validacioin de Contraseña
 //const PASSWORD_REGEX ={
 //  minLength: /^.{8,}$/,
-  //uppercase: /(?=.*[A-Z])/,
-  //lowercase: /(?=.*[a-z])/,
- // number: /(?=.*\d)/,
-  //isValid: /^(?=.*[a_z])(?=.*[A_Z])(?=.*\d)[A-Z a-z\d]{8,}$/
+//uppercase: /(?=.*[A-Z])/,
+//lowercase: /(?=.*[a-z])/,
+// number: /(?=.*\d)/,
+//isValid: /^(?=.*[a_z])(?=.*[A_Z])(?=.*\d)[A-Z a-z\d]{8,}$/
 // };
 
 function Registrar() {
@@ -25,8 +25,35 @@ function Registrar() {
       alert("Por favor completa ambos campos antes de continuar.");
       return;
     }
+    // Guardar el usuario localmente para permitir login y acceso a tests
+    try {
+      const almacen = JSON.parse(localStorage.getItem("usuarios")) || [];
 
-    navigate("/formularioregistro");
+      // Verificar si ya existe
+      const existe = almacen.find((u) => u.username === username);
+      if (existe) {
+        alert("El usuario ya existe. Por favor elige otro nombre de usuario o inicia sesión.");
+        return;
+      }
+
+      const nuevoUsuario = {
+        id: `${username}_${Date.now()}`,
+        username,
+        password,
+        rol: "ALUMNO",
+        nombre: username,
+      };
+
+      almacen.push(nuevoUsuario);
+      localStorage.setItem("usuarios", JSON.stringify(almacen));
+
+      // Solo registrar: volver a la pantalla de login para iniciar sesión
+      alert("Usuario creado correctamente. Ahora puedes iniciar sesión.");
+      navigate("/login", { state: { registered: true, username } });
+    } catch (err) {
+      console.error("Error guardando usuario local:", err);
+      alert("No se pudo crear el usuario local. Revisa la consola.");
+    }
   };
 
   return (
