@@ -61,29 +61,29 @@ function Layout() {
               <Nav.Link as={Link} to="/infopersonal">InfoPersonal</Nav.Link>
 
 
-              {/* 🔽 Menú desplegable para los proyectos */}
+              {/* 🔽 Menú desplegable para los proyectos - Visible para todos */}
               <NavDropdown title="Proyectos" id="proyectos-dropdown">
-                {/* Solo ADMINISTRATIVO puede ver Proyectos */}
                 {isAuthenticated && user?.rol === "ADMIN" && (
                   <>
                     <NavDropdown.Item as={Link} to="/proyectos">
                       Panel de Proyectos
                     </NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item as={Link} to="/proyecto2">
-                      Proyecto 2
-                    </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/proyecto3">
-                      Proyecto 3
-                    </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/proyecto4">
-                      Proyecto 4
-                    </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/proyecto5">
-                      Proyecto 5
-                    </NavDropdown.Item>
                   </>
                 )}
+
+                <NavDropdown.Item as={Link} to="/proyecto2">
+                  Proyecto 2
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/proyecto3">
+                  Proyecto 3
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/proyecto4">
+                  Proyecto 4
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/proyecto5">
+                  Proyecto 5
+                </NavDropdown.Item>
               </NavDropdown>
 
               {/* 🎮 Menú desplegable para Games (solo para ALUMNO) */}
@@ -104,9 +104,9 @@ function Layout() {
                 </NavDropdown>
               )}
 
-              {/* Diagnostico (solo para ALUMNO-INGLES) */}
+              {/* Diagnostico (solo para ALUMNO-INGLES) — lleva primero al formulario si no está registrado */}
               {isAuthenticated && user?.rol === "ALUMNO-INGLES" && (
-                <Nav.Link as={Link} to="/diagnostico">Diagnóstico</Nav.Link>
+                <Nav.Link as={Link} to="/formularioregistro">Diagnóstico</Nav.Link>
               )}
 
               {/* ✅ Resultados: solo visible para ADMINISTRATIVO */}
@@ -117,9 +117,8 @@ function Layout() {
 
 
               {/* ✅ NUEVO LINK: TestIngles - Visible solo para ALUMNO */}
-              {isAuthenticated && user?.rol === "ALUMNO" && (
-                <Nav.Link as={Link} to="/registrar">Nuevo usuario de ingles</Nav.Link>
-              )}
+              {/** Eliminado: no mostrar link de registro en el menú para usuarios ALUMNO.
+                  El registro se realiza desde la página de Login (botón "Registrarse"). */}
             </Nav>
 
             {/* 🔒 Login / Logout */}

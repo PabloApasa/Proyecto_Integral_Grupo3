@@ -43,22 +43,13 @@ import Juego04 from "./assets/components/Diagnostico/Juego04/Juego04";
 import Diagnostico from "./assets/components/Diagnostico/Diagnostico";
 import Resultados from "./assets/components/FormularioRegistro/Resultados";
 
-function RedireccionDiagnostico() {
-  const { user } = useAutorizacion();
-
-  // Si es la primera vez o no tiene registro previo → va al formulario
-  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-  const existeUsuario = usuarios.some(
-    (u) => u.username === user?.username
-  );
-
-  if (!existeUsuario) {
-    return <Navigate to="/formularioregistro" replace />;
-  }
-
-  // Si ya tiene datos en localStorage → entra al Diagnóstico directo
-  return <Diagnostico />;
-}
+// Nota: la lógica de redirección (formularioregistro vs diagnostico) se gestiona
+// a través de la navegación y acceso protegido. El flujo solicitado es:
+// - Registrar: solo registra en BD y NO realiza login automático.
+// - Login: el usuario inicia sesión y obtiene el rol `ALUMNO-INGLES`.
+// - Layout: el enlace "Diagnóstico" para `ALUMNO-INGLES` apunta al formulario.
+// - FormularioRegistro navega a `/diagnostico` al finalizar.
+// Por eso no necesitamos una función RedireccionDiagnostico aquí.
 
 function App() {
   return (
@@ -77,47 +68,19 @@ function App() {
           {/* 🔸 Layout principal con rutas protegidas */}
           <Route path="/" element={<Layout />}>
 
-            {/* Redirección al login si entra sin loguearse */}
-            <Route index element={<Home />} />
+            {/* Redirección inicial: siempre ir a /home al abrir la aplicación */}
+            <Route index element={<Navigate to="home" replace />} />
 
             {/* Rutas ABIERTAS a cualquier usuario con acceso al Layout */}
             <Route path="home" element={<Home />} />
             <Route path="aboutus" element={<AboutUs />} />
             <Route path="infoPersonal" element={<InfoPersonal />} />
 
-            {/* 🔒 Rutas de Proyectos PROTEGIDAS: Solo para ADMINISTRATIVO */}
-            <Route
-              path="proyecto2"
-              element={
-                <ProtectorRutas allowedRoles={['ADMIN']}>
-                  <Proyecto2 />
-                </ProtectorRutas>
-              }
-            />
-            <Route
-              path="proyecto3"
-              element={
-                <ProtectorRutas allowedRoles={['ADMIN']}>
-                  <Proyecto3 />
-                </ProtectorRutas>
-              }
-            />
-            <Route
-              path="proyecto4"
-              element={
-                <ProtectorRutas allowedRoles={['ADMIN']}>
-                  <Proyecto4 />
-                </ProtectorRutas>
-              }
-            />
-            <Route
-              path="proyecto5"
-              element={
-                <ProtectorRutas allowedRoles={['ADMIN']}>
-                  <Proyecto5 />
-                </ProtectorRutas>
-              }
-            />
+            {/* Rutas de Proyectos públicas: accesibles sin iniciar sesión */}
+            <Route path="proyecto2" element={<Proyecto2 />} />
+            <Route path="proyecto3" element={<Proyecto3 />} />
+            <Route path="proyecto4" element={<Proyecto4 />} />
+            <Route path="proyecto5" element={<Proyecto5 />} />
 
 
             {/* 🔸 Ruta exclusiva para ALUMNO */}
@@ -142,9 +105,9 @@ function App() {
             <Route
               path="diagnostico"
               element={
-                //<ProtectorRutas allowedRoles={['ALUMNO-INGLES']}>
-                <Diagnostico />
-                //</ProtectorRutas>
+                <ProtectorRutas allowedRoles={['ALUMNO-INGLES']}>
+                  <Diagnostico />
+                </ProtectorRutas>
               }
             />
             <Route
